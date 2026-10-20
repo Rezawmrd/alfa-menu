@@ -34,10 +34,7 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-button,input{
-  font-family:inherit;
-}
-
+button,input{font-family:inherit}
 button{cursor:pointer}
 
 .container{
@@ -91,45 +88,57 @@ header{
   border-color:var(--green);
 }
 
-/* WELCOME */
-
-.welcome{
-  padding:22px 0 25px;
-}
-
-.welcome-label{
-  color:var(--orange);
-  font-family:"DM Sans",sans-serif;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:2px;
-  direction:ltr;
-  text-align:right;
-}
-
-/* CATEGORIES */
+/* CATEGORY TITLE */
 
 .section-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:18px 0 20px;
+  margin:30px 0 23px;
+}
+
+.section-title-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 17px;
+  border:1px solid rgba(52,61,50,.22);
+  border-right:4px solid var(--orange);
+  border-radius:5px;
+  background:rgba(255,254,250,.65);
+  box-shadow:0 5px 16px rgba(52,61,50,.04);
+}
+
+.title-mark{
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--green);
+  color:var(--bg);
+  border-radius:4px;
+  font-family:"DM Sans",sans-serif;
+  font-size:16px;
+  font-weight:800;
+  direction:ltr;
 }
 
 .section-head h2{
   margin:0;
-  font-size:23px;
+  font-size:19px;
   font-weight:900;
+  color:var(--green);
 }
 
-.section-head span{
-  font-family:"DM Sans",sans-serif;
-  font-size:10px;
-  color:var(--orange);
-  letter-spacing:1.5px;
-  font-weight:800;
-  direction:ltr;
+.title-line{
+  width:35px;
+  height:2px;
+  background:var(--orange);
+  border-radius:5px;
 }
+
+/* CATEGORIES */
 
 .categories{
   display:grid;
@@ -292,22 +301,23 @@ header{
   font-size:12px;
 }
 
-/* FOOTER */
+/* ADDRESS AREA */
 
 footer{
   margin-top:65px;
-  padding:25px 0;
+  padding:24px 0;
   border-top:1px solid var(--line);
-  text-align:center;
 }
 
-.footer-logo{
-  font-family:"DM Sans",sans-serif;
-  font-size:29px;
-  font-weight:800;
-  letter-spacing:-2px;
-  color:var(--green);
-  direction:ltr;
+.address-box{
+  padding:17px;
+  border:1px solid rgba(52,61,50,.2);
+  border-radius:6px;
+  background:rgba(255,254,250,.65);
+  color:var(--muted);
+  text-align:center;
+  font-size:12px;
+  line-height:2;
 }
 
 /* ANIMATION */
@@ -323,7 +333,6 @@ footer{
   .container{padding:0 30px}
   header{padding-top:28px}
   .brand{font-size:36px}
-  .welcome{padding:30px 0 35px}
   .categories{grid-template-columns:repeat(4,minmax(0,1fr))}
   .category{height:245px}
   .menu-item{padding:24px 0}
@@ -336,7 +345,6 @@ footer{
 
 <header>
   <div class="container header-inner">
-
     <div class="brand">ALFA.</div>
 
     <nav class="header-actions">
@@ -345,21 +353,19 @@ footer{
          target="_blank"
          rel="noopener noreferrer">اینستاگرام</a>
     </nav>
-
   </div>
 </header>
 
 <main class="container">
 
-  <section class="welcome">
-    <div class="welcome-label">WELCOME TO ALFA</div>
-  </section>
-
   <section id="categoriesSection">
 
     <div class="section-head">
-      <h2>دسته‌بندی‌ها</h2>
-      <span>EXPLORE / 01</span>
+      <div class="section-title-box">
+        <div class="title-mark">A</div>
+        <h2>دسته‌بندی منو</h2>
+      </div>
+      <div class="title-line"></div>
     </div>
 
     <div class="categories" id="categories"></div>
@@ -376,21 +382,21 @@ footer{
   </div>
 
   <section id="menuSection">
-
     <div class="menu-heading">
       <h2 id="menuTitle">قهوه‌های گرم</h2>
       <span id="menuCount">00 ITEMS</span>
     </div>
 
     <div class="menu-list" id="menuList"></div>
-
   </section>
 
 </main>
 
 <footer>
   <div class="container">
-    <div class="footer-logo">ALFA.</div>
+    <div class="address-box">
+      آدرس کافه در این قسمت قرار می‌گیرد.
+    </div>
   </div>
 </footer>
 
@@ -488,7 +494,6 @@ function renderProducts(){
     filtered = products.filter(product =>
       product.category === activeCategory
     );
-
     const category = categories.find(c => c.id === activeCategory);
     menuTitle.textContent = category ? category.title : "منو";
   }

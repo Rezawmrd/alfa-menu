@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4F0E8">
-<title>ALFA | Digital Menu</title>
+<title>ALFA | منوی دیجیتال</title>
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -23,6 +23,7 @@
 
 html{
   scroll-behavior:smooth;
+  scroll-padding-top:20px;
 }
 
 body{
@@ -37,9 +38,7 @@ button,input{
   font-family:inherit;
 }
 
-button{
-  cursor:pointer;
-}
+button{cursor:pointer}
 
 .container{
   max-width:1100px;
@@ -50,126 +49,97 @@ button{
 /* HEADER */
 
 header{
-  padding:26px 0 15px;
+  padding:24px 0 12px;
 }
 
 .header-inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:12px;
 }
 
 .brand{
   font-family:"DM Sans",sans-serif;
-  font-size:38px;
+  font-size:32px;
   font-weight:800;
-  letter-spacing:-3px;
+  letter-spacing:-2px;
   color:var(--green);
   direction:ltr;
 }
 
-.header-tag{
-  font-family:"DM Sans",sans-serif;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:2px;
-  border:1px solid var(--green);
-  padding:8px 11px;
-  border-radius:30px;
-}
-
-/* HERO */
-
-.hero{
-  padding:35px 0 30px;
-}
-
-.hero-label{
+.header-actions{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:9px;
+}
+
+.header-actions a{
+  text-decoration:none;
+  color:var(--green);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:8px 13px;
+  font-size:11px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.header-actions a:hover{
+  background:var(--green);
+  color:white;
+  border-color:var(--green);
+}
+
+/* WELCOME */
+
+.welcome{
+  padding:22px 0 25px;
+}
+
+.welcome-label{
   color:var(--orange);
+  font-family:"DM Sans",sans-serif;
   font-size:12px;
   font-weight:800;
-}
-
-.hero-label:before{
-  content:"";
-  width:25px;
-  height:2px;
-  background:var(--orange);
-}
-
-.hero h1{
-  font-size:clamp(38px,8vw,78px);
-  line-height:1.35;
-  letter-spacing:-2px;
-  margin:18px 0;
-  font-weight:900;
-}
-
-.hero h1 span{
-  color:var(--orange);
-}
-
-.hero p{
-  font-size:13px;
-  color:var(--muted);
-  line-height:2.2;
-  max-width:400px;
-}
-
-.hero-bottom{
-  margin-top:30px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-top:1px solid var(--line);
-  padding-top:15px;
-  font-size:11px;
-  color:var(--muted);
-}
-
-.hero-bottom strong{
-  font-family:"DM Sans",sans-serif;
-  color:var(--green);
   letter-spacing:2px;
+  direction:ltr;
+  text-align:right;
 }
 
-/* SECTION TITLE */
+/* CATEGORIES */
 
 .section-head{
   display:flex;
   justify-content:space-between;
-  align-items:end;
-  margin:45px 0 20px;
+  align-items:center;
+  margin:18px 0 20px;
 }
 
 .section-head h2{
   margin:0;
-  font-size:24px;
+  font-size:23px;
   font-weight:900;
 }
 
 .section-head span{
   font-family:"DM Sans",sans-serif;
-  font-size:11px;
+  font-size:10px;
   color:var(--orange);
-  letter-spacing:2px;
+  letter-spacing:1.5px;
   font-weight:800;
+  direction:ltr;
 }
-
-/* CATEGORIES */
 
 .categories{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:13px;
 }
 
 .category{
   position:relative;
-  height:180px;
+  height:175px;
   overflow:hidden;
   border-radius:7px;
   background:var(--green);
@@ -178,67 +148,67 @@ header{
 }
 
 .category img{
+  display:block;
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .6s;
-  filter:brightness(.65);
+  transition:transform .5s;
+  filter:brightness(.7);
 }
 
 .category:hover img{
-  transform:scale(1.08);
+  transform:scale(1.06);
 }
 
 .category:after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(transparent 30%,rgba(0,0,0,.7));
+  background:linear-gradient(transparent 25%,rgba(0,0,0,.72));
   z-index:0;
 }
 
 .category-info{
   position:absolute;
-  bottom:16px;
-  right:15px;
-  left:15px;
+  bottom:15px;
+  right:14px;
+  left:14px;
   color:white;
   z-index:1;
 }
 
 .category-info h3{
-  font-size:17px;
-  margin:0;
+  font-size:16px;
+  margin:0 0 3px;
   font-weight:800;
 }
 
 .category-info span{
   font-family:"DM Sans",sans-serif;
-  font-size:10px;
-  opacity:.75;
+  font-size:9px;
+  opacity:.8;
   letter-spacing:1px;
 }
 
 .category.active{
-  outline:3px solid var(--orange);
-  outline-offset:3px;
+  outline:2px solid var(--orange);
+  outline-offset:2px;
 }
 
 /* SEARCH */
 
 .search-box{
-  margin:30px 0;
-  position:relative;
+  margin:27px 0;
 }
 
 .search-box input{
   width:100%;
   background:var(--white);
   border:1px solid var(--line);
-  padding:18px 20px;
+  padding:15px 17px;
   outline:none;
   border-radius:6px;
-  font-size:13px;
+  font-size:12px;
   color:var(--text);
 }
 
@@ -246,17 +216,18 @@ header{
   border-color:var(--orange);
 }
 
-/* MENU */
+/* PRODUCTS */
 
 .menu-heading{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:35px 0 15px;
+  margin:32px 0 15px;
+  gap:10px;
 }
 
 .menu-heading h2{
-  font-size:26px;
+  font-size:23px;
   font-weight:900;
   margin:0;
 }
@@ -264,9 +235,10 @@ header{
 .menu-heading span{
   font-family:"DM Sans",sans-serif;
   color:var(--orange);
-  font-size:12px;
+  font-size:10px;
   font-weight:800;
   letter-spacing:1px;
+  direction:ltr;
 }
 
 .menu-list{
@@ -278,25 +250,23 @@ header{
   justify-content:space-between;
   align-items:center;
   gap:15px;
-  padding:22px 0;
+  padding:20px 0;
   border-bottom:1px solid var(--line);
-  animation:fadeUp .4s ease both;
+  animation:fadeUp .3s ease both;
 }
 
-.item-info{
-  flex:1;
-}
+.item-info{flex:1}
 
 .item-info h3{
-  font-size:15px;
+  font-size:14px;
   font-weight:800;
-  margin:0 0 7px;
+  margin:0 0 6px;
 }
 
 .item-info p{
   font-size:11px;
   color:var(--muted);
-  line-height:2;
+  line-height:1.9;
   margin:0;
 }
 
@@ -304,7 +274,7 @@ header{
   text-align:left;
   white-space:nowrap;
   color:var(--green);
-  font-size:16px;
+  font-size:15px;
   font-weight:900;
 }
 
@@ -317,85 +287,48 @@ header{
 
 .empty{
   text-align:center;
-  padding:60px 10px;
+  padding:45px 10px;
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
 /* FOOTER */
 
 footer{
-  background:var(--green);
-  color:white;
-  margin-top:90px;
-  padding:45px 0 25px;
+  margin-top:65px;
+  padding:25px 0;
+  border-top:1px solid var(--line);
+  text-align:center;
 }
 
 .footer-logo{
   font-family:"DM Sans",sans-serif;
-  font-size:65px;
+  font-size:29px;
   font-weight:800;
-  letter-spacing:-5px;
+  letter-spacing:-2px;
+  color:var(--green);
   direction:ltr;
-  text-align:center;
-}
-
-.footer-text{
-  text-align:center;
-  font-size:12px;
-  opacity:.65;
-  margin:10px 0 35px;
-}
-
-.footer-line{
-  border-top:1px solid rgba(255,255,255,.2);
-  padding-top:20px;
-  display:flex;
-  justify-content:space-between;
-  font-size:10px;
-  opacity:.6;
-  font-family:"DM Sans",sans-serif;
 }
 
 /* ANIMATION */
 
 @keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 /* DESKTOP */
 
 @media(min-width:700px){
-
-  .hero{
-    padding:70px 0 50px;
-  }
-
-  .categories{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .category{
-    height:260px;
-  }
-
-  .menu-item{
-    padding:26px 0;
-  }
-
-  .item-info h3{
-    font-size:17px;
-  }
-
+  .container{padding:0 30px}
+  header{padding-top:28px}
+  .brand{font-size:36px}
+  .welcome{padding:30px 0 35px}
+  .categories{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .category{height:245px}
+  .menu-item{padding:24px 0}
+  .item-info h3{font-size:16px}
 }
-
 </style>
 </head>
 
@@ -403,206 +336,104 @@ footer{
 
 <header>
   <div class="container header-inner">
+
     <div class="brand">ALFA.</div>
-    <div class="header-tag">DIGITAL MENU</div>
+
+    <nav class="header-actions">
+      <a href="tel:PHONE_NUMBER">تماس</a>
+      <a href="https://instagram.com/INSTAGRAM_ID"
+         target="_blank"
+         rel="noopener noreferrer">اینستاگرام</a>
+    </nav>
+
   </div>
 </header>
 
 <main class="container">
 
-<section class="hero">
+  <section class="welcome">
+    <div class="welcome-label">WELCOME TO ALFA</div>
+  </section>
 
-  <div class="hero-label">
-    WELCOME TO ALFA
+  <section id="categoriesSection">
+
+    <div class="section-head">
+      <h2>دسته‌بندی‌ها</h2>
+      <span>EXPLORE / 01</span>
+    </div>
+
+    <div class="categories" id="categories"></div>
+
+  </section>
+
+  <div class="search-box">
+    <input
+      type="search"
+      id="search"
+      placeholder="جستجو در منو..."
+      autocomplete="off"
+    >
   </div>
 
-  <h1>
-    یه طعم تازه،
-    <br>
-    یه <span>حال خوب.</span>
-  </h1>
+  <section id="menuSection">
 
-  <p>
-    از اولین جرعه قهوه تا آخرین لقمه،
-    اینجا همه‌چیز برای ساختن یه لحظه خوب کنار هم قرار گرفته.
-  </p>
+    <div class="menu-heading">
+      <h2 id="menuTitle">قهوه‌های گرم</h2>
+      <span id="menuCount">00 ITEMS</span>
+    </div>
 
-  <div class="hero-bottom">
-    <span>منوی دیجیتال آلفا</span>
-    <strong>EST. 2026</strong>
-  </div>
+    <div class="menu-list" id="menuList"></div>
 
-</section>
-
-<div class="section-head">
-  <h2>دسته‌بندی‌ها</h2>
-  <span>EXPLORE / 01</span>
-</div>
-
-<div class="categories" id="categories"></div>
-
-<div class="search-box">
-  <input
-    type="search"
-    id="search"
-    placeholder="دنبال چی می‌گردی؟"
-    autocomplete="off"
-  >
-</div>
-
-<section id="menuSection">
-
-  <div class="menu-heading">
-    <h2 id="menuTitle">قهوه‌های گرم</h2>
-    <span id="menuCount">00 ITEMS</span>
-  </div>
-
-  <div class="menu-list" id="menuList"></div>
-
-</section>
+  </section>
 
 </main>
 
 <footer>
   <div class="container">
-
     <div class="footer-logo">ALFA.</div>
-
-    <div class="footer-text">
-      هر لحظه، یه تجربه تازه.
-    </div>
-
-    <div class="footer-line">
-      <span>© 2026 ALFA</span>
-      <span>DIGITAL MENU</span>
-    </div>
-
   </div>
 </footer>
 
 <script>
-
-/* SAMPLE CATEGORIES */
-
 const categories = [
-
   {
     id:1,
     title:"قهوه‌های گرم",
     en:"HOT COFFEE",
     image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700"
   },
-
   {
     id:2,
     title:"نوشیدنی‌های سرد",
     en:"COLD DRINKS",
     image:"https://images.unsplash.com/photo-1536935338788846bb9981813?w=700"
   },
-
   {
     id:3,
     title:"کیک و دسر",
     en:"CAKES & DESSERTS",
     image:"https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700"
   },
-
   {
     id:4,
     title:"غذا و میان‌وعده",
     en:"FOOD & SNACKS",
     image:"https://images.unsplash.com/photo-1547592180-85f173990554?w=700"
   }
-
 ];
-
-
-/* SAMPLE PRODUCTS */
 
 const products = [
-
-  {
-    id:1,
-    category:1,
-    name:"اسپرسو سینگل",
-    description:"یک شات اسپرسو با عطر و طعم غلیظ",
-    price:65000
-  },
-
-  {
-    id:2,
-    category:1,
-    name:"اسپرسو دبل",
-    description:"دو شات اسپرسو برای دوستداران قهوه",
-    price:85000
-  },
-
-  {
-    id:3,
-    category:1,
-    name:"کاپوچینو",
-    description:"اسپرسو، شیر گرم و فوم لطیف",
-    price:115000
-  },
-
-  {
-    id:4,
-    category:1,
-    name:"لاته",
-    description:"اسپرسو با شیر بخار داده‌شده",
-    price:125000
-  },
-
-  {
-    id:5,
-    category:2,
-    name:"آیس لاته",
-    description:"اسپرسو، شیر سرد و یخ",
-    price:135000
-  },
-
-  {
-    id:6,
-    category:2,
-    name:"آیس آمریکانو",
-    description:"اسپرسو، آب سرد و یخ",
-    price:95000
-  },
-
-  {
-    id:7,
-    category:3,
-    name:"چیزکیک نیویورکی",
-    description:"چیزکیک خامه‌ای با بافت لطیف",
-    price:165000
-  },
-
-  {
-    id:8,
-    category:3,
-    name:"کیک شکلاتی",
-    description:"کیک شکلاتی با سس مخصوص",
-    price:145000
-  },
-
-  {
-    id:9,
-    category:4,
-    name:"ساندویچ مرغ",
-    description:"مرغ گریل، سبزیجات و سس مخصوص",
-    price:245000
-  },
-
-  {
-    id:10,
-    category:4,
-    name:"سیب‌زمینی ویژه",
-    description:"سیب‌زمینی سرخ‌شده با سس مخصوص",
-    price:175000
-  }
-
+  {id:1,category:1,name:"اسپرسو سینگل",description:"یک شات اسپرسو با عطر و طعم غلیظ",price:65000},
+  {id:2,category:1,name:"اسپرسو دبل",description:"دو شات اسپرسو برای دوستداران قهوه",price:85000},
+  {id:3,category:1,name:"کاپوچینو",description:"اسپرسو، شیر گرم و فوم لطیف",price:115000},
+  {id:4,category:1,name:"لاته",description:"اسپرسو با شیر بخار داده‌شده",price:125000},
+  {id:5,category:2,name:"آیس لاته",description:"اسپرسو، شیر سرد و یخ",price:135000},
+  {id:6,category:2,name:"آیس آمریکانو",description:"اسپرسو، آب سرد و یخ",price:95000},
+  {id:7,category:3,name:"چیزکیک نیویورکی",description:"چیزکیک خامه‌ای با بافت لطیف",price:165000},
+  {id:8,category:3,name:"کیک شکلاتی",description:"کیک شکلاتی با سس مخصوص",price:145000},
+  {id:9,category:4,name:"ساندویچ مرغ",description:"مرغ گریل، سبزیجات و سس مخصوص",price:245000},
+  {id:10,category:4,name:"سیب‌زمینی ویژه",description:"سیب‌زمینی سرخ‌شده با سس مخصوص",price:175000}
 ];
-
 
 let activeCategory = 1;
 
@@ -612,137 +443,82 @@ const menuTitle = document.getElementById("menuTitle");
 const menuCount = document.getElementById("menuCount");
 const searchInput = document.getElementById("search");
 
-
-/* FORMAT PRICE */
-
 function formatPrice(price){
   return new Intl.NumberFormat("fa-IR").format(price);
 }
 
-
-/* RENDER CATEGORIES */
-
 function renderCategories(){
-
   categoryContainer.innerHTML = categories.map(category => `
-
     <div
       class="category ${activeCategory === category.id ? "active" : ""}"
       onclick="selectCategory(${category.id})"
     >
-
-      <img
-        src="${category.image}"
-        alt="${category.title}"
-        loading="lazy"
-      >
-
+      <img src="${category.image}" alt="${category.title}" loading="lazy">
       <div class="category-info">
         <h3>${category.title}</h3>
         <span>${category.en}</span>
       </div>
-
     </div>
-
   `).join("");
-
 }
 
-
-/* SELECT CATEGORY */
-
 function selectCategory(id){
-
   activeCategory = id;
-
   searchInput.value = "";
-
   renderCategories();
-
   renderProducts();
 
   document.getElementById("menuSection").scrollIntoView({
     behavior:"smooth",
     block:"start"
   });
-
 }
 
-
-/* RENDER PRODUCTS */
-
 function renderProducts(){
-
   const search = searchInput.value.trim().toLowerCase();
-
   let filtered;
 
   if(search){
-
     filtered = products.filter(product =>
       product.name.toLowerCase().includes(search) ||
       product.description.toLowerCase().includes(search)
     );
-
     menuTitle.textContent = "نتایج جستجو";
-
   }else{
-
     filtered = products.filter(product =>
       product.category === activeCategory
     );
 
     const category = categories.find(c => c.id === activeCategory);
-
     menuTitle.textContent = category ? category.title : "منو";
-
   }
 
-  menuCount.textContent = filtered.length + " ITEMS";
+  menuCount.textContent =
+    new Intl.NumberFormat("en-US").format(filtered.length) + " ITEMS";
 
   if(filtered.length === 0){
-
-    menuList.innerHTML = `
-      <div class="empty">
-        محصولی پیدا نشد.
-      </div>
-    `;
-
+    menuList.innerHTML = `<div class="empty">محصولی پیدا نشد.</div>`;
     return;
-
   }
 
   menuList.innerHTML = filtered.map(product => `
-
     <div class="menu-item">
-
       <div class="item-info">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
       </div>
-
       <div class="price">
         ${formatPrice(product.price)}
         <small>تومان</small>
       </div>
-
     </div>
-
   `).join("");
-
 }
-
-
-/* SEARCH */
 
 searchInput.addEventListener("input",renderProducts);
 
-
-/* INIT */
-
 renderCategories();
 renderProducts();
-
 </script>
 
 </body>

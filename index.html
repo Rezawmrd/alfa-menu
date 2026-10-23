@@ -20,7 +20,12 @@
   --white:#FFFEFA;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 html{scroll-behavior:smooth}
 
 body{
@@ -31,13 +36,72 @@ body{
   overflow-x:hidden;
 }
 
-a{color:inherit;text-decoration:none}
+body.intro-active{
+  overflow:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
 button,input{font:inherit}
 button{cursor:pointer}
 
 .container{
   width:min(1100px,calc(100% - 36px));
   margin:auto;
+}
+
+/* INTRO */
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#F4F0E8;
+  opacity:1;
+  visibility:visible;
+  transition:opacity .75s ease,visibility .75s ease;
+}
+
+.intro-logo{
+  width:min(270px,70vw);
+  max-height:55vh;
+  object-fit:contain;
+  animation:introLogo 2.5s ease both;
+}
+
+@keyframes introLogo{
+  0%{
+    opacity:0;
+    transform:scale(.88);
+    filter:blur(5px);
+  }
+  30%{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
+  75%{
+    opacity:1;
+    transform:scale(1.025);
+    filter:blur(0);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1.025);
+    filter:blur(0);
+  }
+}
+
+.intro.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 
 /* HEADER */
@@ -135,7 +199,9 @@ main{
   color:var(--text);
 }
 
-.search input::placeholder{color:#99958B}
+.search input::placeholder{
+  color:#99958B;
+}
 
 /* CATEGORY TITLE */
 
@@ -277,8 +343,14 @@ main{
 .view.active{display:block}
 
 @keyframes pageEnter{
-  from{opacity:0;transform:translateY(7px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(7px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .back-button{
@@ -336,7 +408,7 @@ main{
   line-height:1;
 }
 
-/* PRODUCT LIST */
+/* PRODUCTS */
 
 .item-list{
   display:grid;
@@ -471,43 +543,97 @@ main{
 /* RESPONSIVE */
 
 @media(min-width:900px){
-  .category-card{aspect-ratio:1.28/1}
+  .category-card{
+    aspect-ratio:1.28/1;
+  }
 }
 
 @media(max-width:600px){
-  .container{width:calc(100% - 28px)}
+  .container{
+    width:calc(100% - 28px);
+  }
+
   .header-inner{height:67px}
   .brand{font-size:28px}
+
   .header-actions{gap:6px}
-  .header-actions a{padding:7px 10px;font-size:11px}
+
+  .header-actions a{
+    padding:7px 10px;
+    font-size:11px;
+  }
+
   .search-wrap{margin-top:21px}
-  .section-head{margin:30px 0 20px;gap:12px}
+
+  .section-head{
+    margin:30px 0 20px;
+    gap:12px;
+  }
+
   .section-head h2{font-size:19px}
   .heading-line{width:27px}
+
   .category-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:11px;
   }
+
   .category-card{
     aspect-ratio:1/1.12;
     min-height:155px;
   }
-  .cat-info{right:12px;left:12px;bottom:12px}
+
+  .cat-info{
+    right:12px;
+    left:12px;
+    bottom:12px;
+  }
+
   .cat-name{font-size:14px}
   .cat-caption{font-size:9px}
-  .cat-arrow{width:29px;height:29px;font-size:17px}
+
+  .cat-arrow{
+    width:29px;
+    height:29px;
+    font-size:17px;
+  }
+
   .back-button{margin:20px 0}
   .page-title h2{font-size:21px}
   .page-number{font-size:25px}
-  .item-list{grid-template-columns:1fr}
+
+  .item-list{
+    grid-template-columns:1fr;
+  }
+
   .item-card{padding:16px 0}
   .item-name{font-size:13px}
   .item-price{font-size:12px}
-  .footer{margin-top:35px;padding-bottom:18px}
-  .footer-inner{width:calc(100% - 28px)}
-  .address-box{padding:15px 13px;gap:11px}
-  .address-icon{width:38px;height:38px}
+
+  .footer{
+    margin-top:35px;
+    padding-bottom:18px;
+  }
+
+  .footer-inner{
+    width:calc(100% - 28px);
+  }
+
+  .address-box{
+    padding:15px 13px;
+    gap:11px;
+  }
+
+  .address-icon{
+    width:38px;
+    height:38px;
+  }
+
   .address-text{font-size:10px}
+
+  .intro-logo{
+    width:min(235px,72vw);
+  }
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -520,7 +646,20 @@ main{
 </style>
 </head>
 
-<body>
+<body class="intro-active">
+
+<!-- INTRO -->
+
+<div class="intro" id="intro">
+  <img
+    class="intro-logo"
+    src="Alfa Coffee Emblem Logo.png"
+    alt="ALFA Coffee"
+    fetchpriority="high"
+  >
+</div>
+
+<!-- HEADER -->
 
 <header>
   <div class="container header-inner">
@@ -531,9 +670,11 @@ main{
 
     <nav class="header-actions">
       <a href="tel:PHONE_NUMBER">تماس</a>
-      <a href="https://instagram.com/INSTAGRAM_ID"
-         target="_blank"
-         rel="noopener noreferrer">
+      <a
+        href="https://instagram.com/INSTAGRAM_ID"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         اینستاگرام
       </a>
     </nav>
@@ -541,10 +682,13 @@ main{
   </div>
 </header>
 
+<!-- MAIN -->
+
 <main class="container">
 
   <div class="search-wrap">
     <label class="search">
+
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="7.5"></circle>
         <path d="m16.5 16.5 5 5"></path>
@@ -556,6 +700,7 @@ main{
         placeholder="جستجو در منو..."
         autocomplete="off"
       >
+
     </label>
   </div>
 
@@ -617,6 +762,8 @@ main{
 
 </main>
 
+<!-- FOOTER -->
+
 <footer class="footer">
   <div class="footer-inner">
 
@@ -641,6 +788,21 @@ main{
 </footer>
 
 <script>
+
+/* INTRO */
+
+const intro = document.getElementById("intro");
+
+function closeIntro(){
+  intro.classList.add("hide");
+  document.body.classList.remove("intro-active");
+
+  setTimeout(()=>{
+    intro.remove();
+  },800);
+}
+
+setTimeout(closeIntro,3000);
 
 /* SETTINGS */
 
@@ -1104,10 +1266,8 @@ searchInput.addEventListener("input",()=>{
 });
 
 function goHome(){
-
   searchInput.value = "";
   showView(homeView);
-
 }
 
 document.getElementById("backButton")
@@ -1118,10 +1278,8 @@ document.getElementById("searchBackButton")
 
 document.getElementById("brandHome")
   .addEventListener("click",event=>{
-
     event.preventDefault();
     goHome();
-
   });
 
 /* START */

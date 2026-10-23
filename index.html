@@ -19,15 +19,8 @@
   --line:#DDD8CC;
   --white:#FFFEFA;
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-
 body{
   background:var(--cream);
   color:var(--text);
@@ -35,1259 +28,589 @@ body{
   line-height:1.8;
   overflow-x:hidden;
 }
-
-body.intro-active{
-  overflow:hidden;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
+body.intro-active{overflow:hidden}
+a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 button{cursor:pointer}
-
-.container{
-  width:min(1100px,calc(100% - 36px));
-  margin:auto;
-}
+.container{width:min(1100px,calc(100% - 36px));margin:auto}
 
 /* INTRO */
-
 .intro{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#F4F0E8;
-  opacity:1;
-  visibility:visible;
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  background:#F4F0E8;opacity:1;visibility:visible;
   transition:opacity .75s ease,visibility .75s ease;
 }
-
 .intro-logo{
-  width:min(270px,70vw);
-  max-height:55vh;
-  object-fit:contain;
+  width:min(270px,70vw);max-height:55vh;object-fit:contain;
   animation:introLogo 2.5s ease both;
 }
-
 @keyframes introLogo{
-  0%{
-    opacity:0;
-    transform:scale(.88);
-    filter:blur(5px);
-  }
-  30%{
-    opacity:1;
-    transform:scale(1);
-    filter:blur(0);
-  }
-  75%{
-    opacity:1;
-    transform:scale(1.025);
-    filter:blur(0);
-  }
-  100%{
-    opacity:1;
-    transform:scale(1.025);
-    filter:blur(0);
-  }
+  0%{opacity:0;transform:scale(.88);filter:blur(5px)}
+  30%{opacity:1;transform:scale(1);filter:blur(0)}
+  75%,100%{opacity:1;transform:scale(1.025);filter:blur(0)}
 }
-
-.intro.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
+.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 
 /* HEADER */
-
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
+  position:sticky;top:0;z-index:100;
   background:rgba(244,240,232,.94);
   backdrop-filter:blur(15px);
   border-bottom:1px solid rgba(52,61,50,.12);
 }
-
 .header-inner{
-  height:75px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  height:75px;display:flex;align-items:center;justify-content:space-between;
 }
-
 .brand{
-  direction:ltr;
-  font-family:"DM Sans",sans-serif;
-  font-size:31px;
-  font-weight:800;
-  letter-spacing:-2px;
-  color:var(--green);
+  direction:ltr;font-family:"DM Sans",sans-serif;font-size:31px;
+  font-weight:800;letter-spacing:-2px;color:var(--green);
 }
-
 .brand span{color:var(--orange)}
-
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
+.header-actions{display:flex;align-items:center;gap:9px}
 .header-actions a{
-  font-size:12px;
-  font-weight:600;
-  padding:8px 15px;
-  border:1px solid var(--line);
-  border-radius:3px;
-  transition:.25s;
+  font-size:12px;font-weight:600;padding:8px 15px;
+  border:1px solid var(--line);border-radius:3px;transition:.25s;
 }
-
 .header-actions a:hover{
-  background:var(--green);
-  color:var(--white);
-  border-color:var(--green);
+  background:var(--green);color:var(--white);border-color:var(--green);
 }
-
-/* MAIN */
-
-main{
-  padding-bottom:35px;
-  min-height:55vh;
-}
+main{padding-bottom:35px;min-height:55vh}
 
 /* SEARCH */
-
 .search-wrap{margin-top:27px}
-
 .search{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  background:var(--white);
-  border:1px solid var(--line);
-  padding:0 17px;
-  height:52px;
-  transition:.25s;
+  display:flex;align-items:center;gap:12px;
+  background:var(--white);border:1px solid var(--line);
+  padding:0 17px;height:52px;transition:.25s;
 }
-
 .search:focus-within{
-  border-color:var(--green);
-  box-shadow:0 5px 20px rgba(52,61,50,.06);
+  border-color:var(--green);box-shadow:0 5px 20px rgba(52,61,50,.06);
 }
-
 .search svg{
-  width:19px;
-  height:19px;
-  stroke:var(--muted);
-  fill:none;
-  stroke-width:1.7;
-  flex-shrink:0;
+  width:19px;height:19px;stroke:var(--muted);fill:none;
+  stroke-width:1.7;flex-shrink:0;
 }
-
 .search input{
-  width:100%;
-  border:0;
-  outline:0;
-  background:transparent;
-  font-size:13px;
-  color:var(--text);
+  width:100%;border:0;outline:0;background:transparent;
+  font-size:13px;color:var(--text);
 }
-
-.search input::placeholder{
-  color:#99958B;
-}
+.search input::placeholder{color:#99958B}
 
 /* CATEGORY TITLE */
-
 .section-head{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:16px;
-  margin:36px 0 25px;
+  display:flex;justify-content:center;align-items:center;
+  gap:16px;margin:36px 0 25px;
 }
-
 .section-head h2{
-  position:relative;
-  margin:0;
-  padding:0 0 10px;
-  font-size:21px;
-  font-weight:900;
-  color:var(--green);
+  position:relative;margin:0;padding:0 0 10px;
+  font-size:21px;font-weight:900;color:var(--green);
 }
-
 .section-head h2::after{
-  content:"";
-  position:absolute;
-  width:25px;
-  height:3px;
-  background:var(--orange);
-  border-radius:10px;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
+  content:"";position:absolute;width:25px;height:3px;
+  background:var(--orange);border-radius:10px;bottom:0;
+  left:50%;transform:translateX(-50%);
 }
-
-.heading-line{
-  width:38px;
-  height:1px;
-  background:var(--line);
-}
+.heading-line{width:38px;height:1px;background:var(--line)}
 
 /* CATEGORY GRID */
-
 .category-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:17px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;
 }
-
 .category-card{
-  position:relative;
-  display:block;
-  width:100%;
-  text-align:right;
-  border:0;
-  padding:0;
-  background:var(--green);
-  overflow:hidden;
-  aspect-ratio:1/1.05;
-  min-height:190px;
-  color:white;
-  isolation:isolate;
+  position:relative;display:block;width:100%;text-align:right;
+  border:0;padding:0;background:var(--green);overflow:hidden;
+  aspect-ratio:1/1.05;min-height:190px;color:white;isolation:isolate;
 }
-
 .category-card img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
-  transition:transform .6s;
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:-2;transition:transform .6s;
 }
-
 .category-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    rgba(18,24,18,.03) 15%,
-    rgba(18,24,18,.25) 42%,
-    rgba(18,24,18,.88) 100%
-  );
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(18,24,18,.03) 15%,rgba(18,24,18,.25) 42%,rgba(18,24,18,.88) 100%);
   z-index:-1;
 }
-
-.category-card:hover img{
-  transform:scale(1.06);
-}
-
+.category-card:hover img{transform:scale(1.06)}
 .cat-info{
-  position:absolute;
-  right:18px;
-  left:18px;
-  bottom:17px;
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:8px;
+  position:absolute;right:18px;left:18px;bottom:17px;
+  display:flex;justify-content:space-between;align-items:end;gap:8px;
 }
-
-.cat-name{
-  font-size:17px;
-  font-weight:800;
-  line-height:1.5;
-}
-
+.cat-name{font-size:17px;font-weight:800;line-height:1.5}
 .cat-caption{
-  margin-top:4px;
-  color:rgba(255,255,255,.72);
-  font-family:"DM Sans",sans-serif;
-  font-size:10px;
-  letter-spacing:.5px;
+  margin-top:4px;color:rgba(255,255,255,.72);
+  font-family:"DM Sans",sans-serif;font-size:10px;letter-spacing:.5px;
 }
-
 .cat-arrow{
-  width:33px;
-  height:33px;
-  flex-shrink:0;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(255,255,255,.55);
-  border-radius:50%;
-  font-size:20px;
-  transition:.25s;
+  width:33px;height:33px;flex-shrink:0;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.55);border-radius:50%;
+  font-size:20px;transition:.25s;
 }
+.category-card:hover .cat-arrow{color:var(--green);background:white;border-color:white}
 
-.category-card:hover .cat-arrow{
-  color:var(--green);
-  background:white;
-  border-color:white;
-}
-
-/* PAGE TRANSITIONS */
-
-.view{
-  display:none;
-  animation:pageEnter .28s ease;
-}
-
+/* VIEWS */
+.view{display:none;animation:pageEnter .28s ease}
 .view.active{display:block}
-
 @keyframes pageEnter{
-  from{
-    opacity:0;
-    transform:translateY(7px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:translateY(0)}
 }
-
 .back-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-  padding:9px 15px;
-  margin:25px 0 23px;
-  color:var(--green);
-  background:transparent;
-  border:1px solid var(--line);
-  font-size:12px;
-  font-weight:700;
-  transition:.2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:9px 15px;margin:25px 0 23px;color:var(--green);
+  background:transparent;border:1px solid var(--line);
+  font-size:12px;font-weight:700;transition:.2s;
 }
-
-.back-button:hover{
-  color:white;
-  background:var(--green);
-  border-color:var(--green);
-}
-
+.back-button:hover{color:white;background:var(--green);border-color:var(--green)}
 .back-arrow{font-size:17px}
-
 .page-title{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:15px;
-  border-bottom:1px solid var(--line);
-  padding-bottom:18px;
-  margin-bottom:17px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:15px;
+  border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:17px;
 }
-
-.page-title h2{
-  font-size:25px;
-  font-weight:900;
-  color:var(--green);
-  line-height:1.5;
-}
-
-.page-title p{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
-}
-
+.page-title h2{font-size:25px;font-weight:900;color:var(--green);line-height:1.5}
+.page-title p{font-size:11px;color:var(--muted);margin-top:3px}
 .page-number{
-  direction:ltr;
-  font-family:"DM Sans",sans-serif;
-  font-size:30px;
-  font-weight:800;
-  color:rgba(52,61,50,.17);
-  line-height:1;
+  direction:ltr;font-family:"DM Sans",sans-serif;font-size:30px;
+  font-weight:800;color:rgba(52,61,50,.17);line-height:1;
 }
 
 /* PRODUCTS */
-
 .item-list{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:0 25px;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 25px;
 }
-
 .item-card{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:center;
-  gap:6px 12px;
-  padding:18px 0;
-  border-bottom:1px solid var(--line);
-  animation:pageEnter .3s ease both;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;gap:6px 12px;padding:18px 0;
+  border-bottom:1px solid var(--line);animation:pageEnter .3s ease both;
 }
-
-.item-name{
-  font-size:14px;
-  font-weight:700;
-  color:var(--text);
-}
-
-.item-desc{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
-  line-height:1.9;
-}
-
+.item-name{font-size:14px;font-weight:700;color:var(--text)}
+.item-desc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.9}
 .item-price{
-  direction:rtl;
-  white-space:nowrap;
-  font-size:13px;
-  font-weight:800;
-  color:var(--green);
+  direction:rtl;white-space:nowrap;font-size:13px;
+  font-weight:800;color:var(--green);
 }
-
 .empty{
-  grid-column:1/-1;
-  text-align:center;
-  padding:30px 12px;
-  color:var(--muted);
-  font-size:13px;
-  background:rgba(255,254,250,.45);
-  border:1px dashed var(--line);
+  grid-column:1/-1;text-align:center;padding:30px 12px;
+  color:var(--muted);font-size:13px;
+  background:rgba(255,254,250,.45);border:1px dashed var(--line);
 }
 
 /* FOOTER */
-
-.footer{
-  margin-top:45px;
-  padding:0 0 25px;
-  background:var(--cream);
-}
-
-.footer-inner{
-  width:min(1100px,calc(100% - 36px));
-  margin:auto;
-}
-
+.footer{margin-top:45px;padding:0 0 25px;background:var(--cream)}
+.footer-inner{width:min(1100px,calc(100% - 36px));margin:auto}
 .address-box{
-  padding:20px;
-  border:1px solid rgba(52,61,50,.19);
-  background:var(--green);
-  color:var(--white);
-  display:flex;
-  align-items:center;
-  gap:15px;
-  position:relative;
-  overflow:hidden;
+  padding:20px;border:1px solid rgba(52,61,50,.19);
+  background:var(--green);color:var(--white);
+  display:flex;align-items:center;gap:15px;position:relative;overflow:hidden;
 }
-
 .address-box::after{
-  content:"";
-  position:absolute;
-  left:-35px;
-  bottom:-55px;
-  width:130px;
-  height:130px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:50%;
-  pointer-events:none;
+  content:"";position:absolute;left:-35px;bottom:-55px;width:130px;height:130px;
+  border:1px solid rgba(255,255,255,.09);border-radius:50%;pointer-events:none;
 }
-
 .address-icon{
-  flex-shrink:0;
-  width:45px;
-  height:45px;
-  display:grid;
-  place-items:center;
-  border:1px solid rgba(255,255,255,.25);
-  color:#E3A17F;
+  flex-shrink:0;width:45px;height:45px;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.25);color:#E3A17F;
 }
-
-.address-icon svg{
-  width:22px;
-  height:22px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.5;
-}
-
-.address-content{
-  min-width:0;
-  position:relative;
-  z-index:1;
-}
-
-.address-title{
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:3px;
-}
-
-.address-text{
-  color:rgba(255,255,255,.72);
-  font-size:11px;
-  line-height:2;
-  overflow-wrap:anywhere;
-}
-
+.address-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5}
+.address-content{min-width:0;position:relative;z-index:1}
+.address-title{font-size:13px;font-weight:800;margin-bottom:3px}
+.address-text{color:rgba(255,255,255,.72);font-size:11px;line-height:2;overflow-wrap:anywhere}
 .address-note{
-  display:inline-block;
-  margin-top:7px;
-  padding:3px 9px;
-  color:#E3A17F;
-  border:1px solid rgba(227,161,127,.35);
-  font-size:9px;
+  display:inline-block;margin-top:7px;padding:3px 9px;color:#E3A17F;
+  border:1px solid rgba(227,161,127,.35);font-size:9px;
+}
+.status-message{
+  margin-top:14px;text-align:center;font-size:12px;color:var(--muted);
+}
+.status-message.error{color:#B74444}
+.status-message button{
+  border:1px solid var(--line);background:transparent;color:var(--green);
+  padding:5px 12px;margin-right:7px;
 }
 
 /* RESPONSIVE */
-
 @media(min-width:900px){
-  .category-card{
-    aspect-ratio:1.28/1;
-  }
+  .category-card{aspect-ratio:1.28/1}
 }
-
 @media(max-width:600px){
-  .container{
-    width:calc(100% - 28px);
-  }
-
+  .container{width:calc(100% - 28px)}
   .header-inner{height:67px}
   .brand{font-size:28px}
-
   .header-actions{gap:6px}
-
-  .header-actions a{
-    padding:7px 10px;
-    font-size:11px;
-  }
-
+  .header-actions a{padding:7px 10px;font-size:11px}
   .search-wrap{margin-top:21px}
-
-  .section-head{
-    margin:30px 0 20px;
-    gap:12px;
-  }
-
+  .section-head{margin:30px 0 20px;gap:12px}
   .section-head h2{font-size:19px}
   .heading-line{width:27px}
-
-  .category-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:11px;
-  }
-
-  .category-card{
-    aspect-ratio:1/1.12;
-    min-height:155px;
-  }
-
-  .cat-info{
-    right:12px;
-    left:12px;
-    bottom:12px;
-  }
-
+  .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .category-card{aspect-ratio:1/1.12;min-height:155px}
+  .cat-info{right:12px;left:12px;bottom:12px}
   .cat-name{font-size:14px}
   .cat-caption{font-size:9px}
-
-  .cat-arrow{
-    width:29px;
-    height:29px;
-    font-size:17px;
-  }
-
+  .cat-arrow{width:29px;height:29px;font-size:17px}
   .back-button{margin:20px 0}
   .page-title h2{font-size:21px}
   .page-number{font-size:25px}
-
-  .item-list{
-    grid-template-columns:1fr;
-  }
-
+  .item-list{grid-template-columns:1fr}
   .item-card{padding:16px 0}
   .item-name{font-size:13px}
   .item-price{font-size:12px}
-
-  .footer{
-    margin-top:35px;
-    padding-bottom:18px;
-  }
-
-  .footer-inner{
-    width:calc(100% - 28px);
-  }
-
-  .address-box{
-    padding:15px 13px;
-    gap:11px;
-  }
-
-  .address-icon{
-    width:38px;
-    height:38px;
-  }
-
+  .footer{margin-top:35px;padding-bottom:18px}
+  .footer-inner{width:calc(100% - 28px)}
+  .address-box{padding:15px 13px;gap:11px}
+  .address-icon{width:38px;height:38px}
   .address-text{font-size:10px}
-
-  .intro-logo{
-    width:min(235px,72vw);
-  }
+  .intro-logo{width:min(235px,72vw)}
 }
-
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    scroll-behavior:auto!important;
-    animation:none!important;
-    transition:none!important;
-  }
+  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body class="intro-active">
 
-<!-- INTRO -->
-
 <div class="intro" id="intro">
-  <img
-    class="intro-logo"
-    src="Alfa Coffee Emblem Logo.png"
-    alt="ALFA Coffee"
-    fetchpriority="high"
-  >
+  <img class="intro-logo" src="Alfa Coffee Emblem Logo.png" alt="ALFA Coffee" fetchpriority="high">
 </div>
-
-<!-- HEADER -->
 
 <header>
   <div class="container header-inner">
-
-    <a class="brand" href="#" id="brandHome" aria-label="ALFA">
-      ALFA<span>.</span>
-    </a>
-
+    <a class="brand" href="#" id="brandHome" aria-label="ALFA">ALFA<span>.</span></a>
     <nav class="header-actions">
-      <a href="tel:PHONE_NUMBER">تماس</a>
-      <a
-        href="https://instagram.com/INSTAGRAM_ID"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        اینستاگرام
-      </a>
+      <a id="phoneLink" href="tel:PHONE_NUMBER">تماس</a>
+      <a id="instagramLink" href="https://instagram.com/INSTAGRAM_ID" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
     </nav>
-
   </div>
 </header>
 
-<!-- MAIN -->
-
 <main class="container">
-
   <div class="search-wrap">
     <label class="search">
-
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="7.5"></circle>
         <path d="m16.5 16.5 5 5"></path>
       </svg>
-
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="جستجو در منو..."
-        autocomplete="off"
-      >
-
+      <input id="searchInput" type="search" placeholder="جستجو در منو..." autocomplete="off">
     </label>
   </div>
 
-  <!-- HOME -->
-
   <section id="homeView" class="view active">
-
     <div class="section-head">
       <span class="heading-line"></span>
       <h2>دسته‌بندی‌ها</h2>
       <span class="heading-line"></span>
     </div>
-
     <div class="category-grid" id="categoryGrid"></div>
-
+    <div id="homeStatus" class="status-message">در حال دریافت منو...</div>
   </section>
 
-  <!-- CATEGORY -->
-
   <section id="categoryView" class="view">
-
     <button class="back-button" id="backButton" type="button">
-      <span class="back-arrow">→</span>
-      بازگشت به دسته‌بندی‌ها
+      <span class="back-arrow">→</span> بازگشت به دسته‌بندی‌ها
     </button>
-
     <div class="page-title">
       <div>
         <h2 id="pageCategoryName"></h2>
         <p id="pageCategoryCaption"></p>
       </div>
-
       <div class="page-number" id="pageCategoryNumber"></div>
     </div>
-
     <div id="dynamicMenu"></div>
-
   </section>
 
-  <!-- SEARCH -->
-
   <section id="searchView" class="view">
-
     <button class="back-button" id="searchBackButton" type="button">
-      <span class="back-arrow">→</span>
-      بازگشت به دسته‌بندی‌ها
+      <span class="back-arrow">→</span> بازگشت به دسته‌بندی‌ها
     </button>
-
     <div class="page-title">
       <div>
         <h2>نتایج جستجو</h2>
         <p id="resultNote">محصولات منو</p>
       </div>
     </div>
-
     <div id="searchResults" class="item-list"></div>
-
   </section>
-
 </main>
-
-<!-- FOOTER -->
 
 <footer class="footer">
   <div class="footer-inner">
-
     <div class="address-box">
-
       <div class="address-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
           <circle cx="12" cy="10" r="2.5"></circle>
         </svg>
       </div>
-
       <div class="address-content">
         <div class="address-title">آدرس کافه</div>
-        <div class="address-text" id="cafeAddress"></div>
+        <div class="address-text" id="cafeAddress">در حال دریافت آدرس...</div>
         <span class="address-note">منتظر دیدارتان هستیم</span>
       </div>
-
     </div>
-
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
+/* اتصال به Supabase */
+const SUPABASE_URL = "https://uewdwreimgpzpvzkpvvo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* INTRO */
-
+/* اینترو */
 const intro = document.getElementById("intro");
-
 function closeIntro(){
+  if(!intro) return;
   intro.classList.add("hide");
   document.body.classList.remove("intro-active");
-
-  setTimeout(()=>{
-    intro.remove();
-  },800);
+  setTimeout(()=>intro.remove(),800);
 }
-
 setTimeout(closeIntro,3000);
 
-/* SETTINGS */
-
-const CAFE_ADDRESS = "آدرس دقیق کافه را اینجا بنویسید";
-
-/* MENU DATA */
-
-const menuData = [
-
-  {
-    id:"breakfast",
-    name:"صبحانه",
-    caption:"BREAKFAST",
-    image:"https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85",
-    products:[
-      {
-        name:"صبحانه انگلیسی",
-        description:"صبحانه کامل کافه‌ای",
-        price:0
-      },
-      {
-        name:"املت",
-        description:"املت تازه",
-        price:0
-      },
-      {
-        name:"نیمرو",
-        description:"تخم‌مرغ تازه",
-        price:0
-      },
-      {
-        name:"پنکیک",
-        description:"پنکیک تازه",
-        price:0
-      }
-    ]
-  },
-
-  {
-    id:"dinner",
-    name:"شام",
-    caption:"DINNER",
-    image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=85",
-    products:[
-      {
-        name:"پاستا آلفردو",
-        description:"پاستا با سس آلفردو",
-        price:0
-      },
-      {
-        name:"پاستا پستو",
-        description:"پاستا با سس پستو",
-        price:0
-      },
-      {
-        name:"برگر",
-        description:"برگر مخصوص",
-        price:0
-      },
-      {
-        name:"پنینی",
-        description:"ساندویچ گرم",
-        price:0
-      }
-    ]
-  },
-
-  {
-    id:"salad",
-    name:"سالاد",
-    caption:"SALAD",
-    image:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
-    products:[
-      {
-        name:"سالاد سزار",
-        description:"کاهو، مرغ و سس سزار",
-        price:0
-      },
-      {
-        name:"سالاد یونانی",
-        description:"سبزیجات تازه و پنیر",
-        price:0
-      },
-      {
-        name:"سالاد مخصوص",
-        description:"سالاد ویژه کافه",
-        price:0
-      }
-    ]
-  },
-
-  {
-    id:"cake",
-    name:"کیک",
-    caption:"CAKE",
-    image:"https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=900&q=85",
-    products:[
-      {
-        name:"چیزکیک",
-        description:"چیزکیک تازه",
-        price:0
-      },
-      {
-        name:"کیک شکلاتی",
-        description:"کیک شکلاتی",
-        price:0
-      },
-      {
-        name:"تیرامیسو",
-        description:"دسر تیرامیسو",
-        price:0
-      },
-      {
-        name:"براونی",
-        description:"براونی شکلاتی",
-        price:0
-      }
-    ]
-  },
-
-  {
-    id:"hot",
-    name:"نوشیدنی گرم",
-    caption:"HOT DRINKS",
-    image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=85",
-    products:[
-      {
-        name:"اسپرسو",
-        description:"قهوه خالص و غلیظ",
-        price:0
-      },
-      {
-        name:"آمریکانو",
-        description:"اسپرسو با آب داغ",
-        price:0
-      },
-      {
-        name:"لاته",
-        description:"اسپرسو و شیر",
-        price:0
-      },
-      {
-        name:"کاپوچینو",
-        description:"اسپرسو و فوم شیر",
-        price:0
-      },
-      {
-        name:"موکا",
-        description:"قهوه و شکلات",
-        price:0
-      },
-      {
-        name:"هات چاکلت",
-        description:"شکلات داغ",
-        price:0
-      },
-      {
-        name:"چای ماسالا",
-        description:"چای ادویه‌دار با شیر",
-        price:0
-      }
-    ]
-  },
-
-  {
-    id:"cold",
-    name:"نوشیدنی سرد",
-    caption:"COLD DRINKS",
-    image:"https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85",
-    products:[
-      {
-        name:"آیس لاته",
-        description:"اسپرسو و شیر سرد",
-        price:0
-      },
-      {
-        name:"آیس آمریکانو",
-        description:"اسپرسو و آب سرد",
-        price:0
-      },
-      {
-        name:"آیس موکا",
-        description:"قهوه، شکلات و شیر سرد",
-        price:0
-      },
-      {
-        name:"لیموناد",
-        description:"نوشیدنی لیمویی",
-        price:0
-      },
-      {
-        name:"موهیتو",
-        description:"لیمو و نعناع",
-        price:0
-      },
-      {
-        name:"اسموتی",
-        description:"نوشیدنی میوه‌ای",
-        price:0
-      }
-    ]
-  }
-
-];
-
-/* ELEMENTS */
+/* داده‌های منو از دیتابیس پر می‌شوند */
+let menuData = [];
+let cafeSettings = {phone:"",instagram:"",address:""};
 
 const homeView = document.getElementById("homeView");
 const categoryView = document.getElementById("categoryView");
 const searchView = document.getElementById("searchView");
-
 const categoryGrid = document.getElementById("categoryGrid");
 const dynamicMenu = document.getElementById("dynamicMenu");
 const searchResults = document.getElementById("searchResults");
 const searchInput = document.getElementById("searchInput");
 const resultNote = document.getElementById("resultNote");
-
-document.getElementById("cafeAddress").textContent = CAFE_ADDRESS;
-
-/* HELPERS */
+const homeStatus = document.getElementById("homeStatus");
 
 function escapeHTML(value){
   return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
   }[char]));
 }
 
 function formatPrice(price){
   const value = Number(price) || 0;
-
-  if(value <= 0){
-    return "قیمت اعلام نشده";
-  }
-
-  return value.toLocaleString("fa-IR") + " تومان";
+  return value <= 0 ? "قیمت اعلام نشده" : value.toLocaleString("fa-IR")+" تومان";
 }
-
-/* PAGE NAVIGATION */
 
 function showView(view){
-  [homeView,categoryView,searchView].forEach(section=>{
-    section.classList.remove("active");
-  });
-
+  [homeView,categoryView,searchView].forEach(section=>section.classList.remove("active"));
   view.classList.add("active");
-
-  window.scrollTo({
-    top:0,
-    behavior:"instant"
-  });
+  window.scrollTo({top:0,behavior:"auto"});
 }
 
-/* CATEGORY CARDS */
+/* دریافت دسته‌بندی‌ها، محصولات فعال و تنظیمات */
+async function loadMenu(){
+  homeStatus.textContent = "در حال دریافت منو...";
+  homeStatus.classList.remove("error");
 
+  try{
+    const [categoryResult,productResult,settingsResult] = await Promise.all([
+      db.from("alfa_categories")
+        .select("id,name,caption,image_url,sort_order,active")
+        .eq("active",true)
+        .order("sort_order"),
+      db.from("alfa_products")
+        .select("id,category_id,name,description,price,sort_order,active")
+        .eq("active",true)
+        .order("sort_order"),
+      db.from("alfa_settings")
+        .select("phone,instagram,address")
+        .eq("id",1)
+        .maybeSingle()
+    ]);
+
+    if(categoryResult.error) throw categoryResult.error;
+    if(productResult.error) throw productResult.error;
+    if(settingsResult.error) throw settingsResult.error;
+
+    const categories = categoryResult.data || [];
+    const products = productResult.data || [];
+    cafeSettings = settingsResult.data || cafeSettings;
+
+    menuData = categories.map(category=>({
+      id:category.id,
+      name:category.name,
+      caption:category.caption || "",
+      image:category.image_url || "",
+      sort_order:category.sort_order || 0,
+      products:products
+        .filter(product=>product.category_id===category.id)
+        .map(product=>({
+          id:product.id,
+          name:product.name,
+          description:product.description || "",
+          price:product.price || 0,
+          sort_order:product.sort_order || 0
+        }))
+    }));
+
+    renderCategories();
+    applySettings();
+
+    homeStatus.textContent = categories.length
+      ? ""
+      : "هنوز دسته‌بندی فعالی در منو ثبت نشده است.";
+
+  }catch(error){
+    console.error("ALFA menu error:",error);
+    homeStatus.textContent = "دریافت منو ناموفق بود. اتصال اینترنت و دسترسی دیتابیس را بررسی کنید.";
+    homeStatus.classList.add("error");
+    homeStatus.innerHTML += ' <button type="button" id="retryLoad">تلاش دوباره</button>';
+    document.getElementById("retryLoad").addEventListener("click",loadMenu);
+  }
+}
+
+/* تنظیمات کافه */
+function applySettings(){
+  document.getElementById("cafeAddress").textContent =
+    cafeSettings.address || "آدرس کافه هنوز ثبت نشده است.";
+
+  const phoneLink = document.getElementById("phoneLink");
+  if(cafeSettings.phone){
+    phoneLink.href = "tel:"+cafeSettings.phone.replace(/[^\d+]/g,"");
+  }
+
+  const instagramLink = document.getElementById("instagramLink");
+  if(cafeSettings.instagram){
+    const handle = cafeSettings.instagram.replace(/^@/,"").trim();
+    instagramLink.href = "https://instagram.com/"+encodeURIComponent(handle);
+  }
+}
+
+/* کارت‌های دسته‌بندی */
 function renderCategories(){
-
   categoryGrid.innerHTML = "";
 
   menuData.forEach(category=>{
-
     const card = document.createElement("button");
-
     card.type = "button";
     card.className = "category-card";
 
     card.innerHTML = `
-      <img
-        src="${escapeHTML(category.image)}"
-        alt="${escapeHTML(category.name)}"
-        loading="lazy"
-      >
-
+      <img src="${escapeHTML(category.image)}"
+        alt="${escapeHTML(category.name)}" loading="lazy">
       <div class="cat-info">
-
         <div>
-          <div class="cat-name">
-            ${escapeHTML(category.name)}
-          </div>
-
-          <div class="cat-caption">
-            ${escapeHTML(category.caption)}
-          </div>
+          <div class="cat-name">${escapeHTML(category.name)}</div>
+          <div class="cat-caption">${escapeHTML(category.caption)}</div>
         </div>
-
         <span class="cat-arrow" aria-hidden="true">↙</span>
-
       </div>
     `;
 
-    card.addEventListener("click",()=>{
-      openCategory(category.id);
-    });
-
+    card.addEventListener("click",()=>openCategory(category.id));
     categoryGrid.appendChild(card);
-
   });
-
 }
 
-/* PRODUCT CARDS */
-
+/* کارت محصول */
 function createProductCard(product,categoryName=""){
-
   const item = document.createElement("article");
   item.className = "item-card";
 
-  const description = [
-    categoryName,
-    product.description
-  ].filter(Boolean).join(" · ");
+  const description = [categoryName,product.description].filter(Boolean).join(" · ");
 
   item.innerHTML = `
     <div>
-      <div class="item-name">
-        ${escapeHTML(product.name)}
-      </div>
-
-      ${description ? `
-        <div class="item-desc">
-          ${escapeHTML(description)}
-        </div>
-      ` : ""}
+      <div class="item-name">${escapeHTML(product.name)}</div>
+      ${description ? `<div class="item-desc">${escapeHTML(description)}</div>` : ""}
     </div>
-
-    <div class="item-price">
-      ${formatPrice(product.price)}
-    </div>
+    <div class="item-price">${formatPrice(product.price)}</div>
   `;
-
   return item;
-
 }
 
-/* CATEGORY PAGE */
-
+/* صفحه دسته‌بندی */
 function openCategory(id){
-
   const category = menuData.find(item=>item.id===id);
-
   if(!category) return;
 
   searchInput.value = "";
-
-  document.getElementById("pageCategoryName").textContent =
-    category.name;
-
+  document.getElementById("pageCategoryName").textContent = category.name;
   document.getElementById("pageCategoryCaption").textContent =
-    category.products.length.toLocaleString("fa-IR") +
-    " محصول در این دسته";
-
+    category.products.length.toLocaleString("fa-IR")+" محصول در این دسته";
   document.getElementById("pageCategoryNumber").textContent =
     String(menuData.indexOf(category)+1).padStart(2,"0");
 
   dynamicMenu.innerHTML = "";
-
   const list = document.createElement("div");
   list.className = "item-list";
 
   if(!category.products.length){
-
-    list.innerHTML =
-      '<div class="empty">هنوز محصولی ثبت نشده است.</div>';
-
+    list.innerHTML = '<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
   }else{
-
-    category.products.forEach(product=>{
-      list.appendChild(createProductCard(product));
-    });
-
+    category.products.forEach(product=>list.appendChild(createProductCard(product)));
   }
 
   dynamicMenu.appendChild(list);
-
   showView(categoryView);
-
 }
 
-/* SEARCH */
-
+/* جستجو */
 function renderSearchResults(query){
-
   searchResults.innerHTML = "";
-
   const normalizedQuery = query.trim().toLocaleLowerCase("fa");
-
   const matches = [];
 
   menuData.forEach(category=>{
-
     category.products.forEach(product=>{
-
       const searchable = (
-        category.name + " " +
-        product.name + " " +
-        (product.description || "")
+        category.name+" "+product.name+" "+(product.description||"")
       ).toLocaleLowerCase("fa");
 
       if(searchable.includes(normalizedQuery)){
         matches.push({category,product});
       }
-
     });
-
   });
 
   if(!matches.length){
-
-    searchResults.innerHTML =
-      '<div class="empty">موردی با این عبارت پیدا نشد.</div>';
-
+    searchResults.innerHTML = '<div class="empty">موردی با این عبارت پیدا نشد.</div>';
   }else{
-
     matches.forEach(({category,product})=>{
-
-      searchResults.appendChild(
-        createProductCard(product,category.name)
-      );
-
+      searchResults.appendChild(createProductCard(product,category.name));
     });
-
   }
 
   resultNote.textContent = matches.length
-    ? matches.length.toLocaleString("fa-IR") + " مورد پیدا شد"
+    ? matches.length.toLocaleString("fa-IR")+" مورد پیدا شد"
     : "نتیجه‌ای پیدا نشد";
 
   showView(searchView);
-
 }
 
-/* EVENTS */
-
+/* رویدادها */
 searchInput.addEventListener("keydown",event=>{
-
   if(event.key==="Enter"){
-
-    const query = searchInput.value.trim();
-
+    const query=searchInput.value.trim();
     if(query){
       renderSearchResults(query);
       searchInput.blur();
     }
-
   }
-
 });
 
 searchInput.addEventListener("input",()=>{
-
-  if(
-    !searchInput.value.trim() &&
-    searchView.classList.contains("active")
-  ){
+  if(!searchInput.value.trim() && searchView.classList.contains("active")){
     showView(homeView);
   }
-
 });
 
 function goHome(){
-  searchInput.value = "";
+  searchInput.value="";
   showView(homeView);
 }
 
-document.getElementById("backButton")
-  .addEventListener("click",goHome);
+document.getElementById("backButton").addEventListener("click",goHome);
+document.getElementById("searchBackButton").addEventListener("click",goHome);
+document.getElementById("brandHome").addEventListener("click",event=>{
+  event.preventDefault();
+  goHome();
+});
 
-document.getElementById("searchBackButton")
-  .addEventListener("click",goHome);
-
-document.getElementById("brandHome")
-  .addEventListener("click",event=>{
-    event.preventDefault();
-    goHome();
-  });
-
-/* START */
-
-renderCategories();
-showView(homeView);
-
+/* شروع */
+loadMenu();
 </script>
-
 </body>
 </html>

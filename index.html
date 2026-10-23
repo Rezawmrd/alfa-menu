@@ -7,974 +7,570 @@
 <title>ALFA | منوی کافه</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#F4F0E8;
-  --paper:#FFFCF6;
+  --cream:#F4F0E8;
   --green:#343D32;
-  --green2:#4C5947;
   --orange:#C66B42;
-  --text:#282B25;
-  --muted:#858478;
-  --line:#E5DFD2;
-  --radius:22px;
-  --shadow:0 8px 28px rgba(45,48,38,.06);
+  --text:#292B26;
+  --muted:#77776E;
+  --line:#DDD8CC;
+  --white:#FFFEFA;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:"Vazirmatn",sans-serif;
-  min-height:100vh;
+  background:var(--cream);color:var(--text);
+  font-family:"Vazirmatn",sans-serif;line-height:1.8;overflow-x:hidden;
 }
+body.intro-active{overflow:hidden}
+a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible{
-  outline:2px solid var(--orange);
-  outline-offset:3px;
-}
-a{color:inherit;text-decoration:none}
-.hidden{display:none!important}
+.container{width:min(1100px,calc(100% - 36px));margin:auto}
 
-/* INTRO */
-#intro{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  background:var(--bg);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:opacity .55s ease,visibility .55s ease;
+.intro{
+  position:fixed;inset:0;z-index:9999;display:flex;
+  align-items:center;justify-content:center;background:#F4F0E8;
+  opacity:1;visibility:visible;transition:opacity .75s ease,visibility .75s ease;
 }
-#intro.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+.intro-logo{
+  width:min(270px,70vw);max-height:55vh;object-fit:contain;
+  animation:introLogo 2.5s ease both;
 }
-#intro img{
-  width:min(190px,48vw);
-  height:auto;
-  object-fit:contain;
-  animation:logoAppear .9s ease both;
+@keyframes introLogo{
+  0%{opacity:0;transform:scale(.88);filter:blur(5px)}
+  30%{opacity:1;transform:scale(1);filter:blur(0)}
+  75%,100%{opacity:1;transform:scale(1.025);filter:blur(0)}
 }
-@keyframes logoAppear{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1;transform:scale(1)}
-}
+.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 
-/* PAGE */
-.page{
-  width:min(1100px,100%);
-  margin:auto;
-  padding:0 22px;
-}
-
-/* HEADER */
 header{
-  padding:27px 0 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:100;background:rgba(244,240,232,.94);
+  backdrop-filter:blur(15px);border-bottom:1px solid rgba(52,61,50,.12);
 }
+.header-inner{height:75px;display:flex;align-items:center;justify-content:space-between}
 .brand{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
+  direction:ltr;font-family:"DM Sans",sans-serif;font-size:31px;
+  font-weight:800;letter-spacing:-2px;color:var(--green);
 }
-.brand-name{
-  font-family:"DM Sans","Vazirmatn",sans-serif;
-  font-size:29px;
-  font-weight:700;
-  letter-spacing:3px;
-  color:var(--green);
-  line-height:1.2;
+.brand span{color:var(--orange)}
+.header-actions{display:flex;align-items:center;gap:9px}
+.header-actions a{
+  font-size:12px;font-weight:600;padding:8px 15px;
+  border:1px solid var(--line);border-radius:3px;transition:.25s;
 }
-.brand-subtitle{
-  font-size:10px;
-  letter-spacing:3px;
-  color:var(--muted);
-  text-transform:uppercase;
-}
-.header-actions{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-.header-link{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:6px;
-  min-height:38px;
-  padding:8px 13px;
-  border:1px solid var(--line);
-  border-radius:30px;
-  font-size:12px;
-  color:var(--green);
-  background:rgba(255,252,246,.6);
-  transition:.2s;
-}
-.header-link:hover{
-  border-color:var(--green);
-  background:var(--green);
-  color:#fff;
-}
+.header-actions a:hover{background:var(--green);color:var(--white);border-color:var(--green)}
+main{padding-bottom:35px;min-height:55vh}
 
-/* HERO */
-.hero{
-  padding:36px 0 25px;
+.search-wrap{margin-top:27px}
+.search{
+  display:flex;align-items:center;gap:12px;background:var(--white);
+  border:1px solid var(--line);padding:0 17px;height:52px;transition:.25s;
 }
-.eyebrow{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:var(--orange);
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:1.2px;
-}
-.eyebrow:before{
-  content:"";
-  width:25px;
-  height:1px;
-  background:var(--orange);
-}
-.hero h1{
-  margin:12px 0 7px;
-  color:var(--green);
-  font-size:clamp(26px,5vw,42px);
-  font-weight:700;
-  line-height:1.5;
-}
-.hero p{
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:2;
-}
+.search:focus-within{border-color:var(--green);box-shadow:0 5px 20px rgba(52,61,50,.06)}
+.search svg{width:19px;height:19px;stroke:var(--muted);fill:none;stroke-width:1.7;flex-shrink:0}
+.search input{width:100%;border:0;outline:0;background:transparent;font-size:13px;color:var(--text)}
+.search input::placeholder{color:#99958B}
 
-/* SEARCH */
-.search-wrap{
-  position:relative;
-  margin:0 0 32px;
-}
-.search-icon{
-  position:absolute;
-  right:17px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted);
-  font-size:19px;
-  pointer-events:none;
-}
-#searchInput{
-  width:100%;
-  height:55px;
-  padding:0 49px 0 18px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:var(--paper);
-  color:var(--text);
-  font-size:13px;
-  transition:.2s;
-}
-#searchInput:focus{
-  border-color:var(--green2);
-  outline:none;
-  box-shadow:0 0 0 3px rgba(52,61,50,.06);
-}
-#searchInput::placeholder{color:#AAA698}
-
-/* SECTION HEADINGS */
 .section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:17px;
+  display:flex;justify-content:center;align-items:center;gap:16px;margin:36px 0 25px;
 }
-.section-title{
-  margin:0;
-  color:var(--green);
-  font-size:19px;
-  font-weight:700;
+.section-head h2{
+  position:relative;margin:0;padding:0 0 10px;font-size:21px;font-weight:900;color:var(--green);
 }
-.section-caption{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:12px;
+.section-head h2::after{
+  content:"";position:absolute;width:25px;height:3px;background:var(--orange);
+  border-radius:10px;bottom:0;left:50%;transform:translateX(-50%);
 }
-.count-label{
-  white-space:nowrap;
-  color:var(--muted);
-  font-size:11px;
-}
+.heading-line{width:38px;height:1px;background:var(--line)}
 
-/* CATEGORY GRID */
 .category-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:15px;
-  margin-bottom:42px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;
 }
 .category-card{
-  position:relative;
-  overflow:hidden;
-  min-width:0;
-  min-height:175px;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:var(--paper);
-  text-align:right;
-  padding:0;
-  color:var(--text);
-  box-shadow:var(--shadow);
-  transition:transform .22s,border-color .22s,box-shadow .22s;
+  position:relative;display:block;width:100%;text-align:right;border:0;padding:0;
+  background:var(--green);overflow:hidden;aspect-ratio:1/1.05;min-height:190px;
+  color:white;isolation:isolate;
 }
-.category-card:hover{
-  transform:translateY(-3px);
-  border-color:#CFC7B7;
-  box-shadow:0 12px 32px rgba(45,48,38,.1);
+.category-card img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s;
 }
-.category-image{
-  height:112px;
-  overflow:hidden;
-  background:#E9E4D8;
-  position:relative;
+.category-card.no-image::after{
+  content:"ALFA";position:absolute;inset:0;z-index:-2;
+  display:grid;place-items:center;background:#4A5545;
+  font-family:"DM Sans",sans-serif;font-size:30px;font-weight:800;letter-spacing:3px;
+  color:rgba(255,255,255,.45);
 }
-.category-image img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  transition:transform .4s;
+.category-card::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(18,24,18,.03) 15%,rgba(18,24,18,.25) 42%,rgba(18,24,18,.88) 100%);
+  z-index:-1;
 }
-.category-card:hover .category-image img{transform:scale(1.045)}
-.category-image.no-image{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#E9E4D8,#DAD8C9);
+.category-card:hover img{transform:scale(1.06)}
+.cat-info{
+  position:absolute;right:18px;left:18px;bottom:17px;
+  display:flex;justify-content:space-between;align-items:end;gap:8px;
 }
-.category-image.no-image span{
-  color:var(--green);
-  font-family:"DM Sans",sans-serif;
-  font-size:32px;
-  font-weight:700;
-  opacity:.55;
+.cat-name{font-size:17px;font-weight:800;line-height:1.5}
+.cat-caption{
+  margin-top:4px;color:rgba(255,255,255,.72);
+  font-family:"DM Sans",sans-serif;font-size:10px;letter-spacing:.5px;
 }
-.category-info{padding:13px 14px 15px}
-.category-name{
-  font-size:14px;
-  font-weight:700;
-  line-height:1.8;
-  color:var(--green);
+.cat-arrow{
+  width:33px;height:33px;flex-shrink:0;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.55);border-radius:50%;font-size:20px;transition:.25s;
 }
-.category-caption{
-  margin-top:3px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.8;
-}
-.category-arrow{
-  position:absolute;
-  left:12px;
-  bottom:13px;
-  color:var(--orange);
-  font-size:16px;
-  direction:ltr;
-}
+.category-card:hover .cat-arrow{color:var(--green);background:white;border-color:white}
 
-/* CATEGORY VIEW */
-.category-view{padding:3px 0 45px}
+.view{display:none;animation:pageEnter .28s ease}
+.view.active{display:block}
+@keyframes pageEnter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 .back-button{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  border:1px solid var(--line);
-  border-radius:30px;
-  padding:9px 15px;
-  background:var(--paper);
-  color:var(--green);
-  font-size:12px;
-  margin-bottom:22px;
-  transition:.2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:9px 15px;margin:25px 0 23px;color:var(--green);
+  background:transparent;border:1px solid var(--line);font-size:12px;font-weight:700;transition:.2s;
 }
-.back-button:hover{
-  color:white;
-  background:var(--green);
-  border-color:var(--green);
+.back-button:hover{color:white;background:var(--green);border-color:var(--green)}
+.back-arrow{font-size:17px}
+.page-title{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:15px;
+  border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:17px;
 }
-.category-view-title{
-  margin:0;
-  color:var(--green);
-  font-size:27px;
-  font-weight:700;
+.page-title h2{font-size:25px;font-weight:900;color:var(--green);line-height:1.5}
+.page-title p{font-size:11px;color:var(--muted);margin-top:3px}
+.page-number{
+  direction:ltr;font-family:"DM Sans",sans-serif;font-size:30px;
+  font-weight:800;color:rgba(52,61,50,.17);line-height:1;
 }
-.category-view-caption{
-  color:var(--muted);
-  font-size:12px;
-  margin:7px 0 23px;
-  line-height:2;
+.subcategory-heading{
+  margin:20px 0 14px;font-size:13px;font-weight:800;color:var(--green);
 }
-.subcategory-section{margin-bottom:30px}
-.subcategory-section .section-head{margin-bottom:15px}
-.subcategory-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:13px;
+.item-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 25px}
+.item-card{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 12px;
+  padding:18px 0;border-bottom:1px solid var(--line);animation:pageEnter .3s ease both;
 }
+.item-name{font-size:14px;font-weight:700;color:var(--text)}
+.item-desc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.9}
+.item-price{direction:rtl;white-space:nowrap;font-size:13px;font-weight:800;color:var(--green)}
+.empty{
+  grid-column:1/-1;text-align:center;padding:30px 12px;color:var(--muted);font-size:13px;
+  background:rgba(255,254,250,.45);border:1px dashed var(--line);
+}
+.footer{margin-top:45px;padding:0 0 25px;background:var(--cream)}
+.footer-inner{width:min(1100px,calc(100% - 36px));margin:auto}
+.address-box{
+  padding:20px;border:1px solid rgba(52,61,50,.19);background:var(--green);color:var(--white);
+  display:flex;align-items:center;gap:15px;position:relative;overflow:hidden;
+}
+.address-box::after{
+  content:"";position:absolute;left:-35px;bottom:-55px;width:130px;height:130px;
+  border:1px solid rgba(255,255,255,.09);border-radius:50%;pointer-events:none;
+}
+.address-icon{
+  flex-shrink:0;width:45px;height:45px;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.25);color:#E3A17F;
+}
+.address-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5}
+.address-content{min-width:0;position:relative;z-index:1}
+.address-title{font-size:13px;font-weight:800;margin-bottom:3px}
+.address-text{color:rgba(255,255,255,.72);font-size:11px;line-height:2;overflow-wrap:anywhere}
+.address-note{
+  display:inline-block;margin-top:7px;padding:3px 9px;color:#E3A17F;
+  border:1px solid rgba(227,161,127,.35);font-size:9px;
+}
+.status-message{margin-top:14px;text-align:center;font-size:12px;color:var(--muted)}
+.status-message.error{color:#B74444}
+.status-message button{border:1px solid var(--line);background:transparent;color:var(--green);padding:5px 12px;margin-right:7px}
 
-/* PRODUCTS */
-.product-list{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-  border-top:1px solid var(--line);
+@media(min-width:900px){.category-card{aspect-ratio:1.28/1}}
+@media(max-width:600px){
+  .container{width:calc(100% - 28px)}
+  .header-inner{height:67px}.brand{font-size:28px}
+  .header-actions{gap:6px}.header-actions a{padding:7px 10px;font-size:11px}
+  .search-wrap{margin-top:21px}
+  .section-head{margin:30px 0 20px;gap:12px}.section-head h2{font-size:19px}.heading-line{width:27px}
+  .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .category-card{aspect-ratio:1/1.12;min-height:155px}
+  .cat-info{right:12px;left:12px;bottom:12px}.cat-name{font-size:14px}
+  .cat-caption{font-size:9px}.cat-arrow{width:29px;height:29px;font-size:17px}
+  .back-button{margin:20px 0}.page-title h2{font-size:21px}.page-number{font-size:25px}
+  .item-list{grid-template-columns:1fr}.item-card{padding:16px 0}
+  .item-name{font-size:13px}.item-price{font-size:12px}
+  .footer{margin-top:35px;padding-bottom:18px}.footer-inner{width:calc(100% - 28px)}
+  .address-box{padding:15px 13px;gap:11px}.address-icon{width:38px;height:38px}.address-text{font-size:10px}
+  .intro-logo{width:min(235px,72vw)}
 }
-.product-card{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:18px;
-  padding:19px 3px;
-  border-bottom:1px solid var(--line);
-}
-.product-main{min-width:0;flex:1}
-.product-name{
-  margin:0;
-  font-size:15px;
-  font-weight:600;
-  color:var(--green);
-  line-height:1.9;
-}
-.product-description{
-  margin:5px 0 0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:2;
-  overflow-wrap:anywhere;
-}
-.product-category-label{
-  display:inline-block;
-  margin-top:7px;
-  font-size:10px;
-  color:var(--orange);
-  line-height:1.8;
-}
-.product-price{
-  flex-shrink:0;
-  color:var(--orange);
-  font-size:14px;
-  font-weight:700;
-  white-space:nowrap;
-  padding-top:3px;
-}
-.product-price small{
-  font-size:10px;
-  font-weight:400;
-  color:var(--muted);
-  margin-right:3px;
-}
-
-/* SEARCH RESULTS */
-.search-results{padding:0 0 45px}
-.search-results .product-list{margin-top:10px}
-.search-category-heading{
-  margin:20px 0 4px;
-  color:var(--orange);
-  font-size:12px;
-  font-weight:600;
-}
-
-/* MESSAGES */
-.message-box{
-  padding:30px 18px;
-  text-align:center;
-  border:1px dashed var(--line);
-  border-radius:18px;
-  color:var(--muted);
-  background:rgba(255,252,246,.45);
-  font-size:13px;
-  line-height:2.1;
-}
-.message-box button{
-  margin-top:10px;
-  border:0;
-  border-radius:25px;
-  padding:9px 17px;
-  color:#fff;
-  background:var(--green);
-  font-size:12px;
-}
-.loading{
-  text-align:center;
-  padding:35px 10px;
-  color:var(--muted);
-  font-size:13px;
-}
-.loading:before{
-  content:"";
-  display:block;
-  width:25px;
-  height:25px;
-  border:2px solid var(--line);
-  border-top-color:var(--orange);
-  border-radius:50%;
-  margin:0 auto 12px;
-  animation:spin .7s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* FOOTER */
-footer{
-  margin-top:25px;
-  padding:29px 0 35px;
-  background:var(--green);
-  color:#F4F0E8;
-}
-.footer-inner{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:25px;
-}
-.footer-brand{
-  font-family:"DM Sans",sans-serif;
-  font-size:23px;
-  font-weight:700;
-  letter-spacing:2px;
-}
-.footer-label{
-  margin-top:8px;
-  color:#C5C9BC;
-  font-size:11px;
-  line-height:2;
-}
-.footer-address{
-  max-width:420px;
-  color:#F4F0E8;
-  font-size:12px;
-  line-height:2.2;
-}
-.footer-address-label{
-  display:block;
-  color:#D7A184;
-  font-size:10px;
-  margin-bottom:4px;
-  letter-spacing:.5px;
-}
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,.14);
-  margin-top:23px;
-  padding-top:15px;
-  color:#BFC4B8;
-  font-size:10px;
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-}
-
-/* RESPONSIVE */
-@media(max-width:650px){
-  .page{padding:0 17px}
-  header{padding:22px 0 17px}
-  .brand-name{font-size:25px}
-  .header-link{padding:8px 10px;font-size:11px}
-  .hero{padding:29px 0 22px}
-  .category-grid,.subcategory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-  .category-card{min-height:160px;border-radius:18px}
-  .category-image{height:100px}
-  .category-info{padding:10px 11px 13px}
-  .category-name{font-size:13px}
-  .category-caption{font-size:10px}
-  .category-arrow{left:10px;bottom:10px}
-  .section-title{font-size:17px}
-  .category-view-title{font-size:24px}
-  .product-card{gap:12px;padding:17px 1px}
-  .product-name{font-size:14px}
-  .product-description{font-size:11px}
-  .product-price{font-size:13px}
-  .footer-inner{flex-direction:column;gap:18px}
-  .footer-address{max-width:none}
-}
-@media(max-width:370px){
-  .page{padding:0 13px}
-  .header-actions{gap:5px}
-  .header-link{padding:7px 8px;font-size:10px}
-  .category-grid,.subcategory-grid{gap:8px}
-  .category-image{height:88px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
-<body>
+<body class="intro-active">
 
-<div id="intro">
-  <img src="Alfa Coffee Emblem Logo.png" alt="ALFA">
+<div class="intro" id="intro">
+  <img class="intro-logo" src="Alfa Coffee Emblem Logo.png" alt="ALFA Coffee" fetchpriority="high">
 </div>
 
-<div class="page">
-  <header>
-    <a href="#" class="brand" id="brandHome" aria-label="صفحه اصلی">
-      <span class="brand-name">ALFA</span>
-      <span class="brand-subtitle">COFFEE HOUSE</span>
-    </a>
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="#" id="brandHome" aria-label="ALFA">ALFA<span>.</span></a>
+    <nav class="header-actions">
+      <a id="phoneLink" href="tel:PHONE_NUMBER">تماس</a>
+      <a id="instagramLink" href="https://instagram.com/INSTAGRAM_ID" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
+    </nav>
+  </div>
+</header>
 
-    <div class="header-actions">
-      <a class="header-link" id="phoneLink" href="tel:" hidden>تماس</a>
-      <a class="header-link" id="instagramLink" href="#" target="_blank" rel="noopener" hidden>اینستاگرام</a>
-    </div>
-  </header>
-
-  <section class="hero" id="hero">
-    <div class="eyebrow">A LITTLE MOMENT FOR YOU</div>
-    <h1>طعم لحظه‌های خوب</h1>
-    <p>منوی آلفا رو ببین و انتخابت رو پیدا کن.</p>
-  </section>
-
+<main class="container">
   <div class="search-wrap">
-    <span class="search-icon" aria-hidden="true">⌕</span>
-    <input id="searchInput" type="search" placeholder="چی میل داری؟ جست‌وجو کن..." autocomplete="off">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7.5"></circle><path d="m16.5 16.5 5 5"></path>
+      </svg>
+      <input id="searchInput" type="search" placeholder="جستجو در منو..." autocomplete="off">
+    </label>
   </div>
 
-  <main>
-    <section id="homeView">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">منوی آلفا</h2>
-          <p class="section-caption">دسته‌بندی مورد علاقه‌ات رو انتخاب کن.</p>
-        </div>
-        <span class="count-label" id="categoryCount"></span>
-      </div>
-      <div id="categoryGrid" class="category-grid">
-        <div class="loading">در حال دریافت منو...</div>
-      </div>
-    </section>
-
-    <section id="categoryView" class="category-view hidden">
-      <button class="back-button" id="backButton" type="button">→ برگشت</button>
-
-      <h2 class="category-view-title" id="categoryViewTitle"></h2>
-      <p class="category-view-caption" id="categoryViewCaption"></p>
-
-      <div id="subcategorySection" class="subcategory-section hidden">
-        <div class="section-head">
-          <div>
-            <h3 class="section-title">انتخاب زیر‌دسته</h3>
-            <p class="section-caption">برای دیدن محصولات، یکی رو انتخاب کن.</p>
-          </div>
-        </div>
-        <div id="subcategoryGrid" class="subcategory-grid"></div>
-      </div>
-
-      <div id="directProductsSection" class="hidden">
-        <div class="section-head">
-          <div>
-            <h3 class="section-title" id="directProductsTitle">محصولات</h3>
-            <p class="section-caption">محصولات این بخش</p>
-          </div>
-        </div>
-        <div id="directProductList" class="product-list"></div>
-      </div>
-
-      <div id="emptyCategory" class="message-box hidden">هنوز محصولی در این بخش ثبت نشده است.</div>
-    </section>
-
-    <section id="searchView" class="search-results hidden">
-      <button class="back-button" id="searchBackButton" type="button">→ برگشت به منو</button>
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">نتایج جست‌وجو</h2>
-          <p class="section-caption" id="searchCaption"></p>
-        </div>
-      </div>
-      <div id="searchResultsList"></div>
-    </section>
-
-    <div id="pageError" class="message-box hidden">
-      دریافت منو با مشکل مواجه شد.
-      <br>
-      <button type="button" id="retryButton">تلاش دوباره</button>
+  <section id="homeView" class="view active">
+    <div class="section-head">
+      <span class="heading-line"></span><h2>دسته‌بندی‌ها</h2><span class="heading-line"></span>
     </div>
-  </main>
-</div>
+    <div class="category-grid" id="categoryGrid"></div>
+    <div id="homeStatus" class="status-message">در حال دریافت منو...</div>
+  </section>
 
-<footer>
-  <div class="page">
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">ALFA</div>
-        <div class="footer-label">COFFEE HOUSE · GOOD MOMENTS</div>
-      </div>
-      <div class="footer-address">
-        <span class="footer-address-label">آدرس کافه</span>
-        <span id="addressText">برای اطلاع از آدرس کافه با ما در ارتباط باشید.</span>
-      </div>
+  <section id="categoryView" class="view">
+    <button class="back-button" id="backButton" type="button">
+      <span class="back-arrow">→</span> <span id="backButtonText">بازگشت به دسته‌بندی‌ها</span>
+    </button>
+    <div class="page-title">
+      <div><h2 id="pageCategoryName"></h2><p id="pageCategoryCaption"></p></div>
+      <div class="page-number" id="pageCategoryNumber"></div>
     </div>
-    <div class="footer-bottom">
-      <span>ALFA COFFEE</span>
-      <span>یک فنجان حال خوب</span>
+    <div id="dynamicMenu"></div>
+  </section>
+
+  <section id="searchView" class="view">
+    <button class="back-button" id="searchBackButton" type="button">
+      <span class="back-arrow">→</span> بازگشت به دسته‌بندی‌ها
+    </button>
+    <div class="page-title">
+      <div><h2>نتایج جستجو</h2><p id="resultNote">محصولات منو</p></div>
+    </div>
+    <div id="searchResults" class="item-list"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="address-box">
+      <div class="address-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+          <circle cx="12" cy="10" r="2.5"></circle>
+        </svg>
+      </div>
+      <div class="address-content">
+        <div class="address-title">آدرس کافه</div>
+        <div class="address-text" id="cafeAddress">در حال دریافت آدرس...</div>
+        <span class="address-note">منتظر دیدارتان هستیم</span>
+      </div>
     </div>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const SUPABASE_URL = "https://uewdwreimgpzpvzkpvvo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let allCategories = [];
-let allProducts = [];
-let settings = {};
+const intro = document.getElementById("intro");
+function closeIntro(){
+  if(!intro)return;
+  intro.classList.add("hide");
+  document.body.classList.remove("intro-active");
+  setTimeout(()=>intro.remove(),800);
+}
+setTimeout(closeIntro,3000);
+
+let menuData = [];
+let cafeSettings = {phone:"",instagram:"",address:""};
 let currentCategoryId = null;
-let currentRootId = null;
-let isSearching = false;
 
-const $ = id => document.getElementById(id);
-
-const homeView = $("homeView");
-const categoryView = $("categoryView");
-const searchView = $("searchView");
-const categoryGrid = $("categoryGrid");
-const searchInput = $("searchInput");
+const homeView=document.getElementById("homeView");
+const categoryView=document.getElementById("categoryView");
+const searchView=document.getElementById("searchView");
+const categoryGrid=document.getElementById("categoryGrid");
+const dynamicMenu=document.getElementById("dynamicMenu");
+const searchResults=document.getElementById("searchResults");
+const searchInput=document.getElementById("searchInput");
+const resultNote=document.getElementById("resultNote");
+const homeStatus=document.getElementById("homeStatus");
 
 function escapeHTML(value){
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  })[char]);
+  return String(value??"").replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[char]));
 }
-
-function closeIntro(){
-  $("intro").classList.add("hide");
+function formatPrice(price){
+  const value=Number(price)||0;
+  return value<=0?"قیمت اعلام نشده":value.toLocaleString("fa-IR")+" تومان";
 }
-window.addEventListener("load", () => setTimeout(closeIntro, 3000));
-
+function showView(view){
+  [homeView,categoryView,searchView].forEach(section=>section.classList.remove("active"));
+  view.classList.add("active");
+  window.scrollTo({top:0,behavior:"auto"});
+}
 function getCategory(id){
-  return allCategories.find(category => String(category.id) === String(id));
+  return menuData.find(category=>String(category.id)===String(id));
 }
-
 function getChildren(parentId){
-  return allCategories.filter(category =>
-    String(category.parent_id ?? "") === String(parentId)
-  );
+  return menuData.filter(category=>String(category.parent_id||"")===String(parentId));
 }
-
-function getProducts(categoryId){
-  return allProducts.filter(product =>
-    String(product.category_id) === String(categoryId)
-  );
-}
-
 function getRoot(category){
-  if(!category) return null;
-  if(!category.parent_id) return category;
-  return getCategory(category.parent_id) || category;
+  if(!category)return null;
+  if(!category.parent_id)return category;
+  return getCategory(category.parent_id)||category;
 }
-
 function getCategoryPath(category){
-  if(!category) return "";
-  const root = getRoot(category);
-  if(root && String(root.id) !== String(category.id)){
-    return root.name + " / " + category.name;
-  }
-  return category.name;
-}
-
-function showOnly(view){
-  homeView.classList.toggle("hidden", view !== "home");
-  categoryView.classList.toggle("hidden", view !== "category");
-  searchView.classList.toggle("hidden", view !== "search");
-  $("pageError").classList.add("hidden");
-}
-
-function setCategoryCardCaption(category){
-  const children = getChildren(category.id);
-  const products = getProducts(category.id);
-  if(children.length){
-    return `${children.length} زیر‌دسته`;
-  }
-  return `${products.length} محصول`;
-}
-
-function categoryCardHTML(category, index){
-  const image = category.image_url;
-  const imageHTML = image
-    ? `<div class="category-image"><img src="${escapeHTML(image)}" alt="${escapeHTML(category.name)}" loading="lazy" onerror="this.parentElement.classList.add('no-image');this.remove();this.parentElement.innerHTML='<span>ALFA</span>'"></div>`
-    : `<div class="category-image no-image"><span>ALFA</span></div>`;
-
-  const caption = category.caption || setCategoryCardCaption(category);
-
-  return `
-    <button class="category-card" type="button" data-category-id="${escapeHTML(category.id)}">
-      ${imageHTML}
-      <div class="category-info">
-        <div class="category-name">${escapeHTML(category.name)}</div>
-        <div class="category-caption">${escapeHTML(caption)}</div>
-      </div>
-      <span class="category-arrow" aria-hidden="true">↙</span>
-    </button>
-  `;
-}
-
-function bindCategoryCards(container){
-  container.querySelectorAll("[data-category-id]").forEach(button => {
-    button.addEventListener("click", () => openCategory(button.dataset.categoryId));
-  });
-}
-
-function renderHomeCategories(){
-  const roots = allCategories
-    .filter(category => !category.parent_id)
-    .sort((a,b) => Number(a.sort_order || 0) - Number(b.sort_order || 0));
-
-  $("categoryCount").textContent = `${roots.length} دسته`;
-  if(!roots.length){
-    categoryGrid.innerHTML = `<div class="message-box">هنوز دسته‌بندی‌ای ثبت نشده است.</div>`;
-    return;
-  }
-
-  categoryGrid.innerHTML = roots.map(categoryCardHTML).join("");
-  bindCategoryCards(categoryGrid);
-}
-
-function createProductCard(product, showPath = false){
-  const category = getCategory(product.category_id);
-  const price = product.price !== null && product.price !== undefined && product.price !== ""
-    ? `<div class="product-price">${Number(product.price).toLocaleString("fa-IR")}<small>تومان</small></div>`
-    : "";
-
-  const path = showPath && category
-    ? `<div class="product-category-label">${escapeHTML(getCategoryPath(category))}</div>`
-    : "";
-
-  return `
-    <article class="product-card">
-      <div class="product-main">
-        <h3 class="product-name">${escapeHTML(product.name)}</h3>
-        ${product.description ? `<p class="product-description">${escapeHTML(product.description)}</p>` : ""}
-        ${path}
-      </div>
-      ${price}
-    </article>
-  `;
-}
-
-function renderProductList(container, products, showPath = false){
-  if(!products.length){
-    container.innerHTML = `<div class="message-box">هنوز محصولی در این بخش ثبت نشده است.</div>`;
-    return;
-  }
-  container.innerHTML = products.map(product => createProductCard(product, showPath)).join("");
-}
-
-function openCategory(id){
-  const category = getCategory(id);
-  if(!category) return;
-
-  isSearching = false;
-  searchInput.value = "";
-  currentCategoryId = category.id;
-
-  const root = getRoot(category);
-  currentRootId = root ? root.id : category.id;
-
-  const children = getChildren(category.id);
-  const products = getProducts(category.id);
-
-  $("categoryViewTitle").textContent = category.name;
-
-  if(children.length){
-    $("categoryViewCaption").textContent = category.caption || "یکی از زیر‌دسته‌ها رو انتخاب کن.";
-  }else{
-    $("categoryViewCaption").textContent = category.caption || `${products.length.toLocaleString("fa-IR")} محصول در این بخش`;
-  }
-
-  const subSection = $("subcategorySection");
-  const subGrid = $("subcategoryGrid");
-  const directSection = $("directProductsSection");
-  const directList = $("directProductList");
-  const emptyCategory = $("emptyCategory");
-
-  subSection.classList.toggle("hidden", children.length === 0);
-  directSection.classList.add("hidden");
-  emptyCategory.classList.add("hidden");
-  subGrid.innerHTML = "";
-  directList.innerHTML = "";
-
-  if(children.length){
-    subGrid.innerHTML = children
-      .sort((a,b) => Number(a.sort_order || 0) - Number(b.sort_order || 0))
-      .map(categoryCardHTML)
-      .join("");
-    bindCategoryCards(subGrid);
-
-    // محصولات مستقیمی که قبلاً به دسته اصلی وصل شده‌اند هم نمایش داده می‌شوند.
-    if(products.length){
-      directSection.classList.remove("hidden");
-      $("directProductsTitle").textContent = `سایر محصولات ${category.name}`;
-      renderProductList(directList, products);
-    }
-  }else{
-    if(products.length){
-      directSection.classList.remove("hidden");
-      $("directProductsTitle").textContent = "محصولات";
-      renderProductList(directList, products);
-    }else{
-      emptyCategory.classList.remove("hidden");
-    }
-  }
-
-  showOnly("category");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function goBackFromCategory(){
-  if(!currentCategoryId) return goHome();
-
-  const current = getCategory(currentCategoryId);
-  if(current && current.parent_id){
-    openCategory(current.parent_id);
-  }else{
-    goHome();
-  }
-}
-
-function goHome(){
-  currentCategoryId = null;
-  currentRootId = null;
-  isSearching = false;
-  searchInput.value = "";
-  showOnly("home");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function renderSearchResults(query){
-  const q = query.trim().toLocaleLowerCase("fa");
-  if(!q){
-    goHome();
-    return;
-  }
-
-  isSearching = true;
-  const results = allProducts.filter(product => {
-    const category = getCategory(product.category_id);
-    const root = getRoot(category);
-    const text = [
-      product.name,
-      product.description,
-      category?.name,
-      root?.name,
-      getCategoryPath(category)
-    ].join(" ").toLocaleLowerCase("fa");
-
-    return text.includes(q);
-  });
-
-  $("searchCaption").textContent = `${results.length.toLocaleString("fa-IR")} نتیجه برای «${query}»`;
-
-  const resultContainer = $("searchResultsList");
-  if(!results.length){
-    resultContainer.innerHTML = `<div class="message-box">محصولی با این عبارت پیدا نشد.<br>اسم محصول یا دسته‌بندی دیگه‌ای رو امتحان کن.</div>`;
-  }else{
-    resultContainer.innerHTML = `<div class="product-list">${results.map(product => createProductCard(product,true)).join("")}</div>`;
-  }
-
-  showOnly("search");
+  const root=getRoot(category);
+  return root&&String(root.id)!==String(category.id)
+    ? root.name+" / "+category.name
+    : category?.name||"";
 }
 
 async function loadMenu(){
-  $("pageError").classList.add("hidden");
-  categoryGrid.innerHTML = `<div class="loading">در حال دریافت منو...</div>`;
+  homeStatus.textContent="در حال دریافت منو...";
+  homeStatus.classList.remove("error");
 
   try{
-    const [categoriesResponse, productsResponse, settingsResponse] = await Promise.all([
+    const [categoryResult,productResult,settingsResult]=await Promise.all([
       db.from("alfa_categories")
         .select("id,name,caption,image_url,sort_order,active,parent_id")
-        .eq("active",true)
-        .order("sort_order",{ascending:true}),
-
+        .eq("active",true).order("sort_order"),
       db.from("alfa_products")
         .select("id,category_id,name,description,price,sort_order,active")
-        .eq("active",true)
-        .order("sort_order",{ascending:true}),
-
+        .eq("active",true).order("sort_order"),
       db.from("alfa_settings")
-        .select("*")
-        .eq("id",1)
-        .maybeSingle()
+        .select("phone,instagram,address").eq("id",1).maybeSingle()
     ]);
 
-    if(categoriesResponse.error) throw categoriesResponse.error;
-    if(productsResponse.error) throw productsResponse.error;
+    if(categoryResult.error)throw categoryResult.error;
+    if(productResult.error)throw productResult.error;
+    if(settingsResult.error)throw settingsResult.error;
 
-    allCategories = categoriesResponse.data || [];
-    allProducts = productsResponse.data || [];
-    settings = settingsResponse.data || {};
+    const categories=categoryResult.data||[];
+    const products=productResult.data||[];
+    cafeSettings=settingsResult.data||cafeSettings;
 
+    menuData=categories.map(category=>({
+      id:category.id,
+      name:category.name,
+      caption:category.caption||"",
+      image:category.image_url||"",
+      sort_order:category.sort_order||0,
+      parent_id:category.parent_id||null,
+      products:products.filter(product=>String(product.category_id)===String(category.id))
+        .map(product=>({
+          id:product.id,name:product.name,description:product.description||"",
+          price:product.price||0,sort_order:product.sort_order||0
+        }))
+    }));
+
+    renderCategories();
     applySettings();
-    renderHomeCategories();
-    showOnly("home");
+    homeStatus.textContent=menuData.length?"":"هنوز دسته‌بندی فعالی در منو ثبت نشده است.";
   }catch(error){
     console.error("ALFA menu error:",error);
-    categoryGrid.innerHTML = "";
-    $("pageError").classList.remove("hidden");
+    homeStatus.textContent="دریافت منو ناموفق بود. اتصال اینترنت و دسترسی دیتابیس را بررسی کنید.";
+    homeStatus.classList.add("error");
+    homeStatus.innerHTML+=' <button type="button" id="retryLoad">تلاش دوباره</button>';
+    document.getElementById("retryLoad").addEventListener("click",loadMenu);
   }
 }
 
 function applySettings(){
-  if(settings.phone){
-    $("phoneLink").href = "tel:" + settings.phone;
-    $("phoneLink").hidden = false;
-  }else{
-    $("phoneLink").hidden = true;
-  }
-
-  if(settings.instagram){
-    let instagram = settings.instagram.trim();
-    if(!/^https?:\/\//i.test(instagram)){
-      instagram = "https://instagram.com/" + instagram.replace(/^@/,"");
-    }
-    $("instagramLink").href = instagram;
-    $("instagramLink").hidden = false;
-  }else{
-    $("instagramLink").hidden = true;
-  }
-
-  if(settings.address){
-    $("addressText").textContent = settings.address;
+  document.getElementById("cafeAddress").textContent=
+    cafeSettings.address||"آدرس کافه هنوز ثبت نشده است.";
+  const phoneLink=document.getElementById("phoneLink");
+  if(cafeSettings.phone)phoneLink.href="tel:"+cafeSettings.phone.replace(/[^\d+]/g,"");
+  const instagramLink=document.getElementById("instagramLink");
+  if(cafeSettings.instagram){
+    let value=cafeSettings.instagram.trim();
+    if(/^https?:\/\//i.test(value))instagramLink.href=value;
+    else instagramLink.href="https://instagram.com/"+encodeURIComponent(value.replace(/^@/,""));
   }
 }
 
-searchInput.addEventListener("input",event => {
-  const value = event.target.value;
-  if(value.trim()){
-    renderSearchResults(value);
+function makeCategoryCard(category){
+  const card=document.createElement("button");
+  card.type="button";
+  card.className="category-card";
+  const childCount=getChildren(category.id).length;
+  const caption=category.caption || (childCount
+    ? childCount.toLocaleString("fa-IR")+" زیر‌دسته"
+    : category.products.length.toLocaleString("fa-IR")+" محصول");
+
+  card.innerHTML=`
+    ${category.image
+      ? `<img src="${escapeHTML(category.image)}" alt="${escapeHTML(category.name)}" loading="lazy">`
+      : ""}
+    <div class="cat-info">
+      <div>
+        <div class="cat-name">${escapeHTML(category.name)}</div>
+        <div class="cat-caption">${escapeHTML(caption)}</div>
+      </div>
+      <span class="cat-arrow" aria-hidden="true">↙</span>
+    </div>`;
+  if(!category.image)card.classList.add("no-image");
+  card.addEventListener("click",()=>openCategory(category.id));
+  return card;
+}
+
+/* فقط دسته‌های اصلی در صفحه اول */
+function renderCategories(){
+  categoryGrid.innerHTML="";
+  const roots=menuData.filter(category=>!category.parent_id)
+    .sort((a,b)=>a.sort_order-b.sort_order);
+  roots.forEach(category=>categoryGrid.appendChild(makeCategoryCard(category)));
+}
+
+function createProductCard(product,categoryName=""){
+  const item=document.createElement("article");
+  item.className="item-card";
+  const description=[categoryName,product.description].filter(Boolean).join(" · ");
+  item.innerHTML=`
+    <div>
+      <div class="item-name">${escapeHTML(product.name)}</div>
+      ${description?`<div class="item-desc">${escapeHTML(description)}</div>`:""}
+    </div>
+    <div class="item-price">${formatPrice(product.price)}</div>`;
+  return item;
+}
+
+function renderProducts(container,products,categoryName=""){
+  const list=document.createElement("div");
+  list.className="item-list";
+  if(!products.length){
+    list.innerHTML='<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
   }else{
+    products.forEach(product=>list.appendChild(createProductCard(product,categoryName)));
+  }
+  container.appendChild(list);
+}
+
+/* ورود به دسته اصلی یا زیر‌دسته */
+function openCategory(id){
+  const category=getCategory(id);
+  if(!category)return;
+
+  currentCategoryId=category.id;
+  searchInput.value="";
+  dynamicMenu.innerHTML="";
+
+  document.getElementById("pageCategoryName").textContent=category.name;
+  document.getElementById("pageCategoryNumber").textContent=
+    String(menuData.filter(item=>!item.parent_id).findIndex(item=>String(item.id)===String(getRoot(category).id))+1).padStart(2,"0");
+
+  const children=getChildren(category.id);
+  const hasChildren=children.length>0;
+
+  document.getElementById("pageCategoryCaption").textContent=hasChildren
+    ? "زیر‌دستهٔ مورد نظرت رو انتخاب کن."
+    : category.products.length.toLocaleString("fa-IR")+" محصول در این دسته";
+
+  document.getElementById("backButtonText").textContent=category.parent_id
+    ? "بازگشت به "+(getRoot(category)?.name||"دسته اصلی")
+    : "بازگشت به دسته‌بندی‌ها";
+
+  if(hasChildren){
+    const heading=document.createElement("div");
+    heading.className="subcategory-heading";
+    heading.textContent="انتخاب زیر‌دسته";
+    dynamicMenu.appendChild(heading);
+
+    const grid=document.createElement("div");
+    grid.className="category-grid";
+    children.sort((a,b)=>a.sort_order-b.sort_order).forEach(child=>grid.appendChild(makeCategoryCard(child)));
+    dynamicMenu.appendChild(grid);
+
+    /* محصولات متصل مستقیم به دسته اصلی نیز حذف نمی‌شوند */
+    if(category.products.length){
+      const directHeading=document.createElement("div");
+      directHeading.className="subcategory-heading";
+      directHeading.textContent="سایر محصولات "+category.name;
+      dynamicMenu.appendChild(directHeading);
+      renderProducts(dynamicMenu,category.products);
+    }
+  }else{
+    renderProducts(dynamicMenu,category.products);
+  }
+  showView(categoryView);
+}
+
+/* برگشت از زیر‌دسته به دسته اصلی، و از دسته اصلی به صفحه اول */
+function goBack(){
+  const category=getCategory(currentCategoryId);
+  if(category&&category.parent_id){
+    openCategory(category.parent_id);
+  }else{
+    currentCategoryId=null;
     goHome();
   }
-});
+}
 
-$("backButton").addEventListener("click",goBackFromCategory);
-$("searchBackButton").addEventListener("click",goHome);
-$("retryButton").addEventListener("click",loadMenu);
-$("brandHome").addEventListener("click",event => {
-  event.preventDefault();
-  goHome();
+function renderSearchResults(query){
+  searchResults.innerHTML="";
+  const q=query.trim().toLocaleLowerCase("fa");
+  const matches=[];
+
+  menuData.forEach(category=>{
+    category.products.forEach(product=>{
+      const searchable=[
+        category.name,getCategoryPath(category),product.name,product.description||""
+      ].join(" ").toLocaleLowerCase("fa");
+      if(searchable.includes(q))matches.push({category,product});
+    });
+  });
+
+  if(!matches.length){
+    searchResults.innerHTML='<div class="empty">موردی با این عبارت پیدا نشد.</div>';
+  }else{
+    matches.forEach(({category,product})=>{
+      searchResults.appendChild(createProductCard(product,getCategoryPath(category)));
+    });
+  }
+  resultNote.textContent=matches.length
+    ?matches.length.toLocaleString("fa-IR")+" مورد پیدا شد"
+    :"نتیجه‌ای پیدا نشد";
+  showView(searchView);
+}
+
+function goHome(){
+  currentCategoryId=null;
+  searchInput.value="";
+  showView(homeView);
+}
+
+searchInput.addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    const query=searchInput.value.trim();
+    if(query){renderSearchResults(query);searchInput.blur();}
+  }
+});
+searchInput.addEventListener("input",()=>{
+  if(!searchInput.value.trim()&&searchView.classList.contains("active"))showView(homeView);
+});
+document.getElementById("backButton").addEventListener("click",goBack);
+document.getElementById("searchBackButton").addEventListener("click",goHome);
+document.getElementById("brandHome").addEventListener("click",event=>{
+  event.preventDefault();goHome();
 });
 
 loadMenu();

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F4F0E8">
-<title>ALFA | مدیریت منو</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
+<title>ALFA | مدیریت منو</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
 :root{
   --bg:#F4F0E8;
   --green:#343D32;
@@ -34,7 +29,7 @@ h1,h2,h3,p{margin-top:0}
 .wrap{width:min(1080px,calc(100% - 28px));margin:auto}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:6px;border:1px solid var(--green);background:var(--green);color:white;border-radius:4px;padding:10px 15px;font-weight:700}
 .btn.alt{background:transparent;color:var(--green)}
-.btn.danger{background:var(--red);border-color:var(--red)}
+.btn.danger{background:var(--red);border-color:var(--red);color:#fff}
 .btn.small{padding:6px 10px;font-size:11px}
 .btn.orange{background:var(--orange);border-color:var(--orange)}
 .brand{direction:ltr;font-family:"DM Sans",sans-serif;font-size:34px;font-weight:800;letter-spacing:-2px;color:var(--green)}
@@ -81,12 +76,16 @@ main{padding:25px 0 65px}
 .close{border:0;background:transparent;font-size:26px;line-height:1}
 .toast{position:fixed;z-index:500;bottom:20px;left:50%;transform:translate(-50%,15px);background:var(--green);color:white;padding:11px 20px;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.category-row{display:grid;grid-template-columns:70px 1fr auto;gap:15px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.category-row{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:15px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.category-row:last-child{border-bottom:0}
 .category-row img{width:70px;height:65px;object-fit:cover;background:#e9e4d9}
 .category-row h3{font-size:13px;margin:0}
 .category-row p{font-size:11px;color:var(--muted);margin:3px 0}
 .category-row.child{padding-right:28px;background:#faf8f2}
 .category-row.child img{width:55px;height:50px}
+.category-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.category-placeholder{width:70px;height:65px;display:grid;place-items:center;background:#eee9df;color:var(--green);font-size:23px}
+.category-row.child .category-placeholder{width:55px;height:50px}
 .loading{text-align:center;padding:45px;color:var(--muted)}
 @media(max-width:600px){
  .grid2,.toolbar{grid-template-columns:1fr}
@@ -94,15 +93,17 @@ main{padding:25px 0 65px}
  .product-actions{width:100%;justify-content:flex-start}
  .header-title{font-size:11px}
  .card{padding:15px}
- .category-row{grid-template-columns:55px 1fr;gap:10px}
- .category-row img{width:55px;height:55px}
- .category-row .btn{grid-column:2;justify-self:start}
+ .category-row{grid-template-columns:48px minmax(0,1fr);gap:9px}
+ .category-row img,.category-placeholder{width:48px;height:48px}
+ .category-row.child img,.category-row.child .category-placeholder{width:42px;height:42px}
+ .category-row .category-actions{grid-column:1/-1;justify-content:flex-start}
+ .category-row.child{padding-right:12px}
+ .category-row .category-placeholder{width:48px;height:48px}
+ .category-row.child .category-placeholder{width:42px;height:42px}
+ .modal-box{padding:16px}
 }
-</style>
-</head>
-<body>
-
-<section id="loginPage" class="login-page">
+</style></head>
+<body><section id="loginPage" class="login-page">
   <div class="card login-card">
     <div class="brand">ALFA<span>.</span></div>
     <h2>ورود به پنل مدیریت</h2>
@@ -120,9 +121,7 @@ main{padding:25px 0 65px}
     </form>
     <p id="loginError" class="muted" style="color:var(--red);margin:15px 0 0"></p>
   </div>
-</section>
-
-<div id="dashboard" class="hidden">
+</section><div id="dashboard" class="hidden">
   <header>
     <div class="wrap header-inner">
       <div class="header-brand">
@@ -131,58 +130,53 @@ main{padding:25px 0 65px}
       </div>
       <button class="btn alt small" id="logoutBtn">خروج</button>
     </div>
-  </header>
-
-  <main class="wrap">
+  </header>  <main class="wrap">
     <div class="tabs">
       <button class="tab active" data-tab="products">محصولات</button>
       <button class="tab" data-tab="categories">دسته‌بندی‌ها و زیر‌دسته‌ها</button>
       <button class="tab" data-tab="settings">تنظیمات کافه</button>
+    </div><section id="productsSection" class="section active">
+  <div class="section-head">
+    <h2>مدیریت محصولات</h2>
+    <button class="btn orange" id="addProductBtn">+ افزودن محصول</button>
+  </div>
+  <div class="toolbar">
+    <select id="filterCategory"></select>
+    <input id="filterSearch" type="search" placeholder="جستجوی محصول...">
+  </div>
+  <div id="productList" class="product-list"></div>
+</section>
+
+<section id="categoriesSection" class="section">
+  <div class="section-head">
+    <h2>دسته‌بندی‌های منو</h2>
+    <button class="btn orange" id="addCategoryBtn">+ دسته یا زیر‌دسته جدید</button>
+  </div>
+  <p class="muted">برای ساخت زیر‌دسته، دسته اصلی موردنظر را در فرم انتخاب کن. عکس فقط برای دسته‌های اصلی قابل تنظیم است.</p>
+  <div class="card" id="categoryList"></div>
+</section>
+
+<section id="settingsSection" class="section">
+  <div class="section-head"><h2>اطلاعات کافه</h2></div>
+  <form class="card" id="settingsForm">
+    <div class="field">
+      <label>شماره تماس</label>
+      <input id="settingPhone" type="tel" placeholder="مثلاً 09123456789">
     </div>
+    <div class="field">
+      <label>آیدی اینستاگرام</label>
+      <input id="settingInstagram" placeholder="بدون @">
+    </div>
+    <div class="field">
+      <label>آدرس کافه</label>
+      <textarea id="settingAddress"></textarea>
+    </div>
+    <button class="btn" type="submit">ذخیره تنظیمات</button>
+  </form>
+</section>
 
-    <section id="productsSection" class="section active">
-      <div class="section-head">
-        <h2>مدیریت محصولات</h2>
-        <button class="btn orange" id="addProductBtn">+ افزودن محصول</button>
-      </div>
-      <div class="toolbar">
-        <select id="filterCategory"></select>
-        <input id="filterSearch" type="search" placeholder="جستجوی محصول...">
-      </div>
-      <div id="productList" class="product-list"></div>
-    </section>
-
-    <section id="categoriesSection" class="section">
-      <div class="section-head">
-        <h2>دسته‌بندی‌های منو</h2>
-        <button class="btn orange" id="addCategoryBtn">+ دسته یا زیر‌دسته جدید</button>
-      </div>
-      <p class="muted">برای ساخت زیر‌دسته، دسته اصلی موردنظر را در فرم انتخاب کن.</p>
-      <div class="card" id="categoryList"></div>
-    </section>
-
-    <section id="settingsSection" class="section">
-      <div class="section-head"><h2>اطلاعات کافه</h2></div>
-      <form class="card" id="settingsForm">
-        <div class="field">
-          <label>شماره تماس</label>
-          <input id="settingPhone" type="tel" placeholder="مثلاً 09123456789">
-        </div>
-        <div class="field">
-          <label>آیدی اینستاگرام</label>
-          <input id="settingInstagram" placeholder="بدون @">
-        </div>
-        <div class="field">
-          <label>آدرس کافه</label>
-          <textarea id="settingAddress"></textarea>
-        </div>
-        <button class="btn" type="submit">ذخیره تنظیمات</button>
-      </form>
-    </section>
   </main>
-</div>
-
-<div id="productModal" class="modal hidden">
+</div><div id="productModal" class="modal hidden">
   <div class="modal-box">
     <div class="modal-head">
       <h2 id="productModalTitle">افزودن محصول</h2>
@@ -224,64 +218,57 @@ main{padding:25px 0 65px}
       </div>
     </form>
   </div>
-</div>
-
-<div id="categoryModal" class="modal hidden">
+</div><div id="categoryModal" class="modal hidden">
   <div class="modal-box">
     <div class="modal-head">
       <h2 id="categoryModalTitle">دسته‌بندی جدید</h2>
       <button class="close" id="closeCategoryModal" type="button">×</button>
     </div>
     <form id="categoryForm">
-      <input type="hidden" id="categoryId">
-
-      <div class="field">
-        <label>نام دسته‌بندی یا زیر‌دسته</label>
-        <input id="categoryName" required maxlength="100" placeholder="مثلاً بر پایه اسپرسو">
-      </div>
-
-      <div class="field">
-        <label>نوع دسته‌بندی</label>
-        <select id="categoryParent">
-          <option value="">دسته اصلی</option>
-        </select>
-        <p class="muted">برای ساخت زیر‌دسته، دسته اصلی مربوطه را انتخاب کن.</p>
-      </div>
-
-      <div class="field">
-        <label>عنوان انگلیسی یا توضیح کوتاه</label>
-        <input id="categoryCaption" placeholder="مثلاً ESPRESSO BASED">
-      </div>
-
-      <div class="field">
-        <label>آدرس عکس دسته‌بندی (اختیاری)</label>
-        <input id="categoryImage" type="url" placeholder="https://...">
-      </div>
-
-      <div class="field">
-        <label>ترتیب نمایش</label>
-        <input id="categoryOrder" type="number" min="0" step="1" value="0">
-      </div>
-
-      <div class="field">
-        <label style="display:flex;align-items:center;gap:9px">
-          <input id="categoryActive" type="checkbox" checked style="width:auto">
-          دسته‌بندی فعال باشد
-        </label>
-      </div>
-
-      <div class="row">
-        <button class="btn" type="submit" id="saveCategoryBtn">ذخیره دسته‌بندی</button>
-        <button class="btn alt" type="button" id="cancelCategoryBtn">انصراف</button>
-      </div>
-    </form>
+      <input type="hidden" id="categoryId">  <div class="field">
+    <label>نام دسته‌بندی یا زیر‌دسته</label>
+    <input id="categoryName" required maxlength="100" placeholder="مثلاً بر پایه اسپرسو">
   </div>
-</div>
 
-<div id="toast" class="toast" role="status"></div>
+  <div class="field">
+    <label>نوع دسته‌بندی</label>
+    <select id="categoryParent">
+      <option value="">دسته اصلی</option>
+    </select>
+    <p class="muted">برای ساخت زیر‌دسته، دسته اصلی مربوطه را انتخاب کن.</p>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
+  <div class="field">
+    <label>عنوان انگلیسی یا توضیح کوتاه</label>
+    <input id="categoryCaption" placeholder="مثلاً ESPRESSO BASED">
+  </div>
+
+  <div class="field" id="categoryImageField">
+    <label>آدرس عکس دسته‌بندی (اختیاری — فقط دسته اصلی)</label>
+    <input id="categoryImage" type="url" placeholder="https://...">
+    <p class="muted">برای زیر‌دسته نیازی به عکس نیست.</p>
+  </div>
+
+  <div class="field">
+    <label>ترتیب نمایش</label>
+    <input id="categoryOrder" type="number" min="0" step="1" value="0">
+  </div>
+
+  <div class="field">
+    <label style="display:flex;align-items:center;gap:9px">
+      <input id="categoryActive" type="checkbox" checked style="width:auto">
+      دسته‌بندی فعال باشد
+    </label>
+  </div>
+
+  <div class="row">
+    <button class="btn" type="submit" id="saveCategoryBtn">ذخیره دسته‌بندی</button>
+    <button class="btn alt" type="button" id="cancelCategoryBtn">انصراف</button>
+  </div>
+</form>
+
+  </div>
+</div><div id="toast" class="toast" role="status"></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
 const SUPABASE_URL = "https://uewdwreimgpzpvzkpvvo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
 
@@ -418,7 +405,7 @@ document.querySelectorAll(".tab").forEach(tab=>{
 function categoryLabel(c){
   if(c.parent_id){
     const parent=categories.find(x=>x.id===c.parent_id);
-    return (parent?parent.name+" ← ":"") + c.name;
+    return (parent?parent.name+" ← ":"")+c.name;
   }
   return c.name;
 }
@@ -436,19 +423,26 @@ function renderCategoryOptions(){
   });
 
   $("productCategory").innerHTML=options;
-  $("filterCategory").innerHTML=
-    '<option value="">همه دسته‌ها</option>'+options;
+  $("filterCategory").innerHTML='<option value="">همه دسته‌ها</option>'+options;
 
   const currentParent=$("categoryParent").value;
   const editingId=$("categoryId").value;
+  const editingCategory=categories.find(c=>c.id===editingId);
+  const excludedIds=new Set([editingId]);
+
+  /* جلوگیری از انتخاب زیر‌دسته به عنوان والد و جلوگیری از چرخه والدیت */
+  if(editingCategory && !editingCategory.parent_id){
+    categories.filter(c=>c.parent_id===editingCategory.id)
+      .forEach(c=>excludedIds.add(c.id));
+  }
 
   $("categoryParent").innerHTML=
     '<option value="">دسته اصلی</option>'+
-    roots.filter(c=>c.id!==editingId).map(c=>
+    roots.filter(c=>!excludedIds.has(c.id)).map(c=>
       `<option value="${escapeHTML(c.id)}">${escapeHTML(c.name)}</option>`
     ).join("");
 
-  if(currentParent && roots.some(c=>c.id===currentParent && c.id!==editingId)){
+  if(currentParent && roots.some(c=>c.id===currentParent && !excludedIds.has(c.id))){
     $("categoryParent").value=currentParent;
   }
 }
@@ -619,9 +613,13 @@ function renderCategories(){
 
 function categoryRowHTML(c,isChild){
   const productCount=products.filter(p=>p.category_id===c.id).length;
+  const imageHTML=!isChild && c.image_url
+    ?`<img src="${escapeHTML(c.image_url)}" alt="">`
+    :`<div class="category-placeholder" aria-hidden="true">${isChild?"↳":"▦"}</div>`;
+
   return `
     <div class="category-row ${isChild?"child":""}">
-      <img src="${escapeHTML(c.image_url||"")}" alt="">
+      ${imageHTML}
       <div>
         <h3>${isChild?"↳ ":""}${escapeHTML(c.name)}</h3>
         <p>
@@ -632,7 +630,10 @@ function categoryRowHTML(c,isChild){
         ${isChild?'<span class="badge sub">زیر‌دسته</span>':""}
         <span class="badge ${c.active?"":"off"}">${c.active?"فعال":"غیرفعال"}</span>
       </div>
-      <button class="btn alt small" data-edit-category="${escapeHTML(c.id)}">ویرایش</button>
+      <div class="category-actions">
+        <button class="btn alt small" data-edit-category="${escapeHTML(c.id)}">ویرایش</button>
+        <button class="btn danger small" data-delete-category="${escapeHTML(c.id)}">حذف</button>
+      </div>
     </div>`;
 }
 
@@ -647,6 +648,7 @@ function openCategoryModal(category=null){
 
   renderCategoryOptions();
   $("categoryParent").value=category?.parent_id??"";
+  updateCategoryImageField();
 
   $("categoryModalTitle").textContent=category
     ?"ویرایش دسته‌بندی"
@@ -659,6 +661,14 @@ function openCategoryModal(category=null){
   $("categoryModal").classList.remove("hidden");
 }
 
+function updateCategoryImageField(){
+  const isChild=Boolean($("categoryParent").value);
+  $("categoryImageField").classList.toggle("hidden",isChild);
+  $("categoryImage").disabled=isChild;
+}
+
+$("categoryParent").addEventListener("change",updateCategoryImageField);
+
 function closeCategoryModal(){
   $("categoryModal").classList.add("hidden");
 }
@@ -667,12 +677,63 @@ $("addCategoryBtn").addEventListener("click",()=>openCategoryModal());
 $("closeCategoryModal").addEventListener("click",closeCategoryModal);
 $("cancelCategoryBtn").addEventListener("click",closeCategoryModal);
 
-$("categoryList").addEventListener("click",e=>{
-  const btn=e.target.closest("[data-edit-category]");
-  if(!btn)return;
+$("categoryList").addEventListener("click",async e=>{
+  const editBtn=e.target.closest("[data-edit-category]");
+  if(editBtn){
+    const category=categories.find(c=>c.id===editBtn.dataset.editCategory);
+    if(category)openCategoryModal(category);
+    return;
+  }
 
-  const category=categories.find(c=>c.id===btn.dataset.editCategory);
-  if(category)openCategoryModal(category);
+  const deleteBtn=e.target.closest("[data-delete-category]");
+  if(!deleteBtn||busy)return;
+
+  const category=categories.find(c=>c.id===deleteBtn.dataset.deleteCategory);
+  if(!category)return;
+
+  const children=categories.filter(c=>c.parent_id===category.id);
+  const linkedProducts=products.filter(p=>p.category_id===category.id);
+
+  if(children.length){
+    notify("ابتدا زیر‌دسته‌های این دسته را حذف یا جابه‌جا کن.");
+    return;
+  }
+
+  if(linkedProducts.length){
+    notify(`این دسته ${linkedProducts.length} محصول دارد. ابتدا محصولات آن را به دسته دیگری منتقل یا حذف کن.`);
+    return;
+  }
+
+  const message=`دسته «${category.name}» حذف شود؟\n\nاین کار قابل بازگشت نیست.`;
+  if(!confirm(message))return;
+
+  busy=true;
+  deleteBtn.disabled=true;
+
+  try{
+    /* شرط دوم مانع حذف دسته‌ای می‌شود که هم‌زمان محصول گرفته باشد. */
+    const result=await db.from("alfa_categories")
+      .delete()
+      .eq("id",category.id)
+      .select("id");
+
+    if(result.error)throw result.error;
+    if(!result.data?.length){
+      throw new Error("دسته حذف نشد. احتمالاً دسترسی مدیر یا ارتباط با محصولات را بررسی کن.");
+    }
+
+    await loadDashboard();
+    notify("دسته‌بندی حذف شد.");
+  }catch(error){
+    const message=errorText(error);
+    if(/foreign key|violates|constraint|23503/i.test(message)){
+      notify("این دسته هنوز به محصولات یا زیر‌دسته‌ها متصل است. ابتدا ارتباط آن‌ها را تغییر بده.");
+    }else{
+      notify("خطا در حذف: "+message);
+    }
+  }finally{
+    busy=false;
+  }
 });
 
 function makeCategoryId(name){
@@ -699,6 +760,7 @@ $("categoryForm").addEventListener("submit",async e=>{
 
   const id=$("categoryId").value;
   const parentId=$("categoryParent").value||null;
+  const editingCategory=categories.find(c=>c.id===id);
 
   if(parentId===id){
     notify("یک دسته نمی‌تواند والد خودش باشد.");
@@ -713,6 +775,13 @@ $("categoryForm").addEventListener("submit",async e=>{
     }
   }
 
+  /* دسته اصلی دارای زیر‌دسته را نمی‌توان به زیر‌دسته تبدیل کرد. */
+  if(id && !editingCategory?.parent_id && parentId &&
+     categories.some(c=>c.parent_id===id)){
+    notify("ابتدا زیر‌دسته‌های این دسته را جابه‌جا کن؛ سپس می‌توانی آن را به زیر‌دسته تبدیل کنی.");
+    return;
+  }
+
   const name=$("categoryName").value.trim();
   if(!name)return;
 
@@ -724,10 +793,16 @@ $("categoryForm").addEventListener("submit",async e=>{
       name,
       parent_id:parentId,
       caption:$("categoryCaption").value.trim(),
-      image_url:$("categoryImage").value.trim(),
       sort_order:Number($("categoryOrder").value)||0,
       active:$("categoryActive").checked
     };
+
+    /* عکس زیر‌دسته ذخیره نمی‌شود؛ عکس قبلی دسته اصلی هنگام ویرایش حفظ می‌شود. */
+    if(!parentId){
+      payload.image_url=$("categoryImage").value.trim();
+    }else{
+      payload.image_url=null;
+    }
 
     let result;
 
@@ -786,6 +861,5 @@ $("settingsForm").addEventListener("submit",async e=>{
 });
 
 startSession();
-</script>
-</body>
+</script></body>
 </html>

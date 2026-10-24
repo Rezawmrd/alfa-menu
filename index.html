@@ -19,7 +19,6 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-
 html{scroll-behavior:smooth}
 
 body{
@@ -257,185 +256,175 @@ main{min-height:55vh;padding-bottom:30px}
   letter-spacing:1.5px;
 }
 
-/* PREMIUM CATEGORY CARDS */
+/* LUXURY CATEGORY CARDS */
 
 .category-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:15px;
+  gap:16px;
 }
 
 .category-card{
   position:relative;
-  isolation:isolate;
-  width:100%;
-  min-width:0;
-  min-height:205px;
-  padding:21px;
   display:flex;
   flex-direction:column;
   align-items:stretch;
   justify-content:space-between;
+  min-width:0;
+  min-height:228px;
+  padding:0;
   overflow:hidden;
+  isolation:isolate;
   text-align:right;
   font-family:inherit;
   color:var(--green);
-  background:#FBF9F3;
-  border:1px solid rgba(52,61,50,.17);
-  border-radius:3px;
-  box-shadow:0 4px 15px rgba(36,44,36,.025);
-  transition:
-    background .35s ease,
-    border-color .35s ease,
-    transform .35s ease,
-    box-shadow .35s ease;
+  background:#FBF9F4;
+  border:1px solid #D9D4C8;
+  border-radius:0;
+  box-shadow:none;
+  transition:background .25s ease,border-color .25s ease;
 }
+
+/* Top editorial strip */
 
 .category-card::before{
   content:"";
   position:absolute;
-  z-index:-1;
-  width:190px;
-  height:190px;
-  top:-94px;
-  left:-72px;
-  border:1px solid rgba(52,61,50,.12);
-  border-radius:50%;
-  transition:transform .55s cubic-bezier(.2,.7,.2,1);
+  top:0;
+  right:0;
+  left:0;
+  height:4px;
+  background:var(--green);
+  transition:background .25s ease;
 }
 
 .category-card::after{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  width:133px;
-  height:133px;
-  top:-65px;
-  left:-44px;
-  border:1px solid rgba(198,107,66,.24);
-  border-radius:50%;
-  transition:transform .55s cubic-bezier(.2,.7,.2,1);
+  content:none;
 }
 
 .category-card:hover{
   background:#FFFDF8;
-  border-color:rgba(198,107,66,.58);
-  transform:translateY(-4px);
-  box-shadow:0 15px 30px rgba(36,44,36,.065);
+  border-color:var(--green);
+  transform:none;
+  box-shadow:none;
 }
 
-.category-card:hover::before{transform:scale(1.12)}
-.category-card:hover::after{transform:scale(1.16)}
+.category-card:hover::before{
+  background:var(--orange);
+}
+
+/* Number and brand */
 
 .cat-top{
-  position:relative;
-  z-index:1;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
+  padding:22px 23px 0;
 }
 
 .cat-index{
   direction:ltr;
   display:flex;
   align-items:center;
-  gap:9px;
-  color:rgba(52,61,50,.58);
+  gap:11px;
+  color:#858477;
   font-family:"DM Sans",sans-serif;
   font-size:10px;
-  font-weight:800;
+  font-weight:700;
   letter-spacing:2px;
 }
 
 .cat-mark{
-  display:block;
-  width:7px;
-  height:7px;
-  flex-shrink:0;
-  background:var(--orange);
-  border-radius:50%;
-  box-shadow:0 0 0 4px rgba(198,107,66,.10);
+  display:none;
 }
 
+/* Main title */
+
 .cat-info{
-  position:relative;
-  z-index:1;
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
   gap:10px;
-  margin-top:27px;
+  min-width:0;
+  padding:25px 23px 24px;
 }
 
-.cat-info-copy{min-width:0}
+.cat-info-copy{
+  min-width:0;
+  width:100%;
+}
 
 .cat-name{
-  font-size:clamp(17px,2vw,22px);
-  font-weight:900;
-  line-height:1.8;
-  overflow-wrap:anywhere;
+  position:relative;
+  display:block;
   color:var(--green);
-  transition:color .3s ease;
+  font-size:clamp(21px,2.5vw,29px);
+  font-weight:800;
+  line-height:1.7;
+  letter-spacing:-.5px;
+  overflow-wrap:anywhere;
+  transition:color .25s ease;
 }
 
-.category-card:hover .cat-name{color:var(--orange)}
+.category-card:hover .cat-name{
+  color:var(--green);
+}
 
 .cat-caption{
-  margin-top:3px;
-  color:var(--muted);
+  margin-top:7px;
+  color:#858477;
   font-family:"DM Sans","Vazirmatn",sans-serif;
-  font-size:10px;
-  font-weight:500;
+  font-size:11px;
+  font-weight:400;
   line-height:1.9;
   overflow-wrap:anywhere;
 }
 
+/* Bottom action */
+
 .cat-bottom{
-  position:relative;
-  z-index:1;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  margin-top:17px;
-  padding-top:12px;
-  border-top:1px solid rgba(52,61,50,.12);
+  gap:12px;
+  margin:0 23px;
+  padding:13px 0 17px;
+  border-top:1px solid #E5E0D5;
 }
 
 .cat-discover{
-  color:rgba(52,61,50,.68);
-  font-size:10px;
+  color:#65675C;
+  font-size:11px;
   font-weight:600;
-  transition:color .3s ease;
+  transition:color .25s ease;
 }
 
-.category-card:hover .cat-discover{color:var(--green)}
+.category-card:hover .cat-discover{
+  color:var(--orange);
+}
 
 .cat-arrow{
-  width:33px;
-  height:33px;
+  width:31px;
+  height:31px;
   flex-shrink:0;
   display:grid;
   place-items:center;
-  border:1px solid rgba(52,61,50,.2);
-  border-radius:50%;
-  color:var(--orange);
+  border:1px solid #D8D2C5;
+  border-radius:0;
+  color:var(--green);
+  background:transparent;
   font-family:"DM Sans",sans-serif;
   font-size:17px;
   line-height:1;
-  transition:
-    background .3s ease,
-    color .3s ease,
-    border-color .3s ease,
-    transform .3s ease;
+  transition:background .25s ease,color .25s ease,border-color .25s ease;
 }
 
 .category-card:hover .cat-arrow{
   background:var(--green);
-  color:#fff;
+  color:#FFFDF8;
   border-color:var(--green);
-  transform:translate(-2px,-2px);
+  transform:none;
 }
 
 /* CATEGORY VIEW */
@@ -670,13 +659,20 @@ main{min-height:55vh;padding-bottom:30px}
 .status-message.error{color:#B74444}
 .status-message button{margin-right:7px;padding:5px 12px;color:var(--green);background:transparent;border:1px solid var(--line)}
 
-/* TABLET */
+/* DESKTOP */
 
 @media(min-width:800px){
-  .category-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
-  .category-card{min-height:215px;padding:23px}
-  .cat-name{font-size:21px}
+  .category-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+  }
+
+  .category-card{min-height:245px}
+  .cat-top{padding:25px 25px 0}
+  .cat-info{padding:30px 25px}
+  .cat-name{font-size:25px}
   .cat-caption{font-size:11px}
+  .cat-bottom{margin:0 25px;padding:15px 0 19px}
   .home-intro{margin-top:53px;margin-bottom:30px}
 }
 
@@ -701,23 +697,30 @@ main{min-height:55vh;padding-bottom:30px}
   .section-label h2{font-size:13px}
   .section-label span{font-size:9px}
 
-  .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-
-  .category-card{
-    min-height:165px;
-    padding:13px;
-    border-radius:3px;
+  .category-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
   }
 
-  .category-card::before{top:-49px;left:-43px;width:130px;height:130px}
-  .category-card::after{top:-27px;left:-23px;width:91px;height:91px}
+  .category-card{min-height:178px}
 
-  .cat-index{font-size:9px;letter-spacing:1.1px;gap:6px}
-  .cat-mark{width:6px;height:6px}
-  .cat-info{gap:5px;margin-top:20px}
-  .cat-name{font-size:15px}
-  .cat-caption{font-size:9px}
-  .cat-bottom{margin-top:10px;padding-top:8px}
+  .cat-top{padding:16px 13px 0}
+  .cat-index{font-size:9px;letter-spacing:1.2px;gap:7px}
+
+  .cat-info{
+    padding:23px 13px 20px;
+    margin:0;
+  }
+
+  .cat-name{font-size:17px;line-height:1.8}
+  .cat-caption{font-size:9px;margin-top:5px}
+
+  .cat-bottom{
+    margin:0 13px;
+    padding:10px 0 12px;
+    gap:5px;
+  }
+
   .cat-discover{font-size:9px}
   .cat-arrow{width:27px;height:27px;font-size:15px}
 
@@ -749,9 +752,13 @@ main{min-height:55vh;padding-bottom:30px}
   .header-actions a{padding:5px 8px;font-size:10px}
   .home-intro h1{font-size:24px}
   .home-edition{font-size:8px}
-  .category-card{min-height:150px;padding:11px}
-  .cat-name{font-size:13px}
+  .category-grid{gap:8px}
+  .category-card{min-height:164px}
+  .cat-top{padding:14px 10px 0}
+  .cat-info{padding:19px 10px 17px}
+  .cat-name{font-size:14px}
   .cat-caption{font-size:8px}
+  .cat-bottom{margin:0 10px;padding:9px 0 10px}
   .cat-discover{font-size:8px}
   .cat-arrow{width:24px;height:24px}
 }
@@ -781,15 +788,16 @@ main{min-height:55vh;padding-bottom:30px}
       </svg>
       <input id="searchInput" type="search" placeholder="جستجو در منو..." autocomplete="off">
     </label>
-  </div>  <section id="homeView" class="view active">
-    <div class="home-intro">
-      <div class="home-intro-copy">
-        <div class="eyebrow">ALFA COFFEE MENU</div>
-        <h1>طعمِ انتخاب تو.</h1>
-        <p>منوی کافه رو ببین و انتخابت رو پیدا کن.</p>
-      </div>
-      <div class="home-edition">EST. ALFA</div>
-    </div><div class="section-label">
+  </div>  <section id="homeView" class="view active"><div class="home-intro">
+  <div class="home-intro-copy">
+    <div class="eyebrow">ALFA COFFEE MENU</div>
+    <h1>طعمِ انتخاب تو.</h1>
+    <p>منوی کافه رو ببین و انتخابت رو پیدا کن.</p>
+  </div>
+  <div class="home-edition">EST. ALFA</div>
+</div>
+
+<div class="section-label">
   <h2>از منو انتخاب کن</h2>
   <span>OUR MENU</span>
 </div>
@@ -797,11 +805,12 @@ main{min-height:55vh;padding-bottom:30px}
 <div class="category-grid" id="categoryGrid"></div>
 <div id="homeStatus" class="status-message">در حال دریافت منو...</div>
 
-  </section>  <section id="categoryView" class="view">
-    <button class="back-button" id="backButton" type="button">
-      <span class="back-arrow">→</span>
-      <span id="backButtonText">بازگشت به دسته‌بندی‌ها</span>
-    </button><div class="page-title">
+  </section>  <section id="categoryView" class="view"><button class="back-button" id="backButton" type="button">
+  <span class="back-arrow">→</span>
+  <span id="backButtonText">بازگشت به دسته‌بندی‌ها</span>
+</button>
+
+<div class="page-title">
   <div>
     <h2 id="pageCategoryName"></h2>
     <p id="pageCategoryCaption"></p>
@@ -811,11 +820,12 @@ main{min-height:55vh;padding-bottom:30px}
 
 <div id="dynamicMenu"></div>
 
-  </section>  <section id="searchView" class="view">
-    <button class="back-button" id="searchBackButton" type="button">
-      <span class="back-arrow">→</span>
-      بازگشت به دسته‌بندی‌ها
-    </button><div class="page-title">
+  </section>  <section id="searchView" class="view"><button class="back-button" id="searchBackButton" type="button">
+  <span class="back-arrow">→</span>
+  بازگشت به دسته‌بندی‌ها
+</button>
+
+<div class="page-title">
   <div>
     <h2>نتایج جستجو</h2>
     <p id="resultNote">محصولات منو</p>
@@ -1007,7 +1017,7 @@ function applySettings(){
   }
 }
 
-/* دسته‌بندی‌های اصلی؛ بدون عکس */
+/* دسته‌بندی‌های اصلی */
 
 function makeCategoryCard(category,index){
   const card=document.createElement("button");
@@ -1026,10 +1036,7 @@ function makeCategoryCard(category,index){
 
   card.innerHTML=`
     <div class="cat-top">
-      <span class="cat-index">
-        <span class="cat-mark" aria-hidden="true"></span>
-        ${number} / ALFA
-      </span>
+      <span class="cat-index">${number} / ALFA</span>
     </div>
 
     <div class="cat-info">
@@ -1235,7 +1242,7 @@ function goHome(){
   showView(homeView);
 }
 
-/* جست‌وجو با Enter؛ مطابق رفتار نسخه اصلی */
+/* جست‌وجو با Enter */
 
 searchInput.addEventListener("keydown",event=>{
   if(event.key==="Enter"){

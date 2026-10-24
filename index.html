@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4F0E8">
 <meta name="description" content="منوی دیجیتال کافه ALFA">
-<title>ALFA | منوی کافه</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>ALFA | منوی کافه</title><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
 :root{
   --cream:#F4F0E8;
   --green:#343D32;
@@ -23,15 +18,9 @@
   --white:#FFFEFA;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   background:var(--cream);
@@ -41,22 +30,10 @@ body{
   overflow-x:hidden;
 }
 
-body.intro-active{
-  overflow:hidden;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+body.intro-active{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
 
 .container{
   width:min(1080px,calc(100% - 48px));
@@ -86,21 +63,9 @@ button{
 }
 
 @keyframes introLogo{
-  0%{
-    opacity:0;
-    transform:scale(.9);
-    filter:blur(5px);
-  }
-  30%{
-    opacity:1;
-    transform:scale(1);
-    filter:blur(0);
-  }
-  75%,100%{
-    opacity:1;
-    transform:scale(1.025);
-    filter:blur(0);
-  }
+  0%{opacity:0;transform:scale(.9);filter:blur(5px)}
+  30%{opacity:1;transform:scale(1);filter:blur(0)}
+  75%,100%{opacity:1;transform:scale(1.025);filter:blur(0)}
 }
 
 .intro.hide{
@@ -138,9 +103,7 @@ header{
   line-height:1;
 }
 
-.brand span{
-  color:var(--orange);
-}
+.brand span{color:var(--orange)}
 
 .header-actions{
   display:flex;
@@ -167,16 +130,11 @@ header{
   border-color:var(--green);
 }
 
-main{
-  min-height:55vh;
-  padding-bottom:30px;
-}
+main{min-height:55vh;padding-bottom:30px}
 
 /* SEARCH */
 
-.search-wrap{
-  margin-top:28px;
-}
+.search-wrap{margin-top:28px}
 
 .search{
   height:52px;
@@ -213,9 +171,7 @@ main{
   color:var(--text);
 }
 
-.search input::placeholder{
-  color:#99958B;
-}
+.search input::placeholder{color:#99958B}
 
 /* HOME INTRO */
 
@@ -230,9 +186,7 @@ main{
   border-bottom:1px solid var(--line);
 }
 
-.home-intro-copy{
-  min-width:0;
-}
+.home-intro-copy{min-width:0}
 
 .eyebrow{
   display:flex;
@@ -303,23 +257,21 @@ main{
   letter-spacing:1.5px;
 }
 
-/* CATEGORY GRID */
+/* PREMIUM CATEGORY CARDS */
 
 .category-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:13px;
+  gap:15px;
 }
-
-/* Editorial category cards */
 
 .category-card{
   position:relative;
   isolation:isolate;
   width:100%;
   min-width:0;
-  min-height:180px;
-  padding:19px 20px 17px;
+  min-height:205px;
+  padding:21px;
   display:flex;
   flex-direction:column;
   align-items:stretch;
@@ -328,56 +280,52 @@ main{
   text-align:right;
   font-family:inherit;
   color:var(--green);
-  background:var(--white);
-  border:1px solid rgba(52,61,50,.15);
-  border-radius:2px;
+  background:#FBF9F3;
+  border:1px solid rgba(52,61,50,.17);
+  border-radius:3px;
+  box-shadow:0 4px 15px rgba(36,44,36,.025);
   transition:
-    background .3s ease,
-    border-color .3s ease,
-    transform .3s ease,
-    box-shadow .3s ease;
+    background .35s ease,
+    border-color .35s ease,
+    transform .35s ease,
+    box-shadow .35s ease;
 }
 
 .category-card::before{
   content:"";
   position:absolute;
   z-index:-1;
-  top:-72px;
-  left:-58px;
   width:190px;
   height:190px;
-  border:1px solid rgba(52,61,50,.09);
+  top:-94px;
+  left:-72px;
+  border:1px solid rgba(52,61,50,.12);
   border-radius:50%;
-  transition:transform .45s ease;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1);
 }
 
 .category-card::after{
   content:"";
   position:absolute;
   z-index:-1;
-  top:-42px;
-  left:-28px;
-  width:130px;
-  height:130px;
-  border:1px solid rgba(198,107,66,.17);
+  width:133px;
+  height:133px;
+  top:-65px;
+  left:-44px;
+  border:1px solid rgba(198,107,66,.24);
   border-radius:50%;
-  transition:transform .45s ease;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1);
 }
 
 .category-card:hover{
-  background:#FFFFFF;
-  border-color:rgba(198,107,66,.55);
-  transform:translateY(-3px);
-  box-shadow:0 12px 25px rgba(52,61,50,.055);
+  background:#FFFDF8;
+  border-color:rgba(198,107,66,.58);
+  transform:translateY(-4px);
+  box-shadow:0 15px 30px rgba(36,44,36,.065);
 }
 
-.category-card:hover::before{
-  transform:scale(1.08);
-}
-
-.category-card:hover::after{
-  transform:scale(1.12);
-}
+.category-card:hover::before{transform:scale(1.12)}
+.category-card:hover::after{transform:scale(1.16)}
 
 .cat-top{
   position:relative;
@@ -392,12 +340,12 @@ main{
   direction:ltr;
   display:flex;
   align-items:center;
-  gap:8px;
-  color:rgba(52,61,50,.48);
+  gap:9px;
+  color:rgba(52,61,50,.58);
   font-family:"DM Sans",sans-serif;
   font-size:10px;
   font-weight:800;
-  letter-spacing:1.8px;
+  letter-spacing:2px;
 }
 
 .cat-mark{
@@ -407,6 +355,7 @@ main{
   flex-shrink:0;
   background:var(--orange);
   border-radius:50%;
+  box-shadow:0 0 0 4px rgba(198,107,66,.10);
 }
 
 .cat-info{
@@ -416,93 +365,87 @@ main{
   align-items:flex-end;
   justify-content:space-between;
   gap:10px;
-  margin-top:25px;
+  margin-top:27px;
 }
 
-.cat-info-copy{
-  min-width:0;
-}
+.cat-info-copy{min-width:0}
 
 .cat-name{
-  font-size:clamp(16px,2vw,21px);
+  font-size:clamp(17px,2vw,22px);
   font-weight:900;
   line-height:1.8;
   overflow-wrap:anywhere;
   color:var(--green);
+  transition:color .3s ease;
 }
 
+.category-card:hover .cat-name{color:var(--orange)}
+
 .cat-caption{
-  margin-top:2px;
+  margin-top:3px;
   color:var(--muted);
   font-family:"DM Sans","Vazirmatn",sans-serif;
   font-size:10px;
   font-weight:500;
-  line-height:1.8;
+  line-height:1.9;
   overflow-wrap:anywhere;
 }
 
 .cat-bottom{
+  position:relative;
+  z-index:1;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-top:13px;
-  padding-top:10px;
-  border-top:1px solid rgba(52,61,50,.09);
+  margin-top:17px;
+  padding-top:12px;
+  border-top:1px solid rgba(52,61,50,.12);
 }
 
 .cat-discover{
-  color:rgba(52,61,50,.56);
+  color:rgba(52,61,50,.68);
   font-size:10px;
-  font-weight:500;
+  font-weight:600;
+  transition:color .3s ease;
 }
 
+.category-card:hover .cat-discover{color:var(--green)}
+
 .cat-arrow{
-  width:30px;
-  height:30px;
+  width:33px;
+  height:33px;
   flex-shrink:0;
   display:grid;
   place-items:center;
-  border:1px solid var(--line);
+  border:1px solid rgba(52,61,50,.2);
   border-radius:50%;
   color:var(--orange);
   font-family:"DM Sans",sans-serif;
   font-size:17px;
   line-height:1;
   transition:
-    background .25s,
-    color .25s,
-    border-color .25s,
-    transform .25s;
+    background .3s ease,
+    color .3s ease,
+    border-color .3s ease,
+    transform .3s ease;
 }
 
 .category-card:hover .cat-arrow{
   background:var(--green);
-  color:white;
+  color:#fff;
   border-color:var(--green);
   transform:translate(-2px,-2px);
 }
 
 /* CATEGORY VIEW */
 
-.view{
-  display:none;
-  animation:pageEnter .3s ease;
-}
-
-.view.active{
-  display:block;
-}
+.view{display:none;animation:pageEnter .3s ease}
+.view.active{display:block}
 
 @keyframes pageEnter{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 .back-button{
@@ -526,9 +469,7 @@ main{
   border-color:var(--green);
 }
 
-.back-arrow{
-  font-size:17px;
-}
+.back-arrow{font-size:17px}
 
 .page-title{
   display:flex;
@@ -547,11 +488,7 @@ main{
   line-height:1.5;
 }
 
-.page-title p{
-  margin-top:4px;
-  color:var(--muted);
-  font-size:11px;
-}
+.page-title p{margin-top:4px;color:var(--muted);font-size:11px}
 
 .page-number{
   direction:ltr;
@@ -604,9 +541,7 @@ main{
   transform:translateY(-2px);
 }
 
-.subcategory-info{
-  min-width:0;
-}
+.subcategory-info{min-width:0}
 
 .subcategory-name{
   font-size:13px;
@@ -661,27 +596,9 @@ main{
   animation:pageEnter .3s ease both;
 }
 
-.item-name{
-  color:var(--text);
-  font-size:14px;
-  font-weight:800;
-  line-height:1.8;
-}
-
-.item-desc{
-  margin-top:4px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.9;
-}
-
-.item-price{
-  direction:rtl;
-  white-space:nowrap;
-  color:var(--green);
-  font-size:12px;
-  font-weight:800;
-}
+.item-name{color:var(--text);font-size:14px;font-weight:800;line-height:1.8}
+.item-desc{margin-top:4px;color:var(--muted);font-size:11px;line-height:1.9}
+.item-price{direction:rtl;white-space:nowrap;color:var(--green);font-size:12px;font-weight:800}
 
 .empty{
   grid-column:1/-1;
@@ -695,16 +612,8 @@ main{
 
 /* FOOTER */
 
-.footer{
-  margin-top:40px;
-  padding:0 0 25px;
-  background:var(--cream);
-}
-
-.footer-inner{
-  width:min(1080px,calc(100% - 48px));
-  margin:auto;
-}
+.footer{margin-top:40px;padding:0 0 25px;background:var(--cream)}
+.footer-inner{width:min(1080px,calc(100% - 48px));margin:auto}
 
 .address-box{
   position:relative;
@@ -743,32 +652,10 @@ main{
   color:#E3A17F;
 }
 
-.address-icon svg{
-  width:21px;
-  height:21px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.5;
-}
-
-.address-content{
-  position:relative;
-  z-index:1;
-  min-width:0;
-}
-
-.address-title{
-  margin-bottom:3px;
-  font-size:13px;
-  font-weight:800;
-}
-
-.address-text{
-  color:rgba(255,255,255,.73);
-  font-size:11px;
-  line-height:2;
-  overflow-wrap:anywhere;
-}
+.address-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5}
+.address-content{position:relative;z-index:1;min-width:0}
+.address-title{margin-bottom:3px;font-size:13px;font-weight:800}
+.address-text{color:rgba(255,255,255,.73);font-size:11px;line-height:2;overflow-wrap:anywhere}
 
 .address-note{
   display:inline-block;
@@ -779,487 +666,192 @@ main{
   font-size:9px;
 }
 
-.status-message{
-  margin-top:13px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.status-message.error{
-  color:#B74444;
-}
-
-.status-message button{
-  margin-right:7px;
-  padding:5px 12px;
-  color:var(--green);
-  background:transparent;
-  border:1px solid var(--line);
-}
+.status-message{margin-top:13px;text-align:center;color:var(--muted);font-size:12px}
+.status-message.error{color:#B74444}
+.status-message button{margin-right:7px;padding:5px 12px;color:var(--green);background:transparent;border:1px solid var(--line)}
 
 /* TABLET */
 
 @media(min-width:800px){
-  .category-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:16px;
-  }
-
-  .category-card{
-    min-height:205px;
-    padding:23px;
-  }
-
-  .cat-name{
-    font-size:21px;
-  }
-
-  .cat-caption{
-    font-size:11px;
-  }
-
-  .home-intro{
-    margin-top:53px;
-    margin-bottom:30px;
-  }
+  .category-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+  .category-card{min-height:215px;padding:23px}
+  .cat-name{font-size:21px}
+  .cat-caption{font-size:11px}
+  .home-intro{margin-top:53px;margin-bottom:30px}
 }
 
 /* MOBILE */
 
 @media(max-width:600px){
-  .container{
-    width:calc(100% - 30px);
-  }
+  .container{width:calc(100% - 30px)}
+  .header-inner{min-height:66px;gap:12px}
+  .brand{font-size:29px}
+  .header-actions{gap:6px}
+  .header-actions a{min-height:35px;padding:6px 10px;font-size:11px}
+  .search-wrap{margin-top:19px}
+  .search{height:47px;padding:0 13px}
 
-  .header-inner{
-    min-height:66px;
-    gap:12px;
-  }
+  .home-intro{margin-top:34px;margin-bottom:22px;padding-bottom:19px;gap:8px}
+  .home-intro h1{font-size:27px}
+  .home-intro p{max-width:245px;font-size:11px}
+  .home-edition{font-size:9px;letter-spacing:1px}
+  .eyebrow{margin-bottom:6px;font-size:9px}
 
-  .brand{
-    font-size:29px;
-  }
+  .section-label{margin:20px 0 12px}
+  .section-label h2{font-size:13px}
+  .section-label span{font-size:9px}
 
-  .header-actions{
-    gap:6px;
-  }
-
-  .header-actions a{
-    min-height:35px;
-    padding:6px 10px;
-    font-size:11px;
-  }
-
-  .search-wrap{
-    margin-top:19px;
-  }
-
-  .search{
-    height:47px;
-    padding:0 13px;
-  }
-
-  .home-intro{
-    margin-top:34px;
-    margin-bottom:22px;
-    padding-bottom:19px;
-    gap:8px;
-  }
-
-  .home-intro h1{
-    font-size:27px;
-  }
-
-  .home-intro p{
-    max-width:245px;
-    font-size:11px;
-  }
-
-  .home-edition{
-    font-size:9px;
-    letter-spacing:1px;
-  }
-
-  .eyebrow{
-    margin-bottom:6px;
-    font-size:9px;
-  }
-
-  .section-label{
-    margin:20px 0 12px;
-  }
-
-  .section-label h2{
-    font-size:13px;
-  }
-
-  .section-label span{
-    font-size:9px;
-  }
-
-  .category-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-  }
+  .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
 
   .category-card{
-    min-height:155px;
+    min-height:165px;
     padding:13px;
+    border-radius:3px;
   }
 
-  .category-card::before{
-    top:-49px;
-    left:-43px;
-    width:130px;
-    height:130px;
-  }
+  .category-card::before{top:-49px;left:-43px;width:130px;height:130px}
+  .category-card::after{top:-27px;left:-23px;width:91px;height:91px}
 
-  .category-card::after{
-    top:-27px;
-    left:-23px;
-    width:91px;
-    height:91px;
-  }
+  .cat-index{font-size:9px;letter-spacing:1.1px;gap:6px}
+  .cat-mark{width:6px;height:6px}
+  .cat-info{gap:5px;margin-top:20px}
+  .cat-name{font-size:15px}
+  .cat-caption{font-size:9px}
+  .cat-bottom{margin-top:10px;padding-top:8px}
+  .cat-discover{font-size:9px}
+  .cat-arrow{width:27px;height:27px;font-size:15px}
 
-  .cat-index{
-    font-size:9px;
-    letter-spacing:1.1px;
-    gap:6px;
-  }
+  .subcategory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .subcategory-card{min-height:75px;padding:11px 10px;gap:7px}
+  .subcategory-name{font-size:12px}
+  .subcategory-caption{font-size:9px}
+  .subcategory-arrow{width:25px;height:25px;font-size:15px}
 
-  .cat-mark{
-    width:6px;
-    height:6px;
-  }
+  .back-button{margin:19px 0}
+  .page-title h2{font-size:22px}
+  .page-number{font-size:26px}
+  .item-list{grid-template-columns:1fr}
+  .item-card{padding:15px 0}
+  .item-name{font-size:13px}
+  .item-price{font-size:11px}
 
-  .cat-info{
-    gap:5px;
-    margin-top:20px;
-  }
-
-  .cat-name{
-    font-size:15px;
-  }
-
-  .cat-caption{
-    font-size:9px;
-  }
-
-  .cat-bottom{
-    margin-top:10px;
-    padding-top:8px;
-  }
-
-  .cat-discover{
-    font-size:9px;
-  }
-
-  .cat-arrow{
-    width:27px;
-    height:27px;
-    font-size:15px;
-  }
-
-  .subcategory-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-  }
-
-  .subcategory-card{
-    min-height:75px;
-    padding:11px 10px;
-    gap:7px;
-  }
-
-  .subcategory-name{
-    font-size:12px;
-  }
-
-  .subcategory-caption{
-    font-size:9px;
-  }
-
-  .subcategory-arrow{
-    width:25px;
-    height:25px;
-    font-size:15px;
-  }
-
-  .back-button{
-    margin:19px 0;
-  }
-
-  .page-title h2{
-    font-size:22px;
-  }
-
-  .page-number{
-    font-size:26px;
-  }
-
-  .item-list{
-    grid-template-columns:1fr;
-  }
-
-  .item-card{
-    padding:15px 0;
-  }
-
-  .item-name{
-    font-size:13px;
-  }
-
-  .item-price{
-    font-size:11px;
-  }
-
-  .footer{
-    margin-top:32px;
-    padding-bottom:17px;
-  }
-
-  .footer-inner{
-    width:calc(100% - 30px);
-  }
-
-  .address-box{
-    padding:15px 13px;
-    gap:11px;
-  }
-
-  .address-icon{
-    width:37px;
-    height:37px;
-  }
-
-  .address-text{
-    font-size:10px;
-  }
-
-  .intro-logo{
-    width:min(235px,72vw);
-  }
+  .footer{margin-top:32px;padding-bottom:17px}
+  .footer-inner{width:calc(100% - 30px)}
+  .address-box{padding:15px 13px;gap:11px}
+  .address-icon{width:37px;height:37px}
+  .address-text{font-size:10px}
+  .intro-logo{width:min(235px,72vw)}
 }
 
 @media(max-width:360px){
-  .container{
-    width:calc(100% - 24px);
-  }
-
-  .brand{
-    font-size:26px;
-  }
-
-  .header-actions a{
-    padding:5px 8px;
-    font-size:10px;
-  }
-
-  .home-intro h1{
-    font-size:24px;
-  }
-
-  .home-edition{
-    font-size:8px;
-  }
-
-  .category-card{
-    min-height:145px;
-    padding:11px;
-  }
-
-  .cat-name{
-    font-size:13px;
-  }
-
-  .cat-caption{
-    font-size:8px;
-  }
-
-  .cat-discover{
-    font-size:8px;
-  }
-
-  .cat-arrow{
-    width:24px;
-    height:24px;
-  }
+  .container{width:calc(100% - 24px)}
+  .brand{font-size:26px}
+  .header-actions a{padding:5px 8px;font-size:10px}
+  .home-intro h1{font-size:24px}
+  .home-edition{font-size:8px}
+  .category-card{min-height:150px;padding:11px}
+  .cat-name{font-size:13px}
+  .cat-caption{font-size:8px}
+  .cat-discover{font-size:8px}
+  .cat-arrow{width:24px;height:24px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
+  *,*::before,*::after{
     scroll-behavior:auto!important;
     animation:none!important;
     transition:none!important;
   }
 }
-</style>
-</head>
-
-<body class="intro-active">
-
-<div class="intro" id="intro">
-  <img
-    class="intro-logo"
-    src="Alfa Coffee Emblem Logo.png"
-    alt="ALFA Coffee"
-    fetchpriority="high"
-  >
-</div>
-
-<header>
+</style></head><body class="intro-active"><div class="intro" id="intro">
+  <img class="intro-logo" src="Alfa Coffee Emblem Logo.png" alt="ALFA Coffee" fetchpriority="high">
+</div><header>
   <div class="container header-inner">
-    <a class="brand" href="#" id="brandHome" aria-label="ALFA">
-      ALFA<span>.</span>
-    </a>
-
+    <a class="brand" href="#" id="brandHome" aria-label="ALFA">ALFA<span>.</span></a>
     <nav class="header-actions">
       <a id="phoneLink" href="tel:PHONE_NUMBER">تماس</a>
-      <a
-        id="instagramLink"
-        href="https://instagram.com/INSTAGRAM_ID"
-        target="_blank"
-        rel="noopener noreferrer"
-      >اینستاگرام</a>
+      <a id="instagramLink" href="https://instagram.com/INSTAGRAM_ID" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
     </nav>
   </div>
-</header>
-
-<main class="container">
-
-  <div class="search-wrap">
+</header><main class="container">  <div class="search-wrap">
     <label class="search">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="7.5"></circle>
         <path d="m16.5 16.5 5 5"></path>
       </svg>
-
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="جستجو در منو..."
-        autocomplete="off"
-      >
+      <input id="searchInput" type="search" placeholder="جستجو در منو..." autocomplete="off">
     </label>
-  </div>
-
-  <section id="homeView" class="view active">
-
+  </div>  <section id="homeView" class="view active">
     <div class="home-intro">
       <div class="home-intro-copy">
         <div class="eyebrow">ALFA COFFEE MENU</div>
         <h1>طعمِ انتخاب تو.</h1>
         <p>منوی کافه رو ببین و انتخابت رو پیدا کن.</p>
       </div>
-
       <div class="home-edition">EST. ALFA</div>
-    </div>
+    </div><div class="section-label">
+  <h2>از منو انتخاب کن</h2>
+  <span>OUR MENU</span>
+</div>
 
-    <div class="section-label">
-      <h2>از منو انتخاب کن</h2>
-      <span>OUR MENU</span>
-    </div>
+<div class="category-grid" id="categoryGrid"></div>
+<div id="homeStatus" class="status-message">در حال دریافت منو...</div>
 
-    <div class="category-grid" id="categoryGrid"></div>
-
-    <div id="homeStatus" class="status-message">
-      در حال دریافت منو...
-    </div>
-
-  </section>
-
-  <section id="categoryView" class="view">
-
+  </section>  <section id="categoryView" class="view">
     <button class="back-button" id="backButton" type="button">
       <span class="back-arrow">→</span>
       <span id="backButtonText">بازگشت به دسته‌بندی‌ها</span>
-    </button>
+    </button><div class="page-title">
+  <div>
+    <h2 id="pageCategoryName"></h2>
+    <p id="pageCategoryCaption"></p>
+  </div>
+  <div class="page-number" id="pageCategoryNumber"></div>
+</div>
 
-    <div class="page-title">
-      <div>
-        <h2 id="pageCategoryName"></h2>
-        <p id="pageCategoryCaption"></p>
-      </div>
+<div id="dynamicMenu"></div>
 
-      <div class="page-number" id="pageCategoryNumber"></div>
-    </div>
-
-    <div id="dynamicMenu"></div>
-
-  </section>
-
-  <section id="searchView" class="view">
-
+  </section>  <section id="searchView" class="view">
     <button class="back-button" id="searchBackButton" type="button">
       <span class="back-arrow">→</span>
       بازگشت به دسته‌بندی‌ها
-    </button>
+    </button><div class="page-title">
+  <div>
+    <h2>نتایج جستجو</h2>
+    <p id="resultNote">محصولات منو</p>
+  </div>
+</div>
 
-    <div class="page-title">
-      <div>
-        <h2>نتایج جستجو</h2>
-        <p id="resultNote">محصولات منو</p>
-      </div>
-    </div>
+<div id="searchResults" class="item-list"></div>
 
-    <div id="searchResults" class="item-list"></div>
-
-  </section>
-
-</main>
-
-<footer class="footer">
+  </section></main><footer class="footer">
   <div class="footer-inner">
-
     <div class="address-box">
-
       <div class="address-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
           <circle cx="12" cy="10" r="2.5"></circle>
         </svg>
       </div>
-
       <div class="address-content">
         <div class="address-title">آدرس کافه</div>
-
-        <div class="address-text" id="cafeAddress">
-          در حال دریافت آدرس...
-        </div>
-
+        <div class="address-text" id="cafeAddress">در حال دریافت آدرس...</div>
         <span class="address-note">منتظر دیدارتان هستیم</span>
       </div>
-
     </div>
-
   </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-
-<script>
+</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
 const SUPABASE_URL = "https://uewdwreimgpzpvzkpvvo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
 
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
+const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const intro = document.getElementById("intro");
 
 function closeIntro(){
   if(!intro) return;
-
   intro.classList.add("hide");
   document.body.classList.remove("intro-active");
-
-  setTimeout(()=>{
-    intro.remove();
-  },800);
+  setTimeout(()=>intro.remove(),800);
 }
 
 setTimeout(closeIntro,3000);
@@ -1277,11 +869,9 @@ let currentCategoryId = null;
 const homeView = document.getElementById("homeView");
 const categoryView = document.getElementById("categoryView");
 const searchView = document.getElementById("searchView");
-
 const categoryGrid = document.getElementById("categoryGrid");
 const dynamicMenu = document.getElementById("dynamicMenu");
 const searchResults = document.getElementById("searchResults");
-
 const searchInput = document.getElementById("searchInput");
 const resultNote = document.getElementById("resultNote");
 const homeStatus = document.getElementById("homeStatus");
@@ -1298,72 +888,44 @@ function escapeHTML(value){
 
 function formatPrice(price){
   const value = Number(price) || 0;
-
   return value <= 0
     ? "قیمت اعلام نشده"
     : value.toLocaleString("fa-IR") + " تومان";
 }
 
 function showView(view){
-  [
-    homeView,
-    categoryView,
-    searchView
-  ].forEach(section=>{
-    section.classList.remove("active");
-  });
-
+  [homeView,categoryView,searchView].forEach(section=>section.classList.remove("active"));
   view.classList.add("active");
-
-  window.scrollTo({
-    top:0,
-    behavior:"auto"
-  });
+  window.scrollTo({top:0,behavior:"auto"});
 }
 
 function getCategory(id){
-  return menuData.find(category=>
-    String(category.id) === String(id)
-  );
+  return menuData.find(category=>String(category.id)===String(id));
 }
 
 function getChildren(parentId){
-  return menuData.filter(category=>
-    String(category.parent_id || "") === String(parentId)
-  );
+  return menuData.filter(category=>String(category.parent_id || "")===String(parentId));
 }
 
 function getRoot(category){
   if(!category) return null;
-
-  if(!category.parent_id){
-    return category;
-  }
-
+  if(!category.parent_id) return category;
   return getCategory(category.parent_id) || category;
 }
 
 function getCategoryPath(category){
-  const root = getRoot(category);
-
-  return root && String(root.id) !== String(category.id)
-    ? root.name + " / " + category.name
+  const root=getRoot(category);
+  return root && String(root.id)!==String(category.id)
+    ? root.name+" / "+category.name
     : category?.name || "";
 }
 
 async function loadMenu(){
-
-  homeStatus.textContent = "در حال دریافت منو...";
+  homeStatus.textContent="در حال دریافت منو...";
   homeStatus.classList.remove("error");
 
   try{
-
-    const [
-      categoryResult,
-      productResult,
-      settingsResult
-    ] = await Promise.all([
-
+    const [categoryResult,productResult,settingsResult]=await Promise.all([
       db.from("alfa_categories")
         .select("id,name,caption,image_url,sort_order,active,parent_id")
         .eq("active",true)
@@ -1378,263 +940,156 @@ async function loadMenu(){
         .select("phone,instagram,address")
         .eq("id",1)
         .maybeSingle()
-
     ]);
 
-    if(categoryResult.error){
-      throw categoryResult.error;
-    }
+    if(categoryResult.error) throw categoryResult.error;
+    if(productResult.error) throw productResult.error;
+    if(settingsResult.error) throw settingsResult.error;
 
-    if(productResult.error){
-      throw productResult.error;
-    }
+    const categories=categoryResult.data || [];
+    const products=productResult.data || [];
+    cafeSettings=settingsResult.data || cafeSettings;
 
-    if(settingsResult.error){
-      throw settingsResult.error;
-    }
-
-    const categories = categoryResult.data || [];
-    const products = productResult.data || [];
-
-    cafeSettings = settingsResult.data || cafeSettings;
-
-    menuData = categories.map(category=>({
-
+    menuData=categories.map(category=>({
       id:category.id,
-
       name:category.name,
-
       caption:category.caption || "",
-
       image:category.image_url || "",
-
       sort_order:category.sort_order || 0,
-
       parent_id:category.parent_id || null,
-
       products:products
-        .filter(product=>
-          String(product.category_id) === String(category.id)
-        )
+        .filter(product=>String(product.category_id)===String(category.id))
         .map(product=>({
-
           id:product.id,
-
           name:product.name,
-
           description:product.description || "",
-
           price:product.price || 0,
-
           sort_order:product.sort_order || 0
-
         }))
-
     }));
 
     renderCategories();
-
     applySettings();
 
-    homeStatus.textContent = menuData.some(category=>!category.parent_id)
+    homeStatus.textContent=menuData.some(category=>!category.parent_id)
       ? ""
       : "هنوز دسته‌بندی فعالی در منو ثبت نشده است.";
 
   }catch(error){
-
     console.error("ALFA menu error:",error);
-
-    homeStatus.textContent =
-      "دریافت منو ناموفق بود. اتصال اینترنت و دسترسی دیتابیس را بررسی کنید.";
-
+    homeStatus.textContent="دریافت منو ناموفق بود. اتصال اینترنت و دسترسی دیتابیس را بررسی کنید.";
     homeStatus.classList.add("error");
-
-    homeStatus.innerHTML +=
-      ' <button type="button" id="retryLoad">تلاش دوباره</button>';
-
-    document.getElementById("retryLoad")
-      .addEventListener("click",loadMenu);
-
+    homeStatus.innerHTML+=' <button type="button" id="retryLoad">تلاش دوباره</button>';
+    document.getElementById("retryLoad").addEventListener("click",loadMenu);
   }
 }
 
 function applySettings(){
-
-  document.getElementById("cafeAddress").textContent =
+  document.getElementById("cafeAddress").textContent=
     cafeSettings.address || "آدرس کافه هنوز ثبت نشده است.";
 
-  const phoneLink = document.getElementById("phoneLink");
+  const phoneLink=document.getElementById("phoneLink");
 
   if(cafeSettings.phone){
-
-    phoneLink.href =
-      "tel:" + cafeSettings.phone.replace(/[^\d+]/g,"");
-
+    phoneLink.href="tel:"+cafeSettings.phone.replace(/[^\d+]/g,"");
   }
 
-  const instagramLink = document.getElementById("instagramLink");
+  const instagramLink=document.getElementById("instagramLink");
 
   if(cafeSettings.instagram){
-
-    let value = cafeSettings.instagram.trim();
+    let value=cafeSettings.instagram.trim();
 
     if(/^https?:\/\//i.test(value)){
-
-      instagramLink.href = value;
-
+      instagramLink.href=value;
     }else{
-
-      instagramLink.href =
-        "https://instagram.com/" +
-        encodeURIComponent(value.replace(/^@/,""));
-
+      instagramLink.href="https://instagram.com/"+encodeURIComponent(value.replace(/^@/,""));
     }
-
   }
 }
 
 /* دسته‌بندی‌های اصلی؛ بدون عکس */
 
 function makeCategoryCard(category,index){
+  const card=document.createElement("button");
+  card.type="button";
+  card.className="category-card";
 
-  const card = document.createElement("button");
+  const childCount=getChildren(category.id).length;
 
-  card.type = "button";
-  card.className = "category-card";
-
-  const childCount = getChildren(category.id).length;
-
-  const caption = category.caption || (
+  const caption=category.caption || (
     childCount
-      ? childCount.toLocaleString("fa-IR") + " زیر‌دسته"
-      : category.products.length.toLocaleString("fa-IR") + " محصول"
+      ? childCount.toLocaleString("fa-IR")+" زیر‌دسته"
+      : category.products.length.toLocaleString("fa-IR")+" محصول"
   );
 
-  const number = String(index + 1).padStart(2,"0");
+  const number=String(index+1).padStart(2,"0");
 
-  card.innerHTML = `
-
+  card.innerHTML=`
     <div class="cat-top">
-
       <span class="cat-index">
         <span class="cat-mark" aria-hidden="true"></span>
         ${number} / ALFA
       </span>
-
     </div>
 
     <div class="cat-info">
-
       <div class="cat-info-copy">
-
-        <div class="cat-name">
-          ${escapeHTML(category.name)}
-        </div>
-
-        <div class="cat-caption">
-          ${escapeHTML(caption)}
-        </div>
-
+        <div class="cat-name">${escapeHTML(category.name)}</div>
+        <div class="cat-caption">${escapeHTML(caption)}</div>
       </div>
-
     </div>
 
     <div class="cat-bottom">
-
-      <span class="cat-discover">
-        مشاهده منو
-      </span>
-
+      <span class="cat-discover">مشاهده منو</span>
       <span class="cat-arrow" aria-hidden="true">↙</span>
-
     </div>
-
   `;
 
-  card.addEventListener("click",()=>{
-    openCategory(category.id);
-  });
-
+  card.addEventListener("click",()=>openCategory(category.id));
   return card;
 }
 
 /* نمایش دسته‌های اصلی */
 
 function renderCategories(){
+  categoryGrid.innerHTML="";
 
-  categoryGrid.innerHTML = "";
-
-  const roots = menuData
+  const roots=menuData
     .filter(category=>!category.parent_id)
     .sort((a,b)=>a.sort_order-b.sort_order);
 
   roots.forEach((category,index)=>{
-
-    categoryGrid.appendChild(
-      makeCategoryCard(category,index)
-    );
-
+    categoryGrid.appendChild(makeCategoryCard(category,index));
   });
-
 }
 
 function createProductCard(product,categoryName=""){
+  const item=document.createElement("article");
+  item.className="item-card";
 
-  const item = document.createElement("article");
+  const description=[categoryName,product.description].filter(Boolean).join(" · ");
 
-  item.className = "item-card";
-
-  const description = [
-    categoryName,
-    product.description
-  ].filter(Boolean).join(" · ");
-
-  item.innerHTML = `
-
+  item.innerHTML=`
     <div>
-
-      <div class="item-name">
-        ${escapeHTML(product.name)}
-      </div>
-
-      ${
-        description
-          ? `<div class="item-desc">${escapeHTML(description)}</div>`
-          : ""
-      }
-
+      <div class="item-name">${escapeHTML(product.name)}</div>
+      ${description?`<div class="item-desc">${escapeHTML(description)}</div>`:""}
     </div>
-
-    <div class="item-price">
-      ${formatPrice(product.price)}
-    </div>
-
+    <div class="item-price">${formatPrice(product.price)}</div>
   `;
 
   return item;
 }
 
 function renderProducts(container,products,categoryName=""){
-
-  const list = document.createElement("div");
-
-  list.className = "item-list";
+  const list=document.createElement("div");
+  list.className="item-list";
 
   if(!products.length){
-
-    list.innerHTML =
-      '<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
-
+    list.innerHTML='<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
   }else{
-
     products.forEach(product=>{
-
-      list.appendChild(
-        createProductCard(product,categoryName)
-      );
-
+      list.appendChild(createProductCard(product,categoryName));
     });
-
   }
 
   container.appendChild(list);
@@ -1643,122 +1098,79 @@ function renderProducts(container,products,categoryName=""){
 /* ورود به دسته یا زیر‌دسته */
 
 function openCategory(id){
-
-  const category = getCategory(id);
-
+  const category=getCategory(id);
   if(!category) return;
 
-  currentCategoryId = category.id;
+  currentCategoryId=category.id;
+  searchInput.value="";
+  dynamicMenu.innerHTML="";
 
-  searchInput.value = "";
+  document.getElementById("pageCategoryName").textContent=category.name;
 
-  dynamicMenu.innerHTML = "";
+  const root=getRoot(category);
 
-  document.getElementById("pageCategoryName").textContent =
-    category.name;
-
-  const root = getRoot(category);
-
-  const rootIndex = menuData
+  const rootIndex=menuData
     .filter(item=>!item.parent_id)
-    .findIndex(item=>
-      String(item.id) === String(root?.id)
-    );
+    .findIndex(item=>String(item.id)===String(root?.id));
 
-  document.getElementById("pageCategoryNumber").textContent =
+  document.getElementById("pageCategoryNumber").textContent=
     String(Math.max(0,rootIndex+1)).padStart(2,"0");
 
-  const children = getChildren(category.id);
+  const children=getChildren(category.id);
+  const hasChildren=children.length>0;
 
-  const hasChildren = children.length > 0;
-
-  document.getElementById("pageCategoryCaption").textContent =
+  document.getElementById("pageCategoryCaption").textContent=
     hasChildren
       ? "زیر‌دستهٔ مورد نظرت رو انتخاب کن."
-      : category.products.length.toLocaleString("fa-IR") +
-        " محصول در این دسته";
+      : category.products.length.toLocaleString("fa-IR")+" محصول در این دسته";
 
-  document.getElementById("backButtonText").textContent =
+  document.getElementById("backButtonText").textContent=
     category.parent_id
-      ? "بازگشت به " + (root?.name || "دسته اصلی")
+      ? "بازگشت به "+(root?.name || "دسته اصلی")
       : "بازگشت به دسته‌بندی‌ها";
 
   if(hasChildren){
-
-    const heading = document.createElement("div");
-
-    heading.className = "subcategory-heading";
-
-    heading.textContent = "انتخاب زیر‌دسته";
-
+    const heading=document.createElement("div");
+    heading.className="subcategory-heading";
+    heading.textContent="انتخاب زیر‌دسته";
     dynamicMenu.appendChild(heading);
 
-    const grid = document.createElement("div");
-
-    grid.className = "subcategory-grid";
+    const grid=document.createElement("div");
+    grid.className="subcategory-grid";
 
     children
       .sort((a,b)=>a.sort_order-b.sort_order)
       .forEach(child=>{
+        const childCard=document.createElement("button");
+        childCard.type="button";
+        childCard.className="subcategory-card";
 
-        const childCard = document.createElement("button");
+        const childCount=child.products.length;
+        const childCaption=child.caption || childCount.toLocaleString("fa-IR")+" محصول";
 
-        childCard.type = "button";
-
-        childCard.className = "subcategory-card";
-
-        const childCount = child.products.length;
-
-        const childCaption = child.caption ||
-          childCount.toLocaleString("fa-IR") + " محصول";
-
-        childCard.innerHTML = `
-
+        childCard.innerHTML=`
           <div class="subcategory-info">
-
-            <div class="subcategory-name">
-              ${escapeHTML(child.name)}
-            </div>
-
-            <div class="subcategory-caption">
-              ${escapeHTML(childCaption)}
-            </div>
-
+            <div class="subcategory-name">${escapeHTML(child.name)}</div>
+            <div class="subcategory-caption">${escapeHTML(childCaption)}</div>
           </div>
-
           <span class="subcategory-arrow" aria-hidden="true">↙</span>
-
         `;
 
-        childCard.addEventListener("click",()=>{
-          openCategory(child.id);
-        });
-
+        childCard.addEventListener("click",()=>openCategory(child.id));
         grid.appendChild(childCard);
-
       });
 
     dynamicMenu.appendChild(grid);
 
     if(category.products.length){
-
-      const directHeading = document.createElement("div");
-
-      directHeading.className = "subcategory-heading";
-
-      directHeading.textContent =
-        "سایر محصولات " + category.name;
-
+      const directHeading=document.createElement("div");
+      directHeading.className="subcategory-heading";
+      directHeading.textContent="سایر محصولات "+category.name;
       dynamicMenu.appendChild(directHeading);
-
       renderProducts(dynamicMenu,category.products);
-
     }
-
   }else{
-
     renderProducts(dynamicMenu,category.products);
-
   }
 
   showView(categoryView);
@@ -1767,147 +1179,89 @@ function openCategory(id){
 /* بازگشت */
 
 function goBack(){
-
-  const category = getCategory(currentCategoryId);
+  const category=getCategory(currentCategoryId);
 
   if(category && category.parent_id){
-
     openCategory(category.parent_id);
-
   }else{
-
-    currentCategoryId = null;
-
+    currentCategoryId=null;
     goHome();
-
   }
 }
 
 /* جست‌وجوی محصولات */
 
 function renderSearchResults(query){
+  searchResults.innerHTML="";
 
-  searchResults.innerHTML = "";
-
-  const q = query.trim().toLocaleLowerCase("fa");
-
-  const matches = [];
+  const q=query.trim().toLocaleLowerCase("fa");
+  const matches=[];
 
   menuData.forEach(category=>{
-
     category.products.forEach(product=>{
-
-      const searchable = [
-
+      const searchable=[
         category.name,
-
         getCategoryPath(category),
-
         product.name,
-
         product.description || ""
-
       ].join(" ").toLocaleLowerCase("fa");
 
       if(searchable.includes(q)){
-
-        matches.push({
-          category,
-          product
-        });
-
+        matches.push({category,product});
       }
-
     });
-
   });
 
   if(!matches.length){
-
-    searchResults.innerHTML =
-      '<div class="empty">موردی با این عبارت پیدا نشد.</div>';
-
+    searchResults.innerHTML='<div class="empty">موردی با این عبارت پیدا نشد.</div>';
   }else{
-
     matches.forEach(({category,product})=>{
-
       searchResults.appendChild(
-        createProductCard(
-          product,
-          getCategoryPath(category)
-        )
+        createProductCard(product,getCategoryPath(category))
       );
-
     });
-
   }
 
-  resultNote.textContent = matches.length
-    ? matches.length.toLocaleString("fa-IR") + " مورد پیدا شد"
+  resultNote.textContent=matches.length
+    ? matches.length.toLocaleString("fa-IR")+" مورد پیدا شد"
     : "نتیجه‌ای پیدا نشد";
 
   showView(searchView);
 }
 
 function goHome(){
-
-  currentCategoryId = null;
-
-  searchInput.value = "";
-
+  currentCategoryId=null;
+  searchInput.value="";
   showView(homeView);
 }
 
 /* جست‌وجو با Enter؛ مطابق رفتار نسخه اصلی */
 
 searchInput.addEventListener("keydown",event=>{
-
-  if(event.key === "Enter"){
-
-    const query = searchInput.value.trim();
+  if(event.key==="Enter"){
+    const query=searchInput.value.trim();
 
     if(query){
-
       renderSearchResults(query);
-
       searchInput.blur();
-
     }
-
   }
-
 });
 
 searchInput.addEventListener("input",()=>{
-
-  if(
-    !searchInput.value.trim() &&
-    searchView.classList.contains("active")
-  ){
-
+  if(!searchInput.value.trim() && searchView.classList.contains("active")){
     showView(homeView);
-
   }
-
 });
 
-document.getElementById("backButton")
-  .addEventListener("click",goBack);
+document.getElementById("backButton").addEventListener("click",goBack);
+document.getElementById("searchBackButton").addEventListener("click",goHome);
 
-document.getElementById("searchBackButton")
-  .addEventListener("click",goHome);
-
-document.getElementById("brandHome")
-  .addEventListener("click",event=>{
-
-    event.preventDefault();
-
-    goHome();
-
-  });
+document.getElementById("brandHome").addEventListener("click",event=>{
+  event.preventDefault();
+  goHome();
+});
 
 loadMenu();
-</script>
-
-</body>
+</script></body>
 </html>

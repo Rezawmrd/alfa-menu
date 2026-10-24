@@ -1,865 +1,1363 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4F0E8">
-<title>ALFA | مدیریت منو</title><link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
+<title>ALFA | پنل مدیریت</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 :root{
-  --bg:#F4F0E8;
+  --cream:#F4F0E8;
   --green:#343D32;
+  --green2:#455343;
   --orange:#C66B42;
-  --text:#292B26;
-  --muted:#77776E;
-  --line:#DDD8CC;
-  --white:#FFFEFA;
-  --red:#B74444;
+  --white:#fff;
+  --text:#292d27;
+  --muted:#77796f;
+  --line:#e7e1d6;
+  --danger:#b84135;
+  --shadow:0 10px 35px rgba(52,61,50,.07);
+  --radius:20px;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Vazirmatn,sans-serif;font-size:13px}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--text);
+  font-family:"Vazirmatn",sans-serif;
+  font-size:14px;
+}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
-input,textarea,select{width:100%;padding:12px;background:var(--white);border:1px solid var(--line);border-radius:4px;outline:none;color:var(--text)}
-input:focus,textarea:focus,select:focus{border-color:var(--green)}
-textarea{resize:vertical;min-height:85px}
-label{display:block;margin:0 0 7px;font-weight:700;font-size:12px}
-h1,h2,h3,p{margin-top:0}
+button:disabled{opacity:.5;cursor:not-allowed}
 .hidden{display:none!important}
-.wrap{width:min(1080px,calc(100% - 28px));margin:auto}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:6px;border:1px solid var(--green);background:var(--green);color:white;border-radius:4px;padding:10px 15px;font-weight:700}
-.btn.alt{background:transparent;color:var(--green)}
-.btn.danger{background:var(--red);border-color:var(--red);color:#fff}
-.btn.small{padding:6px 10px;font-size:11px}
-.btn.orange{background:var(--orange);border-color:var(--orange)}
-.brand{direction:ltr;font-family:"DM Sans",sans-serif;font-size:34px;font-weight:800;letter-spacing:-2px;color:var(--green)}
-.brand span{color:var(--orange)}
-.muted{color:var(--muted);font-size:12px}
-.card{background:var(--white);border:1px solid var(--line);padding:20px;border-radius:5px}
-.field{margin-bottom:16px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.login-page{min-height:100vh;display:grid;place-items:center;padding:20px}
-.login-card{width:min(420px,100%)}
-.login-card .brand{text-align:center;margin-bottom:7px}
-.login-card h2,.login-card p{text-align:center}
-.login-card h2{font-size:19px}
-.login-card .btn{width:100%;margin-top:8px}
-header{background:var(--white);border-bottom:1px solid var(--line)}
-.header-inner{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.header-title{font-weight:800;font-size:13px}
-.header-brand{display:flex;align-items:center;gap:15px}
-.header-brand .brand{font-size:29px}
-main{padding:25px 0 65px}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:15px;margin-bottom:17px}
-.tab{flex-shrink:0;background:transparent;border:1px solid var(--line);padding:10px 17px;border-radius:3px;font-weight:700;color:var(--green)}
-.tab.active{background:var(--green);border-color:var(--green);color:white}
-.section{display:none}
-.section.active{display:block}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.section-head h2{margin:0;font-size:20px;color:var(--green)}
-.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.product-list{display:grid;gap:10px}
-.product{background:var(--white);border:1px solid var(--line);padding:16px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.product h3{font-size:14px;margin:0 0 4px}
-.product p{font-size:11px;color:var(--muted);margin:0}
-.product .price{font-weight:800;color:var(--green);margin-top:6px}
-.product-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.badge{display:inline-block;padding:2px 8px;background:#E8EBDD;color:#536143;font-size:10px;margin-top:6px}
-.badge.off{background:#F7E5E2;color:var(--red)}
-.badge.sub{background:#F4E5DB;color:#96532F}
-.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line)}
-.modal{position:fixed;inset:0;z-index:300;background:rgba(15,22,15,.62);display:grid;place-items:center;padding:15px}
-.modal-box{width:min(560px,100%);max-height:90vh;overflow-y:auto;background:var(--bg);border-radius:6px;padding:22px}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.modal-head h2{font-size:19px;margin:0}
-.close{border:0;background:transparent;font-size:26px;line-height:1}
-.toast{position:fixed;z-index:500;bottom:20px;left:50%;transform:translate(-50%,15px);background:var(--green);color:white;padding:11px 20px;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.category-row{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:15px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
-.category-row:last-child{border-bottom:0}
-.category-row img{width:70px;height:65px;object-fit:cover;background:#e9e4d9}
-.category-row h3{font-size:13px;margin:0}
-.category-row p{font-size:11px;color:var(--muted);margin:3px 0}
-.category-row.child{padding-right:28px;background:#faf8f2}
-.category-row.child img{width:55px;height:50px}
-.category-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.category-placeholder{width:70px;height:65px;display:grid;place-items:center;background:#eee9df;color:var(--green);font-size:23px}
-.category-row.child .category-placeholder{width:55px;height:50px}
-.loading{text-align:center;padding:45px;color:var(--muted)}
-@media(max-width:600px){
- .grid2,.toolbar{grid-template-columns:1fr}
- .product{align-items:flex-start;flex-direction:column}
- .product-actions{width:100%;justify-content:flex-start}
- .header-title{font-size:11px}
- .card{padding:15px}
- .category-row{grid-template-columns:48px minmax(0,1fr);gap:9px}
- .category-row img,.category-placeholder{width:48px;height:48px}
- .category-row.child img,.category-row.child .category-placeholder{width:42px;height:42px}
- .category-row .category-actions{grid-column:1/-1;justify-content:flex-start}
- .category-row.child{padding-right:12px}
- .category-row .category-placeholder{width:48px;height:48px}
- .category-row.child .category-placeholder{width:42px;height:42px}
- .modal-box{padding:16px}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+.topbar{
+  background:var(--green);
+  color:#fff;
+  padding:17px 0;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 5px 25px rgba(0,0,0,.08);
 }
-</style></head>
-<body><section id="loginPage" class="login-page">
-  <div class="card login-card">
-    <div class="brand">ALFA<span>.</span></div>
-    <h2>ورود به پنل مدیریت</h2>
-    <p class="muted">مدیریت منوی کافه آلفا</p>
-    <form id="loginForm">
-      <div class="field">
-        <label for="email">ایمیل مدیر</label>
-        <input id="email" type="email" autocomplete="username" required>
-      </div>
-      <div class="field">
-        <label for="password">رمز عبور</label>
-        <input id="password" type="password" autocomplete="current-password" required>
-      </div>
-      <button class="btn" id="loginBtn" type="submit">ورود به پنل</button>
-    </form>
-    <p id="loginError" class="muted" style="color:var(--red);margin:15px 0 0"></p>
-  </div>
-</section><div id="dashboard" class="hidden">
-  <header>
-    <div class="wrap header-inner">
-      <div class="header-brand">
-        <div class="brand">ALFA<span>.</span></div>
-        <div class="header-title">پنل مدیریت منو</div>
-      </div>
-      <button class="btn alt small" id="logoutBtn">خروج</button>
-    </div>
-  </header>  <main class="wrap">
-    <div class="tabs">
-      <button class="tab active" data-tab="products">محصولات</button>
-      <button class="tab" data-tab="categories">دسته‌بندی‌ها و زیر‌دسته‌ها</button>
-      <button class="tab" data-tab="settings">تنظیمات کافه</button>
-    </div><section id="productsSection" class="section active">
-  <div class="section-head">
-    <h2>مدیریت محصولات</h2>
-    <button class="btn orange" id="addProductBtn">+ افزودن محصول</button>
-  </div>
-  <div class="toolbar">
-    <select id="filterCategory"></select>
-    <input id="filterSearch" type="search" placeholder="جستجوی محصول...">
-  </div>
-  <div id="productList" class="product-list"></div>
-</section>
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:43px;height:43px;border-radius:14px;
+  background:var(--cream);color:var(--green);
+  display:grid;place-items:center;font-weight:800;
+  font-family:"DM Sans",sans-serif;font-size:20px;
+}
+.brand-title{font-size:17px;font-weight:800;letter-spacing:1px}
+.brand-sub{font-size:11px;color:#d6d9d1;margin-top:2px}
+.top-actions{display:flex;gap:8px;align-items:center}
+.top-btn{
+  padding:9px 13px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;background:transparent;text-decoration:none;
+  font-size:12px;font-weight:600;
+}
+.top-btn:hover{background:rgba(255,255,255,.1)}
+main{padding:28px 0 50px}
+.page-heading{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:16px;margin-bottom:22px;
+}
+.eyebrow{
+  color:var(--orange);font-size:11px;font-weight:800;
+  letter-spacing:1.5px;margin-bottom:7px;
+}
+h1{font-size:clamp(22px,4vw,31px);margin:0;color:var(--green);font-weight:800}
+.page-heading p{margin:8px 0 0;color:var(--muted);font-size:13px}
+.card{
+  background:var(--white);
+  border:1px solid rgba(52,61,50,.06);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.login-wrap{max-width:440px;margin:50px auto}
+.login-card{padding:28px}
+.login-card h2{margin:0 0 8px;color:var(--green);font-size:22px}
+.login-card>p{color:var(--muted);font-size:13px;line-height:1.9;margin:0 0 23px}
+.form-group{margin-bottom:16px}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:8px;color:#4c5148}
+input,textarea,select{
+  width:100%;border:1px solid var(--line);border-radius:12px;
+  background:#fff;padding:12px 13px;outline:none;color:var(--text);
+  transition:border-color .2s,box-shadow .2s;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--green2);
+  box-shadow:0 0 0 3px rgba(52,61,50,.08);
+}
+textarea{min-height:95px;resize:vertical}
+input[type="checkbox"]{width:auto;accent-color:var(--green)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:7px;border:0;border-radius:12px;padding:11px 16px;
+  font-weight:700;font-size:12px;transition:.2s;text-decoration:none;
+}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-secondary{background:var(--cream);color:var(--green)}
+.btn-secondary:hover{background:#eae4d8}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-danger{background:#fff0ed;color:var(--danger)}
+.btn-danger:hover{background:#ffe2dc}
+.btn-block{width:100%}
+.btn-small{padding:7px 10px;font-size:11px;border-radius:9px}
+.message{
+  border-radius:12px;padding:11px 13px;margin:12px 0;
+  font-size:12px;line-height:1.8;display:none;
+}
+.message.show{display:block}
+.message.error{background:#fff0ed;color:#a52e25}
+.message.success{background:#eaf5e9;color:#2e6537}
+.message.info{background:#f1f2ec;color:var(--green)}
+.stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;margin-bottom:22px;
+}
+.stat{padding:18px 20px;position:relative;overflow:hidden}
+.stat:after{
+  content:"";position:absolute;width:65px;height:65px;
+  border-radius:50%;background:var(--cream);left:-18px;top:-20px;
+}
+.stat-label{font-size:12px;color:var(--muted);position:relative;z-index:1}
+.stat-number{font-size:28px;font-weight:800;color:var(--green);margin-top:7px;position:relative;z-index:1}
+.tabs{
+  display:flex;gap:7px;flex-wrap:wrap;padding:8px;
+  margin-bottom:20px;background:#eae5da;border-radius:16px;
+}
+.tab-btn{
+  flex:1;min-width:120px;border:0;background:transparent;
+  color:#696d63;padding:12px;border-radius:11px;
+  font-weight:700;font-size:12px;
+}
+.tab-btn.active{background:#fff;color:var(--green);box-shadow:0 3px 12px #343d3210}
+.panel{padding:22px}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:20px;flex-wrap:wrap;
+}
+.panel-title{font-size:18px;color:var(--green);font-weight:800;margin:0}
+.panel-description{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.8}
+.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.toolbar .search{width:min(260px,100%)}
+.toolbar select{width:auto;min-width:145px}
+.product-list,.category-list{display:flex;flex-direction:column;gap:10px}
+.product-row,.category-row{
+  border:1px solid var(--line);border-radius:15px;padding:13px;
+  display:flex;align-items:center;gap:13px;min-width:0;
+}
+.product-icon,.category-icon{
+  flex:0 0 45px;width:45px;height:45px;border-radius:13px;
+  background:var(--cream);color:var(--green);
+  display:grid;place-items:center;font-weight:800;font-size:17px;
+}
+.category-icon{background:#f5e7dd;color:var(--orange)}
+.row-main{flex:1;min-width:0}
+.row-title{font-weight:800;font-size:13px;overflow-wrap:anywhere}
+.row-meta{color:var(--muted);font-size:11px;margin-top:5px;line-height:1.8}
+.row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.price{color:var(--orange);font-weight:800;font-size:13px;margin-top:4px}
+.status{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 8px;border-radius:20px;font-size:10px;font-weight:700;
+}
+.status:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.status.active{background:#eaf5e9;color:#387544}
+.status.inactive{background:#f1f0ed;color:#88877f}
+.category-children{margin-right:26px;padding-right:15px;border-right:2px solid #eee5d9}
+.empty{
+  padding:35px 15px;text-align:center;border:1px dashed var(--line);
+  border-radius:15px;color:var(--muted);font-size:13px;line-height:2;
+}
+.empty strong{display:block;color:var(--green);font-size:14px;margin-bottom:4px}
+.notice{
+  padding:12px 14px;border-radius:12px;background:#f8f4ec;
+  color:#68695f;font-size:11px;line-height:1.9;margin-bottom:17px;
+}
+.notice strong{color:var(--green)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.settings-form{max-width:720px}
+.modal-backdrop{
+  position:fixed;inset:0;z-index:100;background:rgba(24,29,23,.58);
+  display:none;align-items:center;justify-content:center;
+  padding:16px;overflow-y:auto;
+}
+.modal-backdrop.show{display:flex}
+.modal{
+  background:#fff;width:min(570px,100%);max-height:calc(100vh - 32px);
+  overflow-y:auto;border-radius:22px;padding:23px;
+  box-shadow:0 25px 80px #0002;
+}
+.modal-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-bottom:20px;
+}
+.modal-head h3{margin:0;color:var(--green);font-size:19px}
+.close-btn{
+  width:35px;height:35px;border:0;border-radius:10px;
+  background:var(--cream);color:var(--green);font-size:20px;
+}
+.modal-actions{display:flex;gap:8px;margin-top:20px}
+.modal-actions .btn{flex:1}
+.checkbox-line{
+  display:flex;align-items:center;gap:9px;margin:10px 0 15px;
+  font-size:12px;color:var(--muted);
+}
+.checkbox-line label{margin:0}
+.footer-note{text-align:center;color:#8c8c82;font-size:11px;margin-top:24px}
+.loading{opacity:.6;pointer-events:none}
+@media(max-width:700px){
+  .container{width:calc(100% - 22px)}
+  main{padding-top:21px}
+  .topbar{padding:12px 0}
+  .brand-mark{width:38px;height:38px}
+  .brand-title{font-size:15px}
+  .brand-sub{font-size:10px}
+  .top-btn{padding:8px 10px;font-size:11px}
+  .stats{gap:8px}
+  .stat{padding:13px}
+  .stat-number{font-size:23px}
+  .stat-label{font-size:10px}
+  .panel{padding:14px}
+  .panel-head{align-items:stretch}
+  .panel-head>.btn{width:100%}
+  .toolbar{width:100%}
+  .toolbar .search{width:100%;flex:1}
+  .toolbar select{width:100%}
+  .product-row,.category-row{align-items:flex-start;gap:9px;padding:11px}
+  .product-icon,.category-icon{flex-basis:37px;width:37px;height:37px;border-radius:11px}
+  .row-actions{width:100%;margin-top:8px}
+  .row-actions .btn{flex:1}
+  .product-row,.category-row{flex-wrap:wrap}
+  .row-main{width:calc(100% - 50px);flex:1}
+  .row-actions{padding-right:46px}
+  .category-children{margin-right:12px;padding-right:9px}
+  .grid-2{grid-template-columns:1fr;gap:0}
+  .login-wrap{margin:25px auto}
+  .login-card{padding:21px}
+  .page-heading{align-items:flex-start;flex-direction:column}
+  .modal{padding:17px}
+}
+</style>
+</head>
 
-<section id="categoriesSection" class="section">
-  <div class="section-head">
-    <h2>دسته‌بندی‌های منو</h2>
-    <button class="btn orange" id="addCategoryBtn">+ دسته یا زیر‌دسته جدید</button>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <div class="brand-title">ALFA</div>
+        <div class="brand-sub">پنل مدیریت منوی کافه</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <a class="top-btn" href="./" target="_blank" rel="noopener">مشاهده سایت ↗</a>
+      <button id="logoutBtn" class="top-btn hidden" type="button">خروج</button>
+    </div>
   </div>
-  <p class="muted">برای ساخت زیر‌دسته، دسته اصلی موردنظر را در فرم انتخاب کن. عکس فقط برای دسته‌های اصلی قابل تنظیم است.</p>
-  <div class="card" id="categoryList"></div>
-</section>
+</header>
 
-<section id="settingsSection" class="section">
-  <div class="section-head"><h2>اطلاعات کافه</h2></div>
-  <form class="card" id="settingsForm">
-    <div class="field">
-      <label>شماره تماس</label>
-      <input id="settingPhone" type="tel" placeholder="مثلاً 09123456789">
-    </div>
-    <div class="field">
-      <label>آیدی اینستاگرام</label>
-      <input id="settingInstagram" placeholder="بدون @">
-    </div>
-    <div class="field">
-      <label>آدرس کافه</label>
-      <textarea id="settingAddress"></textarea>
-    </div>
-    <button class="btn" type="submit">ذخیره تنظیمات</button>
-  </form>
-</section>
+<main class="container">
 
-  </main>
-</div><div id="productModal" class="modal hidden">
-  <div class="modal-box">
+  <section id="loginSection" class="login-wrap">
+    <div class="card login-card">
+      <div class="eyebrow">ALFA ADMINISTRATION</div>
+      <h2>ورود به پنل مدیریت</h2>
+      <p>برای مدیریت محصولات، دسته‌بندی‌ها و اطلاعات کافه وارد حساب مدیر شوید.</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">ایمیل</label>
+          <input id="loginEmail" type="email" autocomplete="username" required placeholder="ایمیل مدیر">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">رمز عبور</label>
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="رمز عبور">
+        </div>
+        <div id="loginMessage" class="message"></div>
+        <button id="loginBtn" class="btn btn-primary btn-block" type="submit">ورود به پنل</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="dashboardSection" class="hidden">
+    <div class="page-heading">
+      <div>
+        <div class="eyebrow">CONTROL CENTER</div>
+        <h1>مدیریت کافه</h1>
+        <p>محصولات، دسته‌بندی‌ها و اطلاعات نمایش داده‌شده در سایت را مدیریت کنید.</p>
+      </div>
+      <button class="btn btn-secondary" id="refreshBtn" type="button">↻ بروزرسانی اطلاعات</button>
+    </div>
+
+    <div class="stats">
+      <div class="card stat">
+        <div class="stat-label">کل محصولات</div>
+        <div id="statProducts" class="stat-number">۰</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-label">دسته‌های اصلی</div>
+        <div id="statCategories" class="stat-number">۰</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-label">زیر‌دسته‌ها</div>
+        <div id="statSubcategories" class="stat-number">۰</div>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="products" type="button">محصولات</button>
+      <button class="tab-btn" data-tab="categories" type="button">دسته‌بندی‌ها</button>
+      <button class="tab-btn" data-tab="settings" type="button">اطلاعات کافه</button>
+    </nav>
+
+    <section id="productsTab" class="card panel">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">مدیریت محصولات</h2>
+          <p class="panel-description">افزودن، ویرایش، فعال‌سازی و حذف محصولات منو.</p>
+        </div>
+        <button class="btn btn-primary" id="addProductBtn" type="button">＋ محصول جدید</button>
+      </div>
+
+      <div class="toolbar" style="margin-bottom:16px">
+        <input id="productSearch" class="search" type="search" placeholder="جست‌وجوی محصول...">
+        <select id="productCategoryFilter">
+          <option value="">همه دسته‌ها</option>
+        </select>
+        <select id="productStatusFilter">
+          <option value="">همه وضعیت‌ها</option>
+          <option value="true">فعال</option>
+          <option value="false">غیرفعال</option>
+        </select>
+      </div>
+
+      <div id="productsMessage" class="message"></div>
+      <div id="productList" class="product-list">
+        <div class="empty">در حال دریافت اطلاعات...</div>
+      </div>
+    </section>
+
+    <section id="categoriesTab" class="card panel hidden">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">دسته‌بندی‌ها</h2>
+          <p class="panel-description">ساخت دسته اصلی و زیر‌دسته برای مرتب‌سازی منو.</p>
+        </div>
+        <button class="btn btn-primary" id="addCategoryBtn" type="button">＋ دسته جدید</button>
+      </div>
+
+      <div class="notice">
+        <strong>نکته:</strong>
+        کارت‌های دسته‌بندی در صفحه اصلی فعلاً بدون عکس نمایش داده می‌شوند.
+        برای ساخت دسته یا زیر‌دسته نیازی به واردکردن لینک تصویر نیست.
+      </div>
+
+      <div id="categoriesMessage" class="message"></div>
+      <div id="categoryList" class="category-list">
+        <div class="empty">در حال دریافت اطلاعات...</div>
+      </div>
+    </section>
+
+    <section id="settingsTab" class="card panel hidden">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">اطلاعات کافه</h2>
+          <p class="panel-description">اطلاعات تماس و آدرس نمایش داده‌شده در سایت را ویرایش کنید.</p>
+        </div>
+      </div>
+
+      <div class="notice">
+        اطلاعات را ذخیره کنید تا سایت بتواند آخرین اطلاعات ثبت‌شده را نمایش دهد.
+      </div>
+
+      <form id="settingsForm" class="settings-form">
+        <div class="form-group">
+          <label for="settingPhone">شماره تماس</label>
+          <input id="settingPhone" type="text" placeholder="مثلاً ۰۹۱۲۱۲۳۴۵۶۷">
+        </div>
+        <div class="form-group">
+          <label for="settingInstagram">آیدی یا لینک اینستاگرام</label>
+          <input id="settingInstagram" type="text" placeholder="مثلاً alfa.cafe">
+        </div>
+        <div class="form-group">
+          <label for="settingAddress">آدرس کافه</label>
+          <textarea id="settingAddress" placeholder="آدرس کافه را وارد کنید"></textarea>
+        </div>
+        <div id="settingsMessage" class="message"></div>
+        <button id="saveSettingsBtn" class="btn btn-primary" type="submit">ذخیره اطلاعات</button>
+      </form>
+    </section>
+  </section>
+
+  <div class="footer-note">ALFA · Admin Panel</div>
+</main>
+
+<!-- Product Modal -->
+<div id="productModalBackdrop" class="modal-backdrop">
+  <div class="modal">
     <div class="modal-head">
-      <h2 id="productModalTitle">افزودن محصول</h2>
-      <button class="close" id="closeProductModal" type="button">×</button>
+      <h3 id="productModalTitle">افزودن محصول</h3>
+      <button class="close-btn" type="button" data-close="productModalBackdrop">×</button>
     </div>
+
     <form id="productForm">
-      <input type="hidden" id="productId">
-      <div class="field">
-        <label>نام محصول</label>
-        <input id="productName" required maxlength="150">
+      <input id="productId" type="hidden">
+
+      <div class="form-group">
+        <label for="productName">نام محصول *</label>
+        <input id="productName" required maxlength="150" placeholder="نام محصول">
       </div>
-      <div class="field">
-        <label>دسته یا زیر‌دسته محصول</label>
-        <select id="productCategory" required></select>
+
+      <div class="form-group">
+        <label for="productCategory">دسته‌بندی *</label>
+        <select id="productCategory" required>
+          <option value="">ابتدا دسته‌بندی را انتخاب کنید</option>
+        </select>
       </div>
-      <div class="field">
-        <label>توضیحات</label>
-        <textarea id="productDescription"></textarea>
+
+      <div class="form-group">
+        <label for="productDescription">توضیحات</label>
+        <textarea id="productDescription" placeholder="توضیحات محصول (اختیاری)"></textarea>
       </div>
-      <div class="grid2">
-        <div class="field">
-          <label>قیمت (تومان)</label>
-          <input id="productPrice" type="number" min="0" step="1" required>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="productPrice">قیمت (تومان) *</label>
+          <input id="productPrice" type="number" min="0" step="1" required placeholder="مثلاً ۱۵۰۰۰۰">
         </div>
-        <div class="field">
-          <label>ترتیب نمایش</label>
-          <input id="productOrder" type="number" min="0" step="1" value="0">
+        <div class="form-group">
+          <label for="productSort">ترتیب نمایش</label>
+          <input id="productSort" type="number" step="1" value="0">
         </div>
       </div>
-      <div class="field">
-        <label style="display:flex;align-items:center;gap:9px">
-          <input id="productActive" type="checkbox" checked style="width:auto">
-          محصول در منو نمایش داده شود
-        </label>
+
+      <div class="checkbox-line">
+        <input id="productActive" type="checkbox" checked>
+        <label for="productActive">این محصول در سایت نمایش داده شود</label>
       </div>
-      <div class="row">
-        <button class="btn" type="submit" id="saveProductBtn">ذخیره محصول</button>
-        <button class="btn alt" type="button" id="cancelProductBtn">انصراف</button>
+
+      <div id="productFormMessage" class="message"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" type="button" data-close="productModalBackdrop">انصراف</button>
+        <button id="saveProductBtn" class="btn btn-primary" type="submit">ذخیره محصول</button>
       </div>
     </form>
   </div>
-</div><div id="categoryModal" class="modal hidden">
-  <div class="modal-box">
+</div>
+
+<!-- Category Modal -->
+<div id="categoryModalBackdrop" class="modal-backdrop">
+  <div class="modal">
     <div class="modal-head">
-      <h2 id="categoryModalTitle">دسته‌بندی جدید</h2>
-      <button class="close" id="closeCategoryModal" type="button">×</button>
+      <h3 id="categoryModalTitle">افزودن دسته‌بندی</h3>
+      <button class="close-btn" type="button" data-close="categoryModalBackdrop">×</button>
     </div>
+
     <form id="categoryForm">
-      <input type="hidden" id="categoryId">  <div class="field">
-    <label>نام دسته‌بندی یا زیر‌دسته</label>
-    <input id="categoryName" required maxlength="100" placeholder="مثلاً بر پایه اسپرسو">
-  </div>
+      <input id="categoryId" type="hidden">
 
-  <div class="field">
-    <label>نوع دسته‌بندی</label>
-    <select id="categoryParent">
-      <option value="">دسته اصلی</option>
-    </select>
-    <p class="muted">برای ساخت زیر‌دسته، دسته اصلی مربوطه را انتخاب کن.</p>
-  </div>
+      <div class="form-group">
+        <label for="categoryName">نام دسته‌بندی *</label>
+        <input id="categoryName" required maxlength="100" placeholder="مثلاً نوشیدنی گرم">
+      </div>
 
-  <div class="field">
-    <label>عنوان انگلیسی یا توضیح کوتاه</label>
-    <input id="categoryCaption" placeholder="مثلاً ESPRESSO BASED">
-  </div>
+      <div class="form-group">
+        <label for="categoryCaption">توضیح کوتاه</label>
+        <input id="categoryCaption" maxlength="180" placeholder="مثلاً قهوه و نوشیدنی‌های گرم">
+      </div>
 
-  <div class="field" id="categoryImageField">
-    <label>آدرس عکس دسته‌بندی (اختیاری — فقط دسته اصلی)</label>
-    <input id="categoryImage" type="url" placeholder="https://...">
-    <p class="muted">برای زیر‌دسته نیازی به عکس نیست.</p>
-  </div>
+      <div class="form-group">
+        <label for="categoryParent">نوع دسته‌بندی</label>
+        <select id="categoryParent">
+          <option value="">دسته اصلی</option>
+        </select>
+        <small style="display:block;color:var(--muted);font-size:11px;line-height:1.8;margin-top:7px">
+          برای ساخت زیر‌دسته، دسته اصلی مربوطه را انتخاب کنید.
+        </small>
+      </div>
 
-  <div class="field">
-    <label>ترتیب نمایش</label>
-    <input id="categoryOrder" type="number" min="0" step="1" value="0">
-  </div>
+      <div id="categoryImageGroup" class="form-group">
+        <label for="categoryImage">لینک تصویر (اختیاری)</label>
+        <input id="categoryImage" type="url" placeholder="https://example.com/image.jpg">
+        <small style="display:block;color:var(--muted);font-size:11px;line-height:1.8;margin-top:7px">
+          در طراحی فعلی سایت، تصاویر دسته‌بندی نمایش داده نمی‌شوند. این فیلد فقط برای نگهداری لینک تصویر در دیتابیس باقی مانده است.
+        </small>
+      </div>
 
-  <div class="field">
-    <label style="display:flex;align-items:center;gap:9px">
-      <input id="categoryActive" type="checkbox" checked style="width:auto">
-      دسته‌بندی فعال باشد
-    </label>
-  </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="categorySort">ترتیب نمایش</label>
+          <input id="categorySort" type="number" step="1" value="0">
+        </div>
+        <div class="form-group">
+          <label for="categoryActive">وضعیت</label>
+          <select id="categoryActive">
+            <option value="true">فعال</option>
+            <option value="false">غیرفعال</option>
+          </select>
+        </div>
+      </div>
 
-  <div class="row">
-    <button class="btn" type="submit" id="saveCategoryBtn">ذخیره دسته‌بندی</button>
-    <button class="btn alt" type="button" id="cancelCategoryBtn">انصراف</button>
+      <div id="categoryFormMessage" class="message"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" type="button" data-close="categoryModalBackdrop">انصراف</button>
+        <button id="saveCategoryBtn" class="btn btn-primary" type="submit">ذخیره دسته‌بندی</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>
 
-  </div>
-</div><div id="toast" class="toast" role="status"></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
+<script>
+/* =========================================================
+   اتصال Supabase
+   ========================================================= */
+
 const SUPABASE_URL = "https://uewdwreimgpzpvzkpvvo.supabase.co";
-const SUPABASE_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
+const SUPABASE_ANON_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
 
-const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const $ = id => document.getElementById(id);
+
 let categories = [];
 let products = [];
-let busy = false;
-let toastTimer;
+let settings = null;
+let currentUser = null;
 
-function notify(message){
-  const box=$("toast");
-  box.textContent=message;
-  box.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>box.classList.remove("show"),3500);
+const faNumber = value =>
+  new Intl.NumberFormat("fa-IR").format(Number(value || 0));
+
+const escapeHTML = value =>
+  String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[char]);
+
+function showMessage(id, text, type = "info") {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = text;
+  el.className = "message show " + type;
 }
 
-function escapeHTML(value){
-  return String(value??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[c]));
+function hideMessage(id) {
+  const el = $(id);
+  if (!el) return;
+  el.className = "message";
+  el.textContent = "";
 }
 
-function errorText(error){
-  return error?.message||"خطایی رخ داد.";
-}
-
-function showLogin(message=""){
-  $("loginPage").classList.remove("hidden");
-  $("dashboard").classList.add("hidden");
-  $("loginError").textContent=message;
-}
-
-function showDashboard(){
-  $("loginPage").classList.add("hidden");
-  $("dashboard").classList.remove("hidden");
-}
-
-async function verifyAdmin(){
-  const {data,error}=await db.rpc("is_alfa_admin");
-  if(error) throw error;
-  return data===true;
-}
-
-async function loadDashboard(){
-  const [catResult,prodResult,settingsResult]=await Promise.all([
-    db.from("alfa_categories").select("*").order("sort_order"),
-    db.from("alfa_products").select("*").order("sort_order"),
-    db.from("alfa_settings").select("*").eq("id",1).maybeSingle()
-  ]);
-
-  if(catResult.error) throw catResult.error;
-  if(prodResult.error) throw prodResult.error;
-  if(settingsResult.error) throw settingsResult.error;
-
-  categories=catResult.data||[];
-  products=prodResult.data||[];
-
-  renderCategoryOptions();
-  renderProducts();
-  renderCategories();
-
-  const settings=settingsResult.data||{};
-  $("settingPhone").value=settings.phone||"";
-  $("settingInstagram").value=settings.instagram||"";
-  $("settingAddress").value=settings.address||"";
-}
-
-async function startSession(){
-  const {data:{session},error}=await db.auth.getSession();
-  if(error||!session){showLogin();return;}
-
-  try{
-    if(!await verifyAdmin()){
-      await db.auth.signOut();
-      showLogin("این حساب دسترسی مدیریت ALFA را ندارد.");
-      return;
-    }
-    showDashboard();
-    await loadDashboard();
-  }catch(error){
-    notify("خطا در دریافت اطلاعات: "+errorText(error));
+function setBusy(buttonId, busy, busyText = "در حال ذخیره...") {
+  const button = $(buttonId);
+  if (!button) return;
+  if (busy) {
+    button.dataset.oldText = button.textContent;
+    button.textContent = busyText;
+    button.disabled = true;
+  } else {
+    button.textContent = button.dataset.oldText || button.textContent;
+    button.disabled = false;
   }
 }
 
-$("loginForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(busy)return;
-  busy=true;
-  $("loginBtn").disabled=true;
-  $("loginError").textContent="";
+function formatError(error) {
+  if (!error) return "خطای نامشخص رخ داد.";
+  const message = error.message || String(error);
 
-  try{
-    const {error}=await db.auth.signInWithPassword({
-      email:$("email").value.trim(),
-      password:$("password").value
-    });
-    if(error)throw error;
+  if (/permission denied|row-level security|rls/i.test(message)) {
+    return "دسترسی به اطلاعات مجاز نیست. تنظیمات دسترسی و سیاست‌های RLS جدول را بررسی کنید.";
+  }
+  if (/duplicate key|already exists/i.test(message)) {
+    return "این شناسه یا اطلاعات از قبل ثبت شده است.";
+  }
+  if (/foreign key|violates.*constraint/i.test(message)) {
+    return "این مورد به اطلاعات دیگری متصل است. ابتدا وابستگی‌های آن را بررسی کنید.";
+  }
+  return message;
+}
 
-    if(!await verifyAdmin()){
-      await db.auth.signOut();
-      showLogin("این حساب دسترسی مدیریت ALFA را ندارد.");
-      return;
-    }
+/* =========================================================
+   ورود و بررسی دسترسی مدیر
+   ========================================================= */
 
-    $("password").value="";
-    showDashboard();
-    await loadDashboard();
-  }catch(error){
-    $("loginError").textContent=errorText(error);
-  }finally{
-    busy=false;
-    $("loginBtn").disabled=false;
+async function checkAdmin() {
+  const { data: { session }, error } = await db.auth.getSession();
+
+  if (error) {
+    showLogin();
+    showMessage("loginMessage", formatError(error), "error");
+    return;
+  }
+
+  if (!session) {
+    showLogin();
+    return;
+  }
+
+  currentUser = session.user;
+
+  const { data, error: adminError } = await db.rpc("is_alfa_admin");
+
+  if (adminError || data !== true) {
+    await db.auth.signOut();
+    currentUser = null;
+    showLogin();
+    showMessage(
+      "loginMessage",
+      adminError
+        ? "بررسی دسترسی مدیر انجام نشد. تابع is_alfa_admin و دسترسی‌های آن را بررسی کنید."
+        : "این حساب دسترسی مدیریت ندارد.",
+      "error"
+    );
+    return;
+  }
+
+  showDashboard();
+  await loadDashboard();
+}
+
+function showLogin() {
+  $("loginSection").classList.remove("hidden");
+  $("dashboardSection").classList.add("hidden");
+  $("logoutBtn").classList.add("hidden");
+}
+
+function showDashboard() {
+  $("loginSection").classList.add("hidden");
+  $("dashboardSection").classList.remove("hidden");
+  $("logoutBtn").classList.remove("hidden");
+}
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  hideMessage("loginMessage");
+  setBusy("loginBtn", true, "در حال ورود...");
+
+  try {
+    const email = $("loginEmail").value.trim();
+    const password = $("loginPassword").value;
+
+    const { error } = await db.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+
+    await checkAdmin();
+  } catch (error) {
+    showMessage("loginMessage", formatError(error), "error");
+  } finally {
+    setBusy("loginBtn", false);
   }
 });
 
-$("logoutBtn").addEventListener("click",async()=>{
+$("logoutBtn").addEventListener("click", async () => {
   await db.auth.signOut();
+  currentUser = null;
   showLogin();
+  hideMessage("loginMessage");
 });
 
-document.querySelectorAll(".tab").forEach(tab=>{
-  tab.addEventListener("click",()=>{
-    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    tab.classList.add("active");
-    $(tab.dataset.tab+"Section").classList.add("active");
-  });
-});
-
-/* گزینه‌های دسته‌بندی */
-function categoryLabel(c){
-  if(c.parent_id){
-    const parent=categories.find(x=>x.id===c.parent_id);
-    return (parent?parent.name+" ← ":"")+c.name;
+db.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_OUT") {
+    currentUser = null;
+    showLogin();
   }
-  return c.name;
+});
+
+/* =========================================================
+   بارگذاری اطلاعات
+   ========================================================= */
+
+async function loadDashboard() {
+  $("dashboardSection").classList.add("loading");
+
+  try {
+    const results = await Promise.all([
+      db.from("alfa_categories")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true }),
+
+      db.from("alfa_products")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true }),
+
+      db.from("alfa_settings")
+        .select("*")
+        .limit(1)
+    ]);
+
+    const categoryResult = results[0];
+    const productResult = results[1];
+    const settingsResult = results[2];
+
+    if (categoryResult.error) throw categoryResult.error;
+    if (productResult.error) throw productResult.error;
+    if (settingsResult.error) throw settingsResult.error;
+
+    categories = categoryResult.data || [];
+    products = productResult.data || [];
+    settings = settingsResult.data?.[0] || null;
+
+    updateStats();
+    renderCategoryOptions();
+    renderProducts();
+    renderCategories();
+    fillSettings();
+  } catch (error) {
+    console.error(error);
+    showMessage("productsMessage", "بارگذاری اطلاعات انجام نشد: " + formatError(error), "error");
+    showMessage("categoriesMessage", "بارگذاری دسته‌بندی‌ها انجام نشد: " + formatError(error), "error");
+  } finally {
+    $("dashboardSection").classList.remove("loading");
+  }
 }
 
-function renderCategoryOptions(){
-  const roots=categories.filter(c=>!c.parent_id);
-  const children=categories.filter(c=>c.parent_id);
+$("refreshBtn").addEventListener("click", loadDashboard);
 
-  let options="";
-  roots.forEach(root=>{
-    options+=`<option value="${escapeHTML(root.id)}">${escapeHTML(root.name)}</option>`;
-    children.filter(c=>c.parent_id===root.id).forEach(child=>{
-      options+=`<option value="${escapeHTML(child.id)}">　↳ ${escapeHTML(child.name)}</option>`;
+function updateStats() {
+  const roots = categories.filter(category => !category.parent_id);
+  const children = categories.filter(category => !!category.parent_id);
+
+  $("statProducts").textContent = faNumber(products.length);
+  $("statCategories").textContent = faNumber(roots.length);
+  $("statSubcategories").textContent = faNumber(children.length);
+}
+
+/* =========================================================
+   تب‌ها
+   ========================================================= */
+
+document.querySelectorAll(".tab-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+
+    ["products", "categories", "settings"].forEach(tab => {
+      $(tab + "Tab").classList.toggle("hidden", tab !== button.dataset.tab);
     });
   });
+});
 
-  $("productCategory").innerHTML=options;
-  $("filterCategory").innerHTML='<option value="">همه دسته‌ها</option>'+options;
+/* =========================================================
+   دسته‌بندی‌ها و گزینه‌های انتخاب
+   ========================================================= */
 
-  const currentParent=$("categoryParent").value;
-  const editingId=$("categoryId").value;
-  const editingCategory=categories.find(c=>c.id===editingId);
-  const excludedIds=new Set([editingId]);
+function getCategoryName(id) {
+  const category = categories.find(item => String(item.id) === String(id));
+  return category ? category.name : "بدون دسته‌بندی";
+}
 
-  /* جلوگیری از انتخاب زیر‌دسته به عنوان والد و جلوگیری از چرخه والدیت */
-  if(editingCategory && !editingCategory.parent_id){
-    categories.filter(c=>c.parent_id===editingCategory.id)
-      .forEach(c=>excludedIds.add(c.id));
+function renderCategoryOptions(editingId = null) {
+  const productSelect = $("productCategory");
+  const filterSelect = $("productCategoryFilter");
+  const parentSelect = $("categoryParent");
+
+  const previousProduct = productSelect.value;
+  const previousFilter = filterSelect.value;
+  const previousParent = parentSelect.value;
+
+  const activeCategories = categories.filter(category => category.active !== false);
+
+  productSelect.innerHTML =
+    '<option value="">انتخاب دسته‌بندی</option>' +
+    activeCategories.map(category => {
+      const parentName = category.parent_id
+        ? getCategoryName(category.parent_id) + " / "
+        : "";
+      return `<option value="${escapeHTML(category.id)}">${escapeHTML(parentName + category.name)}</option>`;
+    }).join("");
+
+  filterSelect.innerHTML =
+    '<option value="">همه دسته‌ها</option>' +
+    categories.map(category => {
+      const parentName = category.parent_id
+        ? getCategoryName(category.parent_id) + " / "
+        : "";
+      return `<option value="${escapeHTML(category.id)}">${escapeHTML(parentName + category.name)}</option>`;
+    }).join("");
+
+  const editingCategory = categories.find(category => String(category.id) === String(editingId));
+  const excludedIds = new Set();
+
+  if (editingCategory) {
+    excludedIds.add(String(editingCategory.id));
+
+    // جلوگیری از انتخاب زیر‌دسته‌های خود به‌عنوان والد
+    const collectChildren = parentId => {
+      categories
+        .filter(item => String(item.parent_id) === String(parentId))
+        .forEach(child => {
+          excludedIds.add(String(child.id));
+          collectChildren(child.id);
+        });
+    };
+
+    collectChildren(editingCategory.id);
   }
 
-  $("categoryParent").innerHTML=
-    '<option value="">دسته اصلی</option>'+
-    roots.filter(c=>!excludedIds.has(c.id)).map(c=>
-      `<option value="${escapeHTML(c.id)}">${escapeHTML(c.name)}</option>`
+  const rootCategories = categories.filter(category =>
+    !category.parent_id &&
+    !excludedIds.has(String(category.id))
+  );
+
+  parentSelect.innerHTML =
+    '<option value="">دسته اصلی</option>' +
+    rootCategories.map(category =>
+      `<option value="${escapeHTML(category.id)}">${escapeHTML(category.name)}</option>`
     ).join("");
 
-  if(currentParent && roots.some(c=>c.id===currentParent && !excludedIds.has(c.id))){
-    $("categoryParent").value=currentParent;
-  }
+  if (previousProduct) productSelect.value = previousProduct;
+  if (previousFilter) filterSelect.value = previousFilter;
+  if (previousParent) parentSelect.value = previousParent;
 }
 
-function formatPrice(price){
-  return Number(price)>0
-    ?Number(price).toLocaleString("fa-IR")+" تومان"
-    :"قیمت اعلام نشده";
-}
+function renderCategories() {
+  const container = $("categoryList");
 
-/* محصولات */
-function renderProducts(){
-  const categoryId=$("filterCategory").value;
-  const query=$("filterSearch").value.trim().toLowerCase();
-
-  const filtered=products.filter(p=>{
-    const matchesCategory=!categoryId||p.category_id===categoryId;
-    const matchesText=(p.name+" "+(p.description||"")).toLowerCase().includes(query);
-    return matchesCategory&&matchesText;
-  });
-
-  if(!filtered.length){
-    $("productList").innerHTML='<div class="empty">محصولی پیدا نشد.</div>';
+  if (!categories.length) {
+    container.innerHTML = `
+      <div class="empty">
+        <strong>هنوز دسته‌بندی ثبت نشده است</strong>
+        برای شروع، روی «دسته جدید» بزنید.
+      </div>`;
     return;
   }
 
-  $("productList").innerHTML=filtered.map(p=>{
-    const cat=categories.find(c=>c.id===p.category_id);
+  const roots = categories
+    .filter(category => !category.parent_id)
+    .sort((a,b) => Number(a.sort_order || 0) - Number(b.sort_order || 0));
+
+  const children = categories.filter(category => !!category.parent_id);
+
+  const renderRow = (category, isChild = false) => {
+    const childCount = children.filter(item =>
+      String(item.parent_id) === String(category.id)
+    ).length;
+
+    const productCount = products.filter(item =>
+      String(item.category_id) === String(category.id)
+    ).length;
+
     return `
-      <article class="product">
-        <div>
-          <h3>${escapeHTML(p.name)}</h3>
-          <p>${escapeHTML(cat?categoryLabel(cat):"بدون دسته")} · ${escapeHTML(p.description||"بدون توضیحات")}</p>
-          <div class="price">${formatPrice(p.price)}</div>
-          <span class="badge ${p.active?"":"off"}">${p.active?"فعال":"غیرفعال"}</span>
+      <div class="category-row">
+        <div class="category-icon">${isChild ? "↳" : "A"}</div>
+        <div class="row-main">
+          <div class="row-title">${escapeHTML(category.name)}</div>
+          <div class="row-meta">
+            ${category.caption ? escapeHTML(category.caption) + " · " : ""}
+            ${faNumber(productCount)} محصول
+            ${!isChild && childCount ? " · " + faNumber(childCount) + " زیر‌دسته" : ""}
+            · ترتیب: ${faNumber(category.sort_order || 0)}
+          </div>
+          <div style="margin-top:7px">
+            <span class="status ${category.active === false ? "inactive" : "active"}">
+              ${category.active === false ? "غیرفعال" : "فعال"}
+            </span>
+          </div>
         </div>
-        <div class="product-actions">
-          <button class="btn alt small" data-action="edit" data-id="${p.id}">ویرایش</button>
-          <button class="btn alt small" data-action="toggle" data-id="${p.id}">${p.active?"غیرفعال‌کردن":"فعال‌کردن"}</button>
-          <button class="btn danger small" data-action="delete" data-id="${p.id}">حذف</button>
+        <div class="row-actions">
+          <button class="btn btn-secondary btn-small" type="button"
+            onclick="editCategory('${escapeHTML(category.id)}')">ویرایش</button>
+          <button class="btn btn-danger btn-small" type="button"
+            onclick="deleteCategory('${escapeHTML(category.id)}')">حذف</button>
         </div>
-      </article>`;
-  }).join("");
-}
-
-$("filterCategory").addEventListener("change",renderProducts);
-$("filterSearch").addEventListener("input",renderProducts);
-
-function openProductModal(product=null){
-  $("productForm").reset();
-  $("productId").value=product?.id??"";
-  $("productName").value=product?.name??"";
-  $("productDescription").value=product?.description??"";
-  $("productPrice").value=product?.price??0;
-  $("productOrder").value=product?.sort_order??0;
-  $("productActive").checked=product?.active??true;
-
-  renderCategoryOptions();
-  $("productCategory").value=product?.category_id??categories[0]?.id??"";
-  $("productModalTitle").textContent=product?"ویرایش محصول":"افزودن محصول";
-  $("productModal").classList.remove("hidden");
-}
-
-function closeProductModal(){
-  $("productModal").classList.add("hidden");
-}
-
-$("addProductBtn").addEventListener("click",()=>openProductModal());
-$("closeProductModal").addEventListener("click",closeProductModal);
-$("cancelProductBtn").addEventListener("click",closeProductModal);
-
-$("productForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(busy)return;
-  busy=true;
-  $("saveProductBtn").disabled=true;
-
-  const id=$("productId").value;
-  const payload={
-    name:$("productName").value.trim(),
-    category_id:$("productCategory").value,
-    description:$("productDescription").value.trim(),
-    price:Number($("productPrice").value),
-    sort_order:Number($("productOrder").value)||0,
-    active:$("productActive").checked
+      </div>`;
   };
 
-  try{
-    const result=id
-      ?await db.from("alfa_products").update(payload).eq("id",Number(id)).select()
-      :await db.from("alfa_products").insert(payload).select();
+  let html = "";
 
-    if(result.error)throw result.error;
-    if(!result.data?.length)throw new Error("تغییری ثبت نشد. دسترسی مدیر را بررسی کن.");
+  roots.forEach(root => {
+    html += renderRow(root, false);
 
-    await loadDashboard();
-    closeProductModal();
-    notify("محصول با موفقیت ذخیره شد.");
-  }catch(error){
-    notify("خطا: "+errorText(error));
-  }finally{
-    busy=false;
-    $("saveProductBtn").disabled=false;
-  }
-});
+    const rootChildren = children
+      .filter(child => String(child.parent_id) === String(root.id))
+      .sort((a,b) => Number(a.sort_order || 0) - Number(b.sort_order || 0));
 
-$("productList").addEventListener("click",async e=>{
-  const btn=e.target.closest("button[data-action]");
-  if(!btn||busy)return;
-
-  const product=products.find(p=>p.id===Number(btn.dataset.id));
-  if(!product)return;
-
-  if(btn.dataset.action==="edit"){
-    openProductModal(product);
-    return;
-  }
-
-  if(btn.dataset.action==="delete"&&
-     !confirm(`محصول «${product.name}» حذف شود؟`))return;
-
-  busy=true;
-  btn.disabled=true;
-
-  try{
-    let result;
-    if(btn.dataset.action==="toggle"){
-      result=await db.from("alfa_products")
-        .update({active:!product.active}).eq("id",product.id).select();
-    }else{
-      result=await db.from("alfa_products")
-        .delete().eq("id",product.id).select();
-    }
-
-    if(result.error)throw result.error;
-    if(!result.data?.length)throw new Error("تغییری انجام نشد.");
-
-    await loadDashboard();
-    notify("تغییرات ذخیره شد.");
-  }catch(error){
-    notify("خطا: "+errorText(error));
-  }finally{
-    busy=false;
-    btn.disabled=false;
-  }
-});
-
-/* دسته‌ها و زیر‌دسته‌ها */
-function renderCategories(){
-  const roots=categories.filter(c=>!c.parent_id)
-    .sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
-
-  let html="";
-
-  roots.forEach(root=>{
-    html+=categoryRowHTML(root,false);
-
-    categories.filter(c=>c.parent_id===root.id)
-      .sort((a,b)=>(a.sort_order||0)-(b.sort_order||0))
-      .forEach(child=>{
-        html+=categoryRowHTML(child,true);
+    if (rootChildren.length) {
+      html += `<div class="category-children">`;
+      rootChildren.forEach(child => {
+        html += renderRow(child, true);
       });
+      html += `</div>`;
+    }
   });
 
-  if(!html)html='<div class="empty">هنوز دسته‌ای وجود ندارد.</div>';
-  $("categoryList").innerHTML=html;
+  // نمایش دسته‌هایی که والد آن‌ها در فهرست موجود نیست
+  const orphanCategories = children.filter(child =>
+    !categories.some(root => String(root.id) === String(child.parent_id))
+  );
+
+  orphanCategories.forEach(category => {
+    html += renderRow(category, true);
+  });
+
+  container.innerHTML = html || '<div class="empty">دسته‌بندی‌ای برای نمایش وجود ندارد.</div>';
 }
 
-function categoryRowHTML(c,isChild){
-  const productCount=products.filter(p=>p.category_id===c.id).length;
-  const imageHTML=!isChild && c.image_url
-    ?`<img src="${escapeHTML(c.image_url)}" alt="">`
-    :`<div class="category-placeholder" aria-hidden="true">${isChild?"↳":"▦"}</div>`;
-
-  return `
-    <div class="category-row ${isChild?"child":""}">
-      ${imageHTML}
-      <div>
-        <h3>${isChild?"↳ ":""}${escapeHTML(c.name)}</h3>
-        <p>
-          ${escapeHTML(c.caption||"")}
-          · ${productCount.toLocaleString("fa-IR")} محصول
-          · ترتیب ${Number(c.sort_order)||0}
-        </p>
-        ${isChild?'<span class="badge sub">زیر‌دسته</span>':""}
-        <span class="badge ${c.active?"":"off"}">${c.active?"فعال":"غیرفعال"}</span>
-      </div>
-      <div class="category-actions">
-        <button class="btn alt small" data-edit-category="${escapeHTML(c.id)}">ویرایش</button>
-        <button class="btn danger small" data-delete-category="${escapeHTML(c.id)}">حذف</button>
-      </div>
-    </div>`;
-}
-
-function openCategoryModal(category=null){
-  $("categoryForm").reset();
-  $("categoryId").value=category?.id??"";
-  $("categoryName").value=category?.name??"";
-  $("categoryCaption").value=category?.caption??"";
-  $("categoryImage").value=category?.image_url??"";
-  $("categoryOrder").value=category?.sort_order??0;
-  $("categoryActive").checked=category?.active??true;
-
-  renderCategoryOptions();
-  $("categoryParent").value=category?.parent_id??"";
-  updateCategoryImageField();
-
-  $("categoryModalTitle").textContent=category
-    ?"ویرایش دسته‌بندی"
-    :"افزودن دسته یا زیر‌دسته";
-
-  $("saveCategoryBtn").textContent=category
-    ?"ذخیره تغییرات"
-    :"ایجاد دسته‌بندی";
-
-  $("categoryModal").classList.remove("hidden");
-}
-
-function updateCategoryImageField(){
-  const isChild=Boolean($("categoryParent").value);
-  $("categoryImageField").classList.toggle("hidden",isChild);
-  $("categoryImage").disabled=isChild;
-}
-
-$("categoryParent").addEventListener("change",updateCategoryImageField);
-
-function closeCategoryModal(){
-  $("categoryModal").classList.add("hidden");
-}
-
-$("addCategoryBtn").addEventListener("click",()=>openCategoryModal());
-$("closeCategoryModal").addEventListener("click",closeCategoryModal);
-$("cancelCategoryBtn").addEventListener("click",closeCategoryModal);
-
-$("categoryList").addEventListener("click",async e=>{
-  const editBtn=e.target.closest("[data-edit-category]");
-  if(editBtn){
-    const category=categories.find(c=>c.id===editBtn.dataset.editCategory);
-    if(category)openCategoryModal(category);
-    return;
-  }
-
-  const deleteBtn=e.target.closest("[data-delete-category]");
-  if(!deleteBtn||busy)return;
-
-  const category=categories.find(c=>c.id===deleteBtn.dataset.deleteCategory);
-  if(!category)return;
-
-  const children=categories.filter(c=>c.parent_id===category.id);
-  const linkedProducts=products.filter(p=>p.category_id===category.id);
-
-  if(children.length){
-    notify("ابتدا زیر‌دسته‌های این دسته را حذف یا جابه‌جا کن.");
-    return;
-  }
-
-  if(linkedProducts.length){
-    notify(`این دسته ${linkedProducts.length} محصول دارد. ابتدا محصولات آن را به دسته دیگری منتقل یا حذف کن.`);
-    return;
-  }
-
-  const message=`دسته «${category.name}» حذف شود؟\n\nاین کار قابل بازگشت نیست.`;
-  if(!confirm(message))return;
-
-  busy=true;
-  deleteBtn.disabled=true;
-
-  try{
-    /* شرط دوم مانع حذف دسته‌ای می‌شود که هم‌زمان محصول گرفته باشد. */
-    const result=await db.from("alfa_categories")
-      .delete()
-      .eq("id",category.id)
-      .select("id");
-
-    if(result.error)throw result.error;
-    if(!result.data?.length){
-      throw new Error("دسته حذف نشد. احتمالاً دسترسی مدیر یا ارتباط با محصولات را بررسی کن.");
-    }
-
-    await loadDashboard();
-    notify("دسته‌بندی حذف شد.");
-  }catch(error){
-    const message=errorText(error);
-    if(/foreign key|violates|constraint|23503/i.test(message)){
-      notify("این دسته هنوز به محصولات یا زیر‌دسته‌ها متصل است. ابتدا ارتباط آن‌ها را تغییر بده.");
-    }else{
-      notify("خطا در حذف: "+message);
-    }
-  }finally{
-    busy=false;
-  }
-});
-
-function makeCategoryId(name){
-  let slug=name.trim()
+function makeCategoryId(name) {
+  const slug = String(name)
+    .trim()
     .toLowerCase()
-    .replace(/\s+/g,"-")
-    .replace(/[^\w\u0600-\u06FF-]/g,"")
-    .replace(/-+/g,"-")
-    .replace(/^-|-$/g,"");
+    .replace(/\s+/g, "-")
+    .replace(/[^\u0600-\u06FFa-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 
-  if(!slug)slug="category";
-
-  const base=slug;
-  let number=2;
-  while(categories.some(c=>c.id===slug)){
-    slug=base+"-"+number++;
-  }
-  return slug;
+  return slug || ("category-" + Date.now());
 }
 
-$("categoryForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(busy)return;
+function openCategoryModal(category = null) {
+  hideMessage("categoryFormMessage");
+  $("categoryForm").reset();
 
-  const id=$("categoryId").value;
-  const parentId=$("categoryParent").value||null;
-  const editingCategory=categories.find(c=>c.id===id);
+  $("categoryId").value = category ? category.id : "";
+  $("categoryName").value = category?.name || "";
+  $("categoryCaption").value = category?.caption || "";
+  $("categoryImage").value = category?.image_url || "";
+  $("categorySort").value = category?.sort_order ?? 0;
+  $("categoryActive").value = String(category?.active !== false);
 
-  if(parentId===id){
-    notify("یک دسته نمی‌تواند والد خودش باشد.");
-    return;
-  }
+  renderCategoryOptions(category?.id || null);
+  $("categoryParent").value = category?.parent_id || "";
 
-  if(parentId){
-    const parent=categories.find(c=>c.id===parentId);
-    if(!parent||parent.parent_id){
-      notify("زیر‌دسته باید به یک دسته اصلی متصل شود.");
-      return;
+  $("categoryModalTitle").textContent = category
+    ? "ویرایش دسته‌بندی"
+    : "افزودن دسته‌بندی";
+
+  updateCategoryImageField();
+  $("categoryModalBackdrop").classList.add("show");
+}
+
+function updateCategoryImageField() {
+  const isChild = Boolean($("categoryParent").value);
+  $("categoryImageGroup").classList.toggle("hidden", isChild);
+  $("categoryImage").disabled = isChild;
+}
+
+$("categoryParent").addEventListener("change", updateCategoryImageField);
+
+$("addCategoryBtn").addEventListener("click", () => openCategoryModal());
+
+window.editCategory = function(id) {
+  const category = categories.find(item => String(item.id) === String(id));
+  if (!category) return;
+  openCategoryModal(category);
+};
+
+$("categoryForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  hideMessage("categoryFormMessage");
+  setBusy("saveCategoryBtn", true);
+
+  try {
+    const id = $("categoryId").value.trim();
+    const name = $("categoryName").value.trim();
+    const caption = $("categoryCaption").value.trim();
+    const parentId = $("categoryParent").value || null;
+    const imageUrl = $("categoryImage").value.trim();
+    const sortOrder = Number($("categorySort").value || 0);
+    const active = $("categoryActive").value === "true";
+
+    if (!name) throw new Error("نام دسته‌بندی را وارد کنید.");
+
+    if (parentId && id && String(parentId) === String(id)) {
+      throw new Error("یک دسته نمی‌تواند والد خودش باشد.");
     }
-  }
 
-  /* دسته اصلی دارای زیر‌دسته را نمی‌توان به زیر‌دسته تبدیل کرد. */
-  if(id && !editingCategory?.parent_id && parentId &&
-     categories.some(c=>c.parent_id===id)){
-    notify("ابتدا زیر‌دسته‌های این دسته را جابه‌جا کن؛ سپس می‌توانی آن را به زیر‌دسته تبدیل کنی.");
-    return;
-  }
+    // جلوگیری از تبدیل دسته اصلی دارای زیر‌دسته به زیر‌دسته
+    if (id && parentId) {
+      const hasChildren = categories.some(item =>
+        String(item.parent_id) === String(id)
+      );
 
-  const name=$("categoryName").value.trim();
-  if(!name)return;
+      if (hasChildren) {
+        throw new Error("این دسته خودش زیر‌دسته دارد. ابتدا زیر‌دسته‌های آن را جابه‌جا یا حذف کنید.");
+      }
+    }
 
-  busy=true;
-  $("saveCategoryBtn").disabled=true;
+    let categoryId = id;
 
-  try{
-    const payload={
+    if (!id) {
+      categoryId = makeCategoryId(name);
+      let suffix = 2;
+
+      while (categories.some(item => String(item.id) === String(categoryId))) {
+        categoryId = makeCategoryId(name) + "-" + suffix++;
+      }
+    }
+
+    const payload = {
       name,
-      parent_id:parentId,
-      caption:$("categoryCaption").value.trim(),
-      sort_order:Number($("categoryOrder").value)||0,
-      active:$("categoryActive").checked
+      caption: caption || null,
+      parent_id: parentId,
+      sort_order: sortOrder,
+      active
     };
 
-    /* عکس زیر‌دسته ذخیره نمی‌شود؛ عکس قبلی دسته اصلی هنگام ویرایش حفظ می‌شود. */
-    if(!parentId){
-      payload.image_url=$("categoryImage").value.trim();
-    }else{
-      payload.image_url=null;
+    // برای حفظ اطلاعات قبلی، هنگام ویرایش لینک تصویر خالی باعث پاک‌شدن تصویر ذخیره‌شده نمی‌شود.
+    if (!id) {
+      payload.image_url = parentId ? null : (imageUrl || null);
+    } else if (!parentId && imageUrl) {
+      payload.image_url = imageUrl;
     }
 
     let result;
 
-    if(id){
-      result=await db.from("alfa_categories")
+    if (id) {
+      result = await db
+        .from("alfa_categories")
         .update(payload)
-        .eq("id",id)
-        .select();
-    }else{
-      payload.id=makeCategoryId(name);
-      result=await db.from("alfa_categories")
-        .insert(payload)
-        .select();
+        .eq("id", id);
+    } else {
+      payload.id = categoryId;
+      result = await db
+        .from("alfa_categories")
+        .insert(payload);
     }
 
-    if(result.error)throw result.error;
-    if(!result.data?.length)throw new Error("تغییری ثبت نشد. دسترسی مدیر را بررسی کن.");
+    if (result.error) throw result.error;
+
+    $("categoryModalBackdrop").classList.remove("show");
+    await loadDashboard();
+    showMessage("categoriesMessage", "دسته‌بندی با موفقیت ذخیره شد.", "success");
+  } catch (error) {
+    console.error(error);
+    showMessage("categoryFormMessage", formatError(error), "error");
+  } finally {
+    setBusy("saveCategoryBtn", false);
+  }
+});
+
+window.deleteCategory = async function(id) {
+  const category = categories.find(item => String(item.id) === String(id));
+  if (!category) return;
+
+  const hasChildren = categories.some(item =>
+    String(item.parent_id) === String(id)
+  );
+
+  const hasProducts = products.some(item =>
+    String(item.category_id) === String(id)
+  );
+
+  if (hasChildren || hasProducts) {
+    let reason = [];
+    if (hasChildren) reason.push("این دسته دارای زیر‌دسته است");
+    if (hasProducts) reason.push("محصولاتی به این دسته متصل هستند");
+
+    alert(reason.join(" و ") + ". ابتدا موارد وابسته را جابه‌جا یا حذف کنید.");
+    return;
+  }
+
+  if (!confirm(`دسته «${category.name}» حذف شود؟ این کار قابل بازگشت نیست.`)) return;
+
+  try {
+    const { error } = await db
+      .from("alfa_categories")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
 
     await loadDashboard();
-    closeCategoryModal();
-    notify(id?"دسته‌بندی ویرایش شد.":"دسته‌بندی جدید ساخته شد.");
-  }catch(error){
-    notify("خطا: "+errorText(error));
-  }finally{
-    busy=false;
-    $("saveCategoryBtn").disabled=false;
+    showMessage("categoriesMessage", "دسته‌بندی حذف شد.", "success");
+  } catch (error) {
+    showMessage("categoriesMessage", formatError(error), "error");
   }
-});
+};
 
-/* تنظیمات کافه */
-$("settingsForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(busy)return;
-  busy=true;
+/* =========================================================
+   محصولات
+   ========================================================= */
 
-  try{
-    const payload={
-      id:1,
-      phone:$("settingPhone").value.trim(),
-      instagram:$("settingInstagram").value.trim().replace(/^@/,""),
-      address:$("settingAddress").value.trim()
+function renderProducts() {
+  const container = $("productList");
+  const search = $("productSearch").value.trim().toLowerCase();
+  const categoryFilter = $("productCategoryFilter").value;
+  const statusFilter = $("productStatusFilter").value;
+
+  let filtered = products.filter(product => {
+    const matchesSearch =
+      !search ||
+      String(product.name || "").toLowerCase().includes(search) ||
+      String(product.description || "").toLowerCase().includes(search);
+
+    const matchesCategory =
+      !categoryFilter ||
+      String(product.category_id) === String(categoryFilter);
+
+    const matchesStatus =
+      !statusFilter ||
+      String(product.active !== false) === statusFilter;
+
+    return matchesSearch && matchesCategory && matchesStatus;
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = `
+      <div class="empty">
+        <strong>محصولی پیدا نشد</strong>
+        ${products.length ? "فیلترها را تغییر دهید یا محصول جدید ثبت کنید." : "برای شروع، محصول جدید اضافه کنید."}
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(product => `
+    <div class="product-row">
+      <div class="product-icon">A</div>
+      <div class="row-main">
+        <div class="row-title">${escapeHTML(product.name)}</div>
+        <div class="row-meta">
+          ${escapeHTML(getCategoryName(product.category_id))}
+          ${product.description ? " · " + escapeHTML(product.description) : ""}
+        </div>
+        <div class="price">${faNumber(product.price)} تومان</div>
+        <div style="margin-top:7px">
+          <span class="status ${product.active === false ? "inactive" : "active"}">
+            ${product.active === false ? "غیرفعال" : "فعال"}
+          </span>
+        </div>
+      </div>
+      <div class="row-actions">
+        <button class="btn btn-secondary btn-small" type="button"
+          onclick="editProduct('${escapeHTML(product.id)}')">ویرایش</button>
+        <button class="btn btn-secondary btn-small" type="button"
+          onclick="toggleProduct('${escapeHTML(product.id)}')">
+          ${product.active === false ? "فعال‌کردن" : "غیرفعال‌کردن"}
+        </button>
+        <button class="btn btn-danger btn-small" type="button"
+          onclick="deleteProduct('${escapeHTML(product.id)}')">حذف</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+$("productSearch").addEventListener("input", renderProducts);
+$("productCategoryFilter").addEventListener("change", renderProducts);
+$("productStatusFilter").addEventListener("change", renderProducts);
+
+function openProductModal(product = null) {
+  hideMessage("productFormMessage");
+  $("productForm").reset();
+
+  $("productId").value = product ? product.id : "";
+  $("productName").value = product?.name || "";
+  $("productCategory").value = product?.category_id || "";
+  $("productDescription").value = product?.description || "";
+  $("productPrice").value = product?.price ?? "";
+  $("productSort").value = product?.sort_order ?? 0;
+  $("productActive").checked = product ? product.active !== false : true;
+
+  $("productModalTitle").textContent = product
+    ? "ویرایش محصول"
+    : "افزودن محصول";
+
+  $("productModalBackdrop").classList.add("show");
+}
+
+$("addProductBtn").addEventListener("click", () => openProductModal());
+
+window.editProduct = function(id) {
+  const product = products.find(item => String(item.id) === String(id));
+  if (!product) return;
+  openProductModal(product);
+};
+
+$("productForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  hideMessage("productFormMessage");
+  setBusy("saveProductBtn", true);
+
+  try {
+    const id = $("productId").value.trim();
+    const name = $("productName").value.trim();
+    const categoryId = $("productCategory").value;
+    const description = $("productDescription").value.trim();
+    const price = Number($("productPrice").value);
+    const sortOrder = Number($("productSort").value || 0);
+    const active = $("productActive").checked;
+
+    if (!name) throw new Error("نام محصول را وارد کنید.");
+    if (!categoryId) throw new Error("دسته‌بندی محصول را انتخاب کنید.");
+    if (!Number.isFinite(price) || price < 0) throw new Error("قیمت واردشده معتبر نیست.");
+
+    const payload = {
+      name,
+      category_id: categoryId,
+      description: description || null,
+      price,
+      sort_order: sortOrder,
+      active
     };
 
-    const {data,error}=await db.from("alfa_settings")
-      .upsert(payload,{onConflict:"id"}).select();
+    let result;
 
-    if(error)throw error;
-    if(!data?.length)throw new Error("تنظیمات ذخیره نشد.");
+    if (id) {
+      result = await db
+        .from("alfa_products")
+        .update(payload)
+        .eq("id", id);
+    } else {
+      result = await db
+        .from("alfa_products")
+        .insert(payload);
+    }
 
-    notify("اطلاعات کافه ذخیره شد.");
-  }catch(error){
-    notify("خطا: "+errorText(error));
-  }finally{
-    busy=false;
+    if (result.error) throw result.error;
+
+    $("productModalBackdrop").classList.remove("show");
+    await loadDashboard();
+    showMessage("productsMessage", "محصول با موفقیت ذخیره شد.", "success");
+  } catch (error) {
+    console.error(error);
+    showMessage("productFormMessage", formatError(error), "error");
+  } finally {
+    setBusy("saveProductBtn", false);
   }
 });
 
-startSession();
-</script></body>
+window.toggleProduct = async function(id) {
+  const product = products.find(item => String(item.id) === String(id));
+  if (!product) return;
+
+  try {
+    const { error } = await db
+      .from("alfa_products")
+      .update({ active: product.active === false })
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await loadDashboard();
+    showMessage(
+      "productsMessage",
+      product.active === false ? "محصول فعال شد." : "محصول غیرفعال شد.",
+      "success"
+    );
+  } catch (error) {
+    showMessage("productsMessage", formatError(error), "error");
+  }
+};
+
+window.deleteProduct = async function(id) {
+  const product = products.find(item => String(item.id) === String(id));
+  if (!product) return;
+
+  if (!confirm(`محصول «${product.name}» حذف شود؟ این کار قابل بازگشت نیست.`)) return;
+
+  try {
+    const { error } = await db
+      .from("alfa_products")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await loadDashboard();
+    showMessage("productsMessage", "محصول حذف شد.", "success");
+  } catch (error) {
+    showMessage("productsMessage", formatError(error), "error");
+  }
+};
+
+/* =========================================================
+   تنظیمات کافه
+   ========================================================= */
+
+function fillSettings() {
+  $("settingPhone").value = settings?.phone || "";
+  $("settingInstagram").value = settings?.instagram || "";
+  $("settingAddress").value = settings?.address || "";
+}
+
+$("settingsForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  hideMessage("settingsMessage");
+  setBusy("saveSettingsBtn", true);
+
+  try {
+    const payload = {
+      phone: $("settingPhone").value.trim(),
+      instagram: $("settingInstagram").value.trim(),
+      address: $("settingAddress").value.trim()
+    };
+
+    let result;
+
+    if (settings && settings.id !== undefined && settings.id !== null) {
+      result = await db
+        .from("alfa_settings")
+        .update(payload)
+        .eq("id", settings.id);
+    } else {
+      result = await db
+        .from("alfa_settings")
+        .insert({ id: 1, ...payload });
+    }
+
+    if (result.error) throw result.error;
+
+    await loadDashboard();
+    showMessage("settingsMessage", "اطلاعات کافه ذخیره شد.", "success");
+  } catch (error) {
+    console.error(error);
+    showMessage("settingsMessage", formatError(error), "error");
+  } finally {
+    setBusy("saveSettingsBtn", false);
+  }
+});
+
+/* =========================================================
+   بستن پنجره‌ها
+   ========================================================= */
+
+document.querySelectorAll("[data-close]").forEach(button => {
+  button.addEventListener("click", () => {
+    $(button.dataset.close).classList.remove("show");
+  });
+});
+
+document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+  backdrop.addEventListener("click", event => {
+    if (event.target === backdrop) backdrop.classList.remove("show");
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal-backdrop").forEach(modal => {
+      modal.classList.remove("show");
+    });
+  }
+});
+
+/* =========================================================
+   شروع پنل
+   ========================================================= */
+
+checkAdmin();
+</script>
+</body>
 </html>

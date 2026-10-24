@@ -231,31 +231,6 @@ main{min-height:55vh;padding-bottom:30px}
   letter-spacing:2px;
 }
 
-/* SECTION LABEL */
-
-.section-label{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin:24px 0 13px;
-}
-
-.section-label h2{
-  color:var(--green);
-  font-size:14px;
-  font-weight:800;
-}
-
-.section-label span{
-  direction:ltr;
-  color:var(--muted);
-  font-family:"DM Sans",sans-serif;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:1.5px;
-}
-
 /* LUXURY CATEGORY CARDS */
 
 .category-grid{
@@ -285,8 +260,6 @@ main{min-height:55vh;padding-bottom:30px}
   transition:background .25s ease,border-color .25s ease;
 }
 
-/* Top editorial strip */
-
 .category-card::before{
   content:"";
   position:absolute;
@@ -298,9 +271,7 @@ main{min-height:55vh;padding-bottom:30px}
   transition:background .25s ease;
 }
 
-.category-card::after{
-  content:none;
-}
+.category-card::after{content:none}
 
 .category-card:hover{
   background:#FFFDF8;
@@ -309,11 +280,7 @@ main{min-height:55vh;padding-bottom:30px}
   box-shadow:none;
 }
 
-.category-card:hover::before{
-  background:var(--orange);
-}
-
-/* Number and brand */
+.category-card:hover::before{background:var(--orange)}
 
 .cat-top{
   display:flex;
@@ -323,23 +290,8 @@ main{min-height:55vh;padding-bottom:30px}
   padding:22px 23px 0;
 }
 
-.cat-index{
-  direction:ltr;
-  display:flex;
-  align-items:center;
-  gap:11px;
-  color:#858477;
-  font-family:"DM Sans",sans-serif;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:2px;
-}
-
-.cat-mark{
-  display:none;
-}
-
-/* Main title */
+.cat-index{display:none}
+.cat-mark{display:none}
 
 .cat-info{
   display:flex;
@@ -367,9 +319,7 @@ main{min-height:55vh;padding-bottom:30px}
   transition:color .25s ease;
 }
 
-.category-card:hover .cat-name{
-  color:var(--green);
-}
+.category-card:hover .cat-name{color:var(--green)}
 
 .cat-caption{
   margin-top:7px;
@@ -380,8 +330,6 @@ main{min-height:55vh;padding-bottom:30px}
   line-height:1.9;
   overflow-wrap:anywhere;
 }
-
-/* Bottom action */
 
 .cat-bottom{
   display:flex;
@@ -400,9 +348,7 @@ main{min-height:55vh;padding-bottom:30px}
   transition:color .25s ease;
 }
 
-.category-card:hover .cat-discover{
-  color:var(--orange);
-}
+.category-card:hover .cat-discover{color:var(--orange)}
 
 .cat-arrow{
   width:31px;
@@ -693,19 +639,13 @@ main{min-height:55vh;padding-bottom:30px}
   .home-edition{font-size:9px;letter-spacing:1px}
   .eyebrow{margin-bottom:6px;font-size:9px}
 
-  .section-label{margin:20px 0 12px}
-  .section-label h2{font-size:13px}
-  .section-label span{font-size:9px}
-
   .category-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:10px;
   }
 
   .category-card{min-height:178px}
-
   .cat-top{padding:16px 13px 0}
-  .cat-index{font-size:9px;letter-spacing:1.2px;gap:7px}
 
   .cat-info{
     padding:23px 13px 20px;
@@ -795,11 +735,6 @@ main{min-height:55vh;padding-bottom:30px}
     <p>منوی کافه رو ببین و انتخابت رو پیدا کن.</p>
   </div>
   <div class="home-edition">EST. ALFA</div>
-</div>
-
-<div class="section-label">
-  <h2>از منو انتخاب کن</h2>
-  <span>OUR MENU</span>
 </div>
 
 <div class="category-grid" id="categoryGrid"></div>
@@ -1032,12 +967,8 @@ function makeCategoryCard(category,index){
       : category.products.length.toLocaleString("fa-IR")+" محصول"
   );
 
-  const number=String(index+1).padStart(2,"0");
-
   card.innerHTML=`
-    <div class="cat-top">
-      <span class="cat-index">${number} / ALFA</span>
-    </div>
+    <div class="cat-top"></div>
 
     <div class="cat-info">
       <div class="cat-info-copy">

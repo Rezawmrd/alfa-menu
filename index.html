@@ -1,12 +1,17 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#F4F0E8">
 <meta name="description" content="منوی دیجیتال کافه ALFA">
-<title>ALFA | منوی کافه</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<title>ALFA | منوی کافه</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
 :root{
   --cream:#F4F0E8;
   --green:#343D32;
@@ -120,7 +125,7 @@ header{
   border-radius:2px;
   font-size:12px;
   font-weight:600;
-  transition:background .25s,color .25s,border-color .25s;
+  transition:.25s;
 }
 
 .header-actions a:hover{
@@ -143,7 +148,7 @@ main{min-height:55vh;padding-bottom:30px}
   padding:0 17px;
   background:rgba(255,254,250,.72);
   border:1px solid var(--line);
-  transition:border-color .25s,background .25s;
+  transition:.25s;
 }
 
 .search:focus-within{
@@ -231,7 +236,7 @@ main{min-height:55vh;padding-bottom:30px}
   letter-spacing:2px;
 }
 
-/* LUXURY CATEGORY CARDS */
+/* CATEGORY CARDS WITH IMAGES */
 
 .category-grid{
   display:grid;
@@ -243,63 +248,65 @@ main{min-height:55vh;padding-bottom:30px}
   position:relative;
   display:flex;
   flex-direction:column;
-  align-items:stretch;
-  justify-content:space-between;
+  justify-content:flex-end;
   min-width:0;
-  min-height:228px;
+  min-height:245px;
   padding:0;
   overflow:hidden;
   isolation:isolate;
   text-align:right;
   font-family:inherit;
-  color:var(--green);
-  background:#FBF9F4;
-  border:1px solid #D9D4C8;
-  border-radius:0;
-  box-shadow:none;
-  transition:background .25s ease,border-color .25s ease;
+  color:white;
+  background:var(--green);
+  border:0;
+  border-radius:2px;
+  transition:box-shadow .35s ease;
 }
 
 .category-card::before{
   content:"";
   position:absolute;
-  top:0;
-  right:0;
-  left:0;
-  height:4px;
-  background:var(--green);
-  transition:background .25s ease;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(
+    to top,
+    rgba(18,25,18,.88) 0%,
+    rgba(18,25,18,.48) 40%,
+    rgba(18,25,18,.05) 100%
+  );
+  transition:opacity .35s ease;
 }
-
-.category-card::after{content:none}
 
 .category-card:hover{
-  background:#FFFDF8;
-  border-color:var(--green);
-  transform:none;
-  box-shadow:none;
+  box-shadow:0 12px 28px rgba(36,44,36,.15);
 }
 
-.category-card:hover::before{background:var(--orange)}
-
-.cat-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:22px 23px 0;
+.category-card:hover::before{
+  opacity:.85;
 }
 
-.cat-index{display:none}
-.cat-mark{display:none}
+.category-image{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .7s ease;
+}
+
+.category-card:hover .category-image{
+  transform:scale(1.07);
+}
+
+.cat-top{display:none}
 
 .cat-info{
+  position:relative;
+  z-index:2;
   display:flex;
   align-items:flex-end;
-  justify-content:space-between;
-  gap:10px;
-  min-width:0;
-  padding:25px 23px 24px;
+  padding:25px 23px 15px;
 }
 
 .cat-info-copy{
@@ -308,47 +315,39 @@ main{min-height:55vh;padding-bottom:30px}
 }
 
 .cat-name{
-  position:relative;
   display:block;
-  color:var(--green);
+  color:white;
   font-size:clamp(21px,2.5vw,29px);
-  font-weight:800;
+  font-weight:900;
   line-height:1.7;
-  letter-spacing:-.5px;
   overflow-wrap:anywhere;
-  transition:color .25s ease;
+  text-shadow:0 2px 10px rgba(0,0,0,.2);
 }
 
-.category-card:hover .cat-name{color:var(--green)}
-
 .cat-caption{
-  margin-top:7px;
-  color:#858477;
-  font-family:"DM Sans","Vazirmatn",sans-serif;
+  margin-top:4px;
+  color:rgba(255,255,255,.82);
   font-size:11px;
-  font-weight:400;
   line-height:1.9;
-  overflow-wrap:anywhere;
 }
 
 .cat-bottom{
+  position:relative;
+  z-index:2;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
   margin:0 23px;
-  padding:13px 0 17px;
-  border-top:1px solid #E5E0D5;
+  padding:12px 0 17px;
+  border-top:1px solid rgba(255,255,255,.32);
 }
 
 .cat-discover{
-  color:#65675C;
+  color:white;
   font-size:11px;
   font-weight:600;
-  transition:color .25s ease;
 }
-
-.category-card:hover .cat-discover{color:var(--orange)}
 
 .cat-arrow{
   width:31px;
@@ -356,21 +355,16 @@ main{min-height:55vh;padding-bottom:30px}
   flex-shrink:0;
   display:grid;
   place-items:center;
-  border:1px solid #D8D2C5;
-  border-radius:0;
-  color:var(--green);
-  background:transparent;
+  border:1px solid rgba(255,255,255,.65);
+  color:white;
   font-family:"DM Sans",sans-serif;
   font-size:17px;
-  line-height:1;
-  transition:background .25s ease,color .25s ease,border-color .25s ease;
+  transition:.3s;
 }
 
 .category-card:hover .cat-arrow{
-  background:var(--green);
-  color:#FFFDF8;
-  border-color:var(--green);
-  transform:none;
+  background:white;
+  color:var(--green);
 }
 
 /* CATEGORY VIEW */
@@ -395,7 +389,7 @@ main{min-height:55vh;padding-bottom:30px}
   border:1px solid var(--line);
   font-size:12px;
   font-weight:700;
-  transition:background .2s,color .2s,border-color .2s;
+  transition:.2s;
 }
 
 .back-button:hover{
@@ -423,7 +417,11 @@ main{min-height:55vh;padding-bottom:30px}
   line-height:1.5;
 }
 
-.page-title p{margin-top:4px;color:var(--muted);font-size:11px}
+.page-title p{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+}
 
 .page-number{
   direction:ltr;
@@ -467,7 +465,7 @@ main{min-height:55vh;padding-bottom:30px}
   background:var(--white);
   border:1px solid var(--line);
   border-radius:2px;
-  transition:background .2s,border-color .2s,transform .2s;
+  transition:.2s;
 }
 
 .subcategory-card:hover{
@@ -503,7 +501,6 @@ main{min-height:55vh;padding-bottom:30px}
   color:var(--orange);
   font-family:"DM Sans",sans-serif;
   font-size:17px;
-  transition:background .2s,color .2s,border-color .2s;
 }
 
 .subcategory-card:hover .subcategory-arrow{
@@ -531,9 +528,27 @@ main{min-height:55vh;padding-bottom:30px}
   animation:pageEnter .3s ease both;
 }
 
-.item-name{color:var(--text);font-size:14px;font-weight:800;line-height:1.8}
-.item-desc{margin-top:4px;color:var(--muted);font-size:11px;line-height:1.9}
-.item-price{direction:rtl;white-space:nowrap;color:var(--green);font-size:12px;font-weight:800}
+.item-name{
+  color:var(--text);
+  font-size:14px;
+  font-weight:800;
+  line-height:1.8;
+}
+
+.item-desc{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.9;
+}
+
+.item-price{
+  direction:rtl;
+  white-space:nowrap;
+  color:var(--green);
+  font-size:12px;
+  font-weight:800;
+}
 
 .empty{
   grid-column:1/-1;
@@ -547,8 +562,16 @@ main{min-height:55vh;padding-bottom:30px}
 
 /* FOOTER */
 
-.footer{margin-top:40px;padding:0 0 25px;background:var(--cream)}
-.footer-inner{width:min(1080px,calc(100% - 48px));margin:auto}
+.footer{
+  margin-top:40px;
+  padding:0 0 25px;
+  background:var(--cream);
+}
+
+.footer-inner{
+  width:min(1080px,calc(100% - 48px));
+  margin:auto;
+}
 
 .address-box{
   position:relative;
@@ -587,10 +610,32 @@ main{min-height:55vh;padding-bottom:30px}
   color:#E3A17F;
 }
 
-.address-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5}
-.address-content{position:relative;z-index:1;min-width:0}
-.address-title{margin-bottom:3px;font-size:13px;font-weight:800}
-.address-text{color:rgba(255,255,255,.73);font-size:11px;line-height:2;overflow-wrap:anywhere}
+.address-icon svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.5;
+}
+
+.address-content{
+  position:relative;
+  z-index:1;
+  min-width:0;
+}
+
+.address-title{
+  margin-bottom:3px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.address-text{
+  color:rgba(255,255,255,.73);
+  font-size:11px;
+  line-height:2;
+  overflow-wrap:anywhere;
+}
 
 .address-note{
   display:inline-block;
@@ -601,9 +646,22 @@ main{min-height:55vh;padding-bottom:30px}
   font-size:9px;
 }
 
-.status-message{margin-top:13px;text-align:center;color:var(--muted);font-size:12px}
+.status-message{
+  margin-top:13px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
 .status-message.error{color:#B74444}
-.status-message button{margin-right:7px;padding:5px 12px;color:var(--green);background:transparent;border:1px solid var(--line)}
+
+.status-message button{
+  margin-right:7px;
+  padding:5px 12px;
+  color:var(--green);
+  background:transparent;
+  border:1px solid var(--line);
+}
 
 /* DESKTOP */
 
@@ -613,11 +671,9 @@ main{min-height:55vh;padding-bottom:30px}
     gap:18px;
   }
 
-  .category-card{min-height:245px}
-  .cat-top{padding:25px 25px 0}
-  .cat-info{padding:30px 25px}
+  .category-card{min-height:270px}
+  .cat-info{padding:30px 25px 17px}
   .cat-name{font-size:25px}
-  .cat-caption{font-size:11px}
   .cat-bottom{margin:0 25px;padding:15px 0 19px}
   .home-intro{margin-top:53px;margin-bottom:30px}
 }
@@ -626,14 +682,22 @@ main{min-height:55vh;padding-bottom:30px}
 
 @media(max-width:600px){
   .container{width:calc(100% - 30px)}
+
   .header-inner{min-height:66px;gap:12px}
   .brand{font-size:29px}
   .header-actions{gap:6px}
   .header-actions a{min-height:35px;padding:6px 10px;font-size:11px}
+
   .search-wrap{margin-top:19px}
   .search{height:47px;padding:0 13px}
 
-  .home-intro{margin-top:34px;margin-bottom:22px;padding-bottom:19px;gap:8px}
+  .home-intro{
+    margin-top:34px;
+    margin-bottom:22px;
+    padding-bottom:19px;
+    gap:8px;
+  }
+
   .home-intro h1{font-size:27px}
   .home-intro p{max-width:245px;font-size:11px}
   .home-edition{font-size:9px;letter-spacing:1px}
@@ -644,19 +708,13 @@ main{min-height:55vh;padding-bottom:30px}
     gap:10px;
   }
 
-  .category-card{min-height:178px}
-  .cat-top{padding:16px 13px 0}
-
-  .cat-info{
-    padding:23px 13px 20px;
-    margin:0;
-  }
-
+  .category-card{min-height:185px}
+  .cat-info{padding:20px 12px 13px}
   .cat-name{font-size:17px;line-height:1.8}
   .cat-caption{font-size:9px;margin-top:5px}
 
   .cat-bottom{
-    margin:0 13px;
+    margin:0 12px;
     padding:10px 0 12px;
     gap:5px;
   }
@@ -664,7 +722,11 @@ main{min-height:55vh;padding-bottom:30px}
   .cat-discover{font-size:9px}
   .cat-arrow{width:27px;height:27px;font-size:15px}
 
-  .subcategory-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .subcategory-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
   .subcategory-card{min-height:75px;padding:11px 10px;gap:7px}
   .subcategory-name{font-size:12px}
   .subcategory-caption{font-size:9px}
@@ -673,6 +735,7 @@ main{min-height:55vh;padding-bottom:30px}
   .back-button{margin:19px 0}
   .page-title h2{font-size:22px}
   .page-number{font-size:26px}
+
   .item-list{grid-template-columns:1fr}
   .item-card{padding:15px 0}
   .item-name{font-size:13px}
@@ -683,6 +746,7 @@ main{min-height:55vh;padding-bottom:30px}
   .address-box{padding:15px 13px;gap:11px}
   .address-icon{width:37px;height:37px}
   .address-text{font-size:10px}
+
   .intro-logo{width:min(235px,72vw)}
 }
 
@@ -693,9 +757,8 @@ main{min-height:55vh;padding-bottom:30px}
   .home-intro h1{font-size:24px}
   .home-edition{font-size:8px}
   .category-grid{gap:8px}
-  .category-card{min-height:164px}
-  .cat-top{padding:14px 10px 0}
-  .cat-info{padding:19px 10px 17px}
+  .category-card{min-height:165px}
+  .cat-info{padding:18px 10px 12px}
   .cat-name{font-size:14px}
   .cat-caption{font-size:8px}
   .cat-bottom{margin:0 10px;padding:9px 0 10px}
@@ -710,17 +773,29 @@ main{min-height:55vh;padding-bottom:30px}
     transition:none!important;
   }
 }
-</style></head><body class="intro-active"><div class="intro" id="intro">
+</style>
+</head>
+
+<body class="intro-active">
+
+<div class="intro" id="intro">
   <img class="intro-logo" src="Alfa Coffee Emblem Logo.png" alt="ALFA Coffee" fetchpriority="high">
-</div><header>
+</div>
+
+<header>
   <div class="container header-inner">
     <a class="brand" href="#" id="brandHome" aria-label="ALFA">ALFA<span>.</span></a>
+
     <nav class="header-actions">
       <a id="phoneLink" href="tel:PHONE_NUMBER">تماس</a>
       <a id="instagramLink" href="https://instagram.com/INSTAGRAM_ID" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
     </nav>
   </div>
-</header><main class="container">  <div class="search-wrap">
+</header>
+
+<main class="container">
+
+  <div class="search-wrap">
     <label class="search">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="7.5"></circle>
@@ -728,68 +803,93 @@ main{min-height:55vh;padding-bottom:30px}
       </svg>
       <input id="searchInput" type="search" placeholder="جستجو در منو..." autocomplete="off">
     </label>
-  </div>  <section id="homeView" class="view active"><div class="home-intro">
-  <div class="home-intro-copy">
-    <div class="eyebrow">ALFA COFFEE MENU</div>
-    <h1>طعمِ انتخاب تو.</h1>
-    <p>منوی کافه رو ببین و انتخابت رو پیدا کن.</p>
   </div>
-  <div class="home-edition">EST. ALFA</div>
-</div>
 
-<div class="category-grid" id="categoryGrid"></div>
-<div id="homeStatus" class="status-message">در حال دریافت منو...</div>
+  <section id="homeView" class="view active">
 
-  </section>  <section id="categoryView" class="view"><button class="back-button" id="backButton" type="button">
-  <span class="back-arrow">→</span>
-  <span id="backButtonText">بازگشت به دسته‌بندی‌ها</span>
-</button>
+    <div class="home-intro">
+      <div class="home-intro-copy">
+        <div class="eyebrow">ALFA COFFEE MENU</div>
+        <h1>طعمِ انتخاب تو.</h1>
+        <p>منوی کافه رو ببین و انتخابت رو پیدا کن.</p>
+      </div>
+      <div class="home-edition">EST. ALFA</div>
+    </div>
 
-<div class="page-title">
-  <div>
-    <h2 id="pageCategoryName"></h2>
-    <p id="pageCategoryCaption"></p>
-  </div>
-  <div class="page-number" id="pageCategoryNumber"></div>
-</div>
+    <div class="category-grid" id="categoryGrid"></div>
+    <div id="homeStatus" class="status-message">در حال دریافت منو...</div>
 
-<div id="dynamicMenu"></div>
+  </section>
 
-  </section>  <section id="searchView" class="view"><button class="back-button" id="searchBackButton" type="button">
-  <span class="back-arrow">→</span>
-  بازگشت به دسته‌بندی‌ها
-</button>
+  <section id="categoryView" class="view">
 
-<div class="page-title">
-  <div>
-    <h2>نتایج جستجو</h2>
-    <p id="resultNote">محصولات منو</p>
-  </div>
-</div>
+    <button class="back-button" id="backButton" type="button">
+      <span class="back-arrow">→</span>
+      <span id="backButtonText">بازگشت به دسته‌بندی‌ها</span>
+    </button>
 
-<div id="searchResults" class="item-list"></div>
+    <div class="page-title">
+      <div>
+        <h2 id="pageCategoryName"></h2>
+        <p id="pageCategoryCaption"></p>
+      </div>
+      <div class="page-number" id="pageCategoryNumber"></div>
+    </div>
 
-  </section></main><footer class="footer">
+    <div id="dynamicMenu"></div>
+
+  </section>
+
+  <section id="searchView" class="view">
+
+    <button class="back-button" id="searchBackButton" type="button">
+      <span class="back-arrow">→</span>
+      بازگشت به دسته‌بندی‌ها
+    </button>
+
+    <div class="page-title">
+      <div>
+        <h2>نتایج جستجو</h2>
+        <p id="resultNote">محصولات منو</p>
+      </div>
+    </div>
+
+    <div id="searchResults" class="item-list"></div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
   <div class="footer-inner">
     <div class="address-box">
+
       <div class="address-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
           <circle cx="12" cy="10" r="2.5"></circle>
         </svg>
       </div>
+
       <div class="address-content">
         <div class="address-title">آدرس کافه</div>
         <div class="address-text" id="cafeAddress">در حال دریافت آدرس...</div>
         <span class="address-note">منتظر دیدارتان هستیم</span>
       </div>
+
     </div>
   </div>
-</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+<script>
+
 const SUPABASE_URL = "https://uewdwreimgpzpvzkpvvo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_YV6qFCwOPJojdbuJegfYww_NYt1IO19";
 
 const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
 const intro = document.getElementById("intro");
 
 function closeIntro(){
@@ -821,6 +921,59 @@ const searchInput = document.getElementById("searchInput");
 const resultNote = document.getElementById("resultNote");
 const homeStatus = document.getElementById("homeStatus");
 
+/* CATEGORY IMAGE DATABASE */
+
+const categoryImages = {
+
+  breakfast:
+  "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1000&q=85",
+
+  dinner:
+  "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1000&q=85",
+
+  salad:
+  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=85",
+
+  cake:
+  "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85",
+
+  cold:
+  "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1000&q=85",
+
+  hot:
+  "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1000&q=85"
+
+};
+
+const fallbackImages = [
+  categoryImages.breakfast,
+  categoryImages.dinner,
+  categoryImages.salad,
+  categoryImages.cake,
+  categoryImages.cold,
+  categoryImages.hot
+];
+
+function getCategoryImage(category,index){
+
+  // اگر در پنل مدیریت عکس آپلود شده باشد، همان عکس استفاده می‌شود.
+  if(category.image && category.image.trim()){
+    return category.image;
+  }
+
+  const name=String(category.name || "").replace(/\s/g,"");
+
+  if(name.includes("صبحانه")) return categoryImages.breakfast;
+  if(name.includes("شام")) return categoryImages.dinner;
+  if(name.includes("سالاد")) return categoryImages.salad;
+  if(name.includes("کیک")) return categoryImages.cake;
+
+  if(name.includes("سرد")) return categoryImages.cold;
+  if(name.includes("گرم")) return categoryImages.hot;
+
+  return fallbackImages[index % fallbackImages.length];
+}
+
 function escapeHTML(value){
   return String(value ?? "").replace(/[&<>"']/g,char=>({
     "&":"&amp;",
@@ -833,15 +986,23 @@ function escapeHTML(value){
 
 function formatPrice(price){
   const value = Number(price) || 0;
+
   return value <= 0
     ? "قیمت اعلام نشده"
     : value.toLocaleString("fa-IR") + " تومان";
 }
 
 function showView(view){
-  [homeView,categoryView,searchView].forEach(section=>section.classList.remove("active"));
+  [homeView,categoryView,searchView].forEach(section=>{
+    section.classList.remove("active");
+  });
+
   view.classList.add("active");
-  window.scrollTo({top:0,behavior:"auto"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"auto"
+  });
 }
 
 function getCategory(id){
@@ -849,28 +1010,42 @@ function getCategory(id){
 }
 
 function getChildren(parentId){
-  return menuData.filter(category=>String(category.parent_id || "")===String(parentId));
+  return menuData.filter(category=>
+    String(category.parent_id || "")===String(parentId)
+  );
 }
 
 function getRoot(category){
   if(!category) return null;
+
   if(!category.parent_id) return category;
+
   return getCategory(category.parent_id) || category;
 }
 
 function getCategoryPath(category){
   const root=getRoot(category);
+
   return root && String(root.id)!==String(category.id)
     ? root.name+" / "+category.name
     : category?.name || "";
 }
 
+/* LOAD MENU */
+
 async function loadMenu(){
+
   homeStatus.textContent="در حال دریافت منو...";
   homeStatus.classList.remove("error");
 
   try{
-    const [categoryResult,productResult,settingsResult]=await Promise.all([
+
+    const [
+      categoryResult,
+      productResult,
+      settingsResult
+    ]=await Promise.all([
+
       db.from("alfa_categories")
         .select("id,name,caption,image_url,sort_order,active,parent_id")
         .eq("active",true)
@@ -885,6 +1060,7 @@ async function loadMenu(){
         .select("phone,instagram,address")
         .eq("id",1)
         .maybeSingle()
+
     ]);
 
     if(categoryResult.error) throw categoryResult.error;
@@ -893,17 +1069,22 @@ async function loadMenu(){
 
     const categories=categoryResult.data || [];
     const products=productResult.data || [];
+
     cafeSettings=settingsResult.data || cafeSettings;
 
     menuData=categories.map(category=>({
+
       id:category.id,
       name:category.name,
       caption:category.caption || "",
       image:category.image_url || "",
       sort_order:category.sort_order || 0,
       parent_id:category.parent_id || null,
+
       products:products
-        .filter(product=>String(product.category_id)===String(category.id))
+        .filter(product=>
+          String(product.category_id)===String(category.id)
+        )
         .map(product=>({
           id:product.id,
           name:product.name,
@@ -911,6 +1092,7 @@ async function loadMenu(){
           price:product.price || 0,
           sort_order:product.sort_order || 0
         }))
+
     }));
 
     renderCategories();
@@ -921,15 +1103,27 @@ async function loadMenu(){
       : "هنوز دسته‌بندی فعالی در منو ثبت نشده است.";
 
   }catch(error){
+
     console.error("ALFA menu error:",error);
+
     homeStatus.textContent="دریافت منو ناموفق بود. اتصال اینترنت و دسترسی دیتابیس را بررسی کنید.";
+
     homeStatus.classList.add("error");
-    homeStatus.innerHTML+=' <button type="button" id="retryLoad">تلاش دوباره</button>';
-    document.getElementById("retryLoad").addEventListener("click",loadMenu);
+
+    homeStatus.innerHTML+=
+      ' <button type="button" id="retryLoad">تلاش دوباره</button>';
+
+    document.getElementById("retryLoad")
+      .addEventListener("click",loadMenu);
+
   }
+
 }
 
+/* SETTINGS */
+
 function applySettings(){
+
   document.getElementById("cafeAddress").textContent=
     cafeSettings.address || "آدرس کافه هنوز ثبت نشده است.";
 
@@ -942,20 +1136,27 @@ function applySettings(){
   const instagramLink=document.getElementById("instagramLink");
 
   if(cafeSettings.instagram){
+
     let value=cafeSettings.instagram.trim();
 
     if(/^https?:\/\//i.test(value)){
       instagramLink.href=value;
     }else{
-      instagramLink.href="https://instagram.com/"+encodeURIComponent(value.replace(/^@/,""));
+      instagramLink.href=
+        "https://instagram.com/"+
+        encodeURIComponent(value.replace(/^@/,""));
     }
+
   }
+
 }
 
-/* دسته‌بندی‌های اصلی */
+/* CATEGORY CARDS */
 
 function makeCategoryCard(category,index){
+
   const card=document.createElement("button");
+
   card.type="button";
   card.className="category-card";
 
@@ -967,8 +1168,17 @@ function makeCategoryCard(category,index){
       : category.products.length.toLocaleString("fa-IR")+" محصول"
   );
 
+  const imageURL=getCategoryImage(category,index);
+
   card.innerHTML=`
-    <div class="cat-top"></div>
+
+    <img
+      class="category-image"
+      src="${escapeHTML(imageURL)}"
+      alt="${escapeHTML(category.name)}"
+      loading="lazy"
+      onerror="this.style.display='none'"
+    >
 
     <div class="cat-info">
       <div class="cat-info-copy">
@@ -981,15 +1191,21 @@ function makeCategoryCard(category,index){
       <span class="cat-discover">مشاهده منو</span>
       <span class="cat-arrow" aria-hidden="true">↙</span>
     </div>
+
   `;
 
-  card.addEventListener("click",()=>openCategory(category.id));
+  card.addEventListener("click",()=>{
+    openCategory(category.id);
+  });
+
   return card;
+
 }
 
-/* نمایش دسته‌های اصلی */
+/* RENDER CATEGORIES */
 
 function renderCategories(){
+
   categoryGrid.innerHTML="";
 
   const roots=menuData
@@ -997,64 +1213,107 @@ function renderCategories(){
     .sort((a,b)=>a.sort_order-b.sort_order);
 
   roots.forEach((category,index)=>{
-    categoryGrid.appendChild(makeCategoryCard(category,index));
+
+    categoryGrid.appendChild(
+      makeCategoryCard(category,index)
+    );
+
   });
+
 }
 
+/* PRODUCTS */
+
 function createProductCard(product,categoryName=""){
+
   const item=document.createElement("article");
+
   item.className="item-card";
 
-  const description=[categoryName,product.description].filter(Boolean).join(" · ");
+  const description=[
+    categoryName,
+    product.description
+  ].filter(Boolean).join(" · ");
 
   item.innerHTML=`
+
     <div>
-      <div class="item-name">${escapeHTML(product.name)}</div>
-      ${description?`<div class="item-desc">${escapeHTML(description)}</div>`:""}
+      <div class="item-name">
+        ${escapeHTML(product.name)}
+      </div>
+
+      ${description
+        ? `<div class="item-desc">${escapeHTML(description)}</div>`
+        : ""
+      }
     </div>
-    <div class="item-price">${formatPrice(product.price)}</div>
+
+    <div class="item-price">
+      ${formatPrice(product.price)}
+    </div>
+
   `;
 
   return item;
+
 }
 
 function renderProducts(container,products,categoryName=""){
+
   const list=document.createElement("div");
+
   list.className="item-list";
 
   if(!products.length){
-    list.innerHTML='<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
+
+    list.innerHTML=
+      '<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
+
   }else{
+
     products.forEach(product=>{
-      list.appendChild(createProductCard(product,categoryName));
+
+      list.appendChild(
+        createProductCard(product,categoryName)
+      );
+
     });
+
   }
 
   container.appendChild(list);
+
 }
 
-/* ورود به دسته یا زیر‌دسته */
+/* OPEN CATEGORY */
 
 function openCategory(id){
+
   const category=getCategory(id);
+
   if(!category) return;
 
   currentCategoryId=category.id;
+
   searchInput.value="";
   dynamicMenu.innerHTML="";
 
-  document.getElementById("pageCategoryName").textContent=category.name;
+  document.getElementById("pageCategoryName").textContent=
+    category.name;
 
   const root=getRoot(category);
 
   const rootIndex=menuData
     .filter(item=>!item.parent_id)
-    .findIndex(item=>String(item.id)===String(root?.id));
+    .findIndex(item=>
+      String(item.id)===String(root?.id)
+    );
 
   document.getElementById("pageCategoryNumber").textContent=
     String(Math.max(0,rootIndex+1)).padStart(2,"0");
 
   const children=getChildren(category.id);
+
   const hasChildren=children.length>0;
 
   document.getElementById("pageCategoryCaption").textContent=
@@ -1068,96 +1327,148 @@ function openCategory(id){
       : "بازگشت به دسته‌بندی‌ها";
 
   if(hasChildren){
+
     const heading=document.createElement("div");
+
     heading.className="subcategory-heading";
     heading.textContent="انتخاب زیر‌دسته";
+
     dynamicMenu.appendChild(heading);
 
     const grid=document.createElement("div");
+
     grid.className="subcategory-grid";
 
     children
       .sort((a,b)=>a.sort_order-b.sort_order)
       .forEach(child=>{
+
         const childCard=document.createElement("button");
+
         childCard.type="button";
         childCard.className="subcategory-card";
 
         const childCount=child.products.length;
-        const childCaption=child.caption || childCount.toLocaleString("fa-IR")+" محصول";
+
+        const childCaption=child.caption ||
+          childCount.toLocaleString("fa-IR")+" محصول";
 
         childCard.innerHTML=`
+
           <div class="subcategory-info">
-            <div class="subcategory-name">${escapeHTML(child.name)}</div>
-            <div class="subcategory-caption">${escapeHTML(childCaption)}</div>
+
+            <div class="subcategory-name">
+              ${escapeHTML(child.name)}
+            </div>
+
+            <div class="subcategory-caption">
+              ${escapeHTML(childCaption)}
+            </div>
+
           </div>
+
           <span class="subcategory-arrow" aria-hidden="true">↙</span>
+
         `;
 
-        childCard.addEventListener("click",()=>openCategory(child.id));
+        childCard.addEventListener("click",()=>{
+          openCategory(child.id);
+        });
+
         grid.appendChild(childCard);
+
       });
 
     dynamicMenu.appendChild(grid);
 
     if(category.products.length){
+
       const directHeading=document.createElement("div");
+
       directHeading.className="subcategory-heading";
       directHeading.textContent="سایر محصولات "+category.name;
+
       dynamicMenu.appendChild(directHeading);
+
       renderProducts(dynamicMenu,category.products);
+
     }
+
   }else{
+
     renderProducts(dynamicMenu,category.products);
+
   }
 
   showView(categoryView);
+
 }
 
-/* بازگشت */
+/* BACK */
 
 function goBack(){
+
   const category=getCategory(currentCategoryId);
 
   if(category && category.parent_id){
+
     openCategory(category.parent_id);
+
   }else{
+
     currentCategoryId=null;
     goHome();
+
   }
+
 }
 
-/* جست‌وجوی محصولات */
+/* SEARCH */
 
 function renderSearchResults(query){
+
   searchResults.innerHTML="";
 
   const q=query.trim().toLocaleLowerCase("fa");
+
   const matches=[];
 
   menuData.forEach(category=>{
+
     category.products.forEach(product=>{
+
       const searchable=[
+
         category.name,
         getCategoryPath(category),
         product.name,
         product.description || ""
+
       ].join(" ").toLocaleLowerCase("fa");
 
       if(searchable.includes(q)){
         matches.push({category,product});
       }
+
     });
+
   });
 
   if(!matches.length){
-    searchResults.innerHTML='<div class="empty">موردی با این عبارت پیدا نشد.</div>';
+
+    searchResults.innerHTML=
+      '<div class="empty">موردی با این عبارت پیدا نشد.</div>';
+
   }else{
+
     matches.forEach(({category,product})=>{
+
       searchResults.appendChild(
         createProductCard(product,getCategoryPath(category))
       );
+
     });
+
   }
 
   resultNote.textContent=matches.length
@@ -1165,41 +1476,71 @@ function renderSearchResults(query){
     : "نتیجه‌ای پیدا نشد";
 
   showView(searchView);
+
 }
 
 function goHome(){
+
   currentCategoryId=null;
   searchInput.value="";
+
   showView(homeView);
+
 }
 
-/* جست‌وجو با Enter */
+/* SEARCH EVENTS */
 
 searchInput.addEventListener("keydown",event=>{
+
   if(event.key==="Enter"){
+
     const query=searchInput.value.trim();
 
     if(query){
+
       renderSearchResults(query);
       searchInput.blur();
+
     }
+
   }
+
 });
 
 searchInput.addEventListener("input",()=>{
-  if(!searchInput.value.trim() && searchView.classList.contains("active")){
+
+  if(
+    !searchInput.value.trim() &&
+    searchView.classList.contains("active")
+  ){
+
     showView(homeView);
+
   }
+
 });
 
-document.getElementById("backButton").addEventListener("click",goBack);
-document.getElementById("searchBackButton").addEventListener("click",goHome);
+/* NAVIGATION */
 
-document.getElementById("brandHome").addEventListener("click",event=>{
-  event.preventDefault();
-  goHome();
-});
+document.getElementById("backButton")
+  .addEventListener("click",goBack);
+
+document.getElementById("searchBackButton")
+  .addEventListener("click",goHome);
+
+document.getElementById("brandHome")
+  .addEventListener("click",event=>{
+
+    event.preventDefault();
+    goHome();
+
+  });
+
+/* START */
 
 loadMenu();
-</script></body>
+
+</script>
+
+</body>
 </html>
